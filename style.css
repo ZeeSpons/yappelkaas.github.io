@@ -1,15 +1,15 @@
 body {
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
-  background-color: #fffbe6;
-  color: #333;
+  background-color: #f0f6ff;
+  color: #1e2b3a;
   text-align: center;
 }
 
 .hero {
   padding: 2rem;
-  background-color: #ffe28a;
-  border-bottom: 4px solid #e5c100;
+  background-color: #d6eaff;
+  border-bottom: 4px solid #3399ff;
 }
 
 .menu {
@@ -22,17 +22,19 @@ body {
 
 .menu-btn {
   padding: 1rem 2rem;
-  background-color: #ffd966;
-  border: 2px solid #f1c232;
-  border-radius: 10px;
+  background-color: #e0f0ff;
+  border: 2px solid #66b3ff;
+  border-radius: 12px;
   text-decoration: none;
   font-size: 1.2rem;
-  color: #333;
-  transition: 0.2s;
+  color: #1e2b3a;
+  transition: 0.2s ease-in-out;
+  box-shadow: 2px 2px 8px rgba(0, 0, 50, 0.1);
 }
 
 .menu-btn:hover {
-  background-color: #ffe599;
+  background-color: #cce6ff;
+  transform: translateY(-2px);
 }
 
 .feature-img img {
@@ -41,14 +43,15 @@ body {
   height: auto;
   margin: 2rem auto;
   border-radius: 15px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  box-shadow: 0 0 20px rgba(0, 102, 204, 0.2);
 }
 
 footer {
   margin-top: 2rem;
   padding: 1rem;
-  background-color: #fff2cc;
-  border-top: 2px solid #f1c232;
+  background-color: #dbeeff;
+  border-top: 2px solid #66b3ff;
+  color: #1e2b3a;
 }
 
 /* Live banner styling */
@@ -61,4 +64,3 @@ footer {
 .live-banner.hidden {
   display: none;
 }
-
