@@ -103,3 +103,42 @@ footer {
   font-size: 2rem;
   color: #1e2b3a;
 }
+.live-banner {
+  background-color: #9146ff; /* Twitch paars */
+  color: white;
+  padding: 0.6rem;
+  font-weight: bold;
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+}
+
+.offline-banner {
+  background-color: #e0e0e0; /* lichtgrijs */
+  color: #333;
+  padding: 0.6rem;
+  font-weight: bold;
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 10000;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Om ruimte te maken voor de bovenste balk als die er is */
+body.has-live-banner {
+  padding-top: 2.5rem;
+}
+
+/* Om ruimte te maken voor de onderste balk als die er is */
+body.has-offline-banner {
+  padding-bottom: 2.5rem;
+}
