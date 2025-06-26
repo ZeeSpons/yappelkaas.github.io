@@ -2,29 +2,78 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kaasklikker</title>
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
   <style>
-    /* Home knop styling */
+    /* Grotere home knop linksboven */
     .home-btn {
       position: fixed;
-      top: 15px;
-      left: 15px;
+      top: 20px;
+      left: 20px;
       background-color: #66b3ff;
       color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
+      padding: 0.8rem 1.8rem;
+      border-radius: 12px;
       text-decoration: none;
       font-weight: bold;
-      box-shadow: 2px 2px 8px rgba(0, 102, 204, 0.3);
+      box-shadow: 2px 4px 10px rgba(0, 102, 204, 0.4);
       transition: background-color 0.3s ease;
       z-index: 1000;
       user-select: none;
+      font-size: 1.3rem;
     }
     .home-btn:hover {
       background-color: #3399ff;
+    }
+
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      margin: 0;
+      background-color: #fffbe6;
+      color: #333;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    header.hero h1 {
+      font-size: 3.2rem;
+      margin-bottom: 0.5rem;
+    }
+    header.hero p {
+      font-size: 1.6rem;
+      margin-top: 0;
+      margin-bottom: 2rem;
+    }
+
+    main.kaasklikker h2,
+    main.kaasklikker h3 {
+      font-size: 2rem;
+      margin: 1rem 0;
+    }
+
+    #cheese {
+      width: 350px;
+      max-width: 90vw;
+      margin: 2rem auto;
+      border-radius: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: transform 0.15s ease;
+      display: block;
+    }
+    #cheese:active {
+      transform: scale(0.95);
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding: 1.5rem;
+      background-color: #fff2cc;
+      border-top: 3px solid #f1c232;
+      font-size: 1rem;
+      color: #666;
     }
   </style>
 </head>
