@@ -8,18 +8,60 @@
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
   <script src="livecheck.js" defer></script>
+  <style>
+    /* Extra styling voor grotere knoppen en afbeelding op homepage */
+    main.menu {
+      gap: 1.5rem; /* wat meer ruimte tussen knoppen */
+      padding: 3rem 2rem;
+    }
+    .menu-btn {
+      font-size: 1.5rem; /* groter lettertype */
+      padding: 1.5rem 3rem; /* grotere klikbare knop */
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .menu-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+    }
+    section.feature-img img {
+      max-width: 450px; /* iets groter */
+      margin: 2.5rem auto;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      display: block;
+    }
+    /* Footer en copyright wat meer padding en centreren */
+    footer {
+      margin-top: 3rem;
+      padding: 1.5rem;
+      background-color: #f9f6e7;
+      border-top: 2px solid #d6c84a;
+      font-size: 0.9rem;
+      text-align: center;
+      color: #666;
+    }
+    p.copyright {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #aaa;
+      margin-top: 1rem;
+      margin-bottom: 3rem; /* ruimere ruimte onder copyright */
+      user-select: none;
+    }
+  </style>
 </head>
 
 <body>
   <!-- 🔔 Live Notificatie -->
   <div id="live-banner" class="live-banner hidden">
-  🔴 APPELKAAS is NU live op <a href="https://www.twitch.tv/appelkaas" target="_blank" rel="noopener noreferrer">twitch.tv/appelkaas</a> 🔴
-</div>
+    🔴 APPELKAAS is NU live op <a href="https://www.twitch.tv/appelkaas" target="_blank" rel="noopener noreferrer">twitch.tv/appelkaas</a> 🔴
+  </div>
 
-<div id="offline-banner" class="offline-banner hidden">
-  😔 APPELKAAS is nu niet live op Twitch 😔
-</div>
-
+  <div id="offline-banner" class="offline-banner hidden">
+    😔 APPELKAAS is nu niet live op Twitch 😔
+  </div>
 
   <header class="hero">
     <h1>Welkom op Yappelkaas.nl</h1>
@@ -39,12 +81,10 @@
     <img src="assets/appelkaas_welkom.png" alt="Appelkaas begroet je" />
   </section>
 
-<footer>
-  <p>🍏🧀 Yappelkaas 2025 – Geen garantie op mentale stabiliteit.</p>
-</footer>
+  <footer>
+    <p>🍏🧀 Yappelkaas 2025 – Geen garantie op mentale stabiliteit.</p>
+  </footer>
 
-<p class="copyright">Gemaakt door: Zeespons.</p>
-
+  <p class="copyright">Gemaakt door: Zeespons.</p>
 </body>
 </html>
-
