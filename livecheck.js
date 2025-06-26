@@ -1,25 +1,17 @@
-const clientId = 'JE_CLIENT_ID_HIER';
-const accessToken = 'JE_ACCESS_TOKEN_HIER';
 const userLogin = 'appelkaas';
-
 const liveBanner = document.getElementById('live-banner');
 const offlineBanner = document.getElementById('offline-banner');
 
 async function checkLiveStatus() {
   try {
-    const response = await fetch(`https://api.twitch.tv/helix/streams?user_login=${userLogin}`, {
-      headers: {
-        'Client-ID': clientId,
-        'Authorization': `Bearer ${accessToken}`
-      }
-    });
+    const response = await fetch(`https://decapi.me/twitch/stream/${userLogin}`);
 
-    if (!response.ok) {
-      throw new Error('API request failed');
-    }
+    if (!response.ok) throw new Error('API error');
 
-    const data = await response.json();
-    const isLive = data.data && data.data.length > 0;
+    const text = await response.text();
+
+    // DecAPI geeft "offline" als ze niet live is, anders streamtitel
+    const isLive = text.toLowerCase() !== 'offline';
 
     if (isLive) {
       liveBanner.classList.remove('hidden');
@@ -33,8 +25,7 @@ async function checkLiveStatus() {
       document.body.classList.add('has-offline-banner');
     }
   } catch (error) {
-    console.error('Error checking Twitch live status:', error);
-    // Bij error tonen we de offline banner veilig
+    console.error('Fout bij livecheck:', error);
     liveBanner.classList.add('hidden');
     offlineBanner.classList.remove('hidden');
     document.body.classList.remove('has-live-banner');
@@ -42,8 +33,8 @@ async function checkLiveStatus() {
   }
 }
 
-// Check direct bij laden
+// Check meteen bij laden
 checkLiveStatus();
 
-// Optioneel: periodiek updaten (bijv elke 60 sec)
+// Check elke minuut opnieuw
 setInterval(checkLiveStatus, 60000);
