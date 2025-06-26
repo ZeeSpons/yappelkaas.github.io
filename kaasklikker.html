@@ -6,8 +6,31 @@
   <title>Kaasklikker</title>
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
+  <style>
+    /* Home knop styling */
+    .home-btn {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      background-color: #66b3ff;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 2px 2px 8px rgba(0, 102, 204, 0.3);
+      transition: background-color 0.3s ease;
+      z-index: 1000;
+      user-select: none;
+    }
+    .home-btn:hover {
+      background-color: #3399ff;
+    }
+  </style>
 </head>
 <body>
+  <a href="index.html" class="home-btn">🏠 Home</a>
+
   <header class="hero">
     <h1>🧀 Kaasklikker</h1>
     <p>Klik op de kaas en laat het yappen beginnen!</p>
@@ -25,4 +48,3 @@
   </footer>
 </body>
 </html>
-
