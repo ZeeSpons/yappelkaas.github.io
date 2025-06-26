@@ -7,50 +7,57 @@
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
   <style>
+    /* Blauw achtergrond zoals eerst */
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      margin: 0;
+      background-color: #66b3ff; /* helder blauw */
+      color: #333;
+      text-align: center;
+      padding: 2rem;
+    }
+
     /* Grotere home knop linksboven */
     .home-btn {
       position: fixed;
       top: 20px;
       left: 20px;
-      background-color: #66b3ff;
+      background-color: #005bbb; /* donkerder blauw */
       color: white;
       padding: 0.8rem 1.8rem;
       border-radius: 12px;
       text-decoration: none;
       font-weight: bold;
-      box-shadow: 2px 4px 10px rgba(0, 102, 204, 0.4);
+      box-shadow: 2px 4px 10px rgba(0, 0, 102, 0.6);
       transition: background-color 0.3s ease;
       z-index: 1000;
       user-select: none;
       font-size: 1.3rem;
     }
     .home-btn:hover {
-      background-color: #3399ff;
-    }
-
-    body {
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      margin: 0;
-      background-color: #fffbe6;
-      color: #333;
-      text-align: center;
-      padding: 2rem;
+      background-color: #003f7f;
     }
 
     header.hero h1 {
       font-size: 3.2rem;
       margin-bottom: 0.5rem;
+      color: white;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
     }
     header.hero p {
       font-size: 1.6rem;
       margin-top: 0;
       margin-bottom: 2rem;
+      color: white;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
     }
 
     main.kaasklikker h2,
     main.kaasklikker h3 {
       font-size: 2rem;
       margin: 1rem 0;
+      color: white;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
     }
 
     #cheese {
@@ -58,7 +65,7 @@
       max-width: 90vw;
       margin: 2rem auto;
       border-radius: 25px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
       cursor: pointer;
       transition: transform 0.15s ease;
       display: block;
@@ -70,10 +77,10 @@
     footer {
       margin-top: 3rem;
       padding: 1.5rem;
-      background-color: #fff2cc;
-      border-top: 3px solid #f1c232;
+      background-color: #004aad; /* donkerder blauw */
+      color: white;
       font-size: 1rem;
-      color: #666;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     }
   </style>
 </head>
