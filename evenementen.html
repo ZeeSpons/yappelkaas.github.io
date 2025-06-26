@@ -1,1 +1,184 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Evenementen | Yappelkaas.nl</title>
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Specifieke styling voor evenementenpagina */
+
+    body {
+      background-color: #f0f6ff;
+      color: #1e2b3a;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      text-align: center;
+    }
+
+    header.hero {
+      padding: 2rem;
+      background-color: #d6eaff;
+      border-bottom: 4px solid #3399ff;
+      border-radius: 15px;
+    }
+
+    header.hero h1 {
+      margin: 0;
+    }
+
+    .menu {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      padding: 2rem;
+      background-color: #e0f0ff;
+      border-radius: 15px;
+      border: 2px solid #66b3ff;
+      margin-bottom: 2rem;
+    }
+
+    .menu-btn {
+      padding: 1rem 2rem;
+      background-color: #e0f0ff;
+      border: 2px solid #66b3ff;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 1.2rem;
+      color: #1e2b3a;
+      box-shadow: 2px 2px 8px rgba(0, 0, 50, 0.1);
+      transition: 0.2s ease-in-out;
+    }
+
+    .menu-btn:hover {
+      background-color: #cce6ff;
+      transform: translateY(-2px);
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto 3rem;
+      padding: 0 1rem;
+    }
+
+    .event-card {
+      display: flex;
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 102, 204, 0.15);
+      margin-bottom: 2rem;
+      overflow: hidden;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1rem;
+    }
+
+    .event-image {
+      flex: 0 0 200px; /* vaste breedte */
+      height: 200px;   /* vierkant */
+      border-radius: 12px;
+      object-fit: cover;
+      box-shadow: 0 0 15px rgba(0, 102, 204, 0.3);
+    }
+
+    .event-text {
+      flex: 1;
+      text-align: left;
+      color: #1e2b3a;
+    }
+
+    .event-text h2 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    .event-text p {
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* Mobile responsive: afbeelding boven tekst, verticale stapeling */
+    @media (max-width: 600px) {
+      .event-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .event-image {
+        width: 90%;
+        height: auto;
+        max-height: 300px;
+      }
+
+      .event-text {
+        text-align: center;
+        margin-top: 1rem;
+      }
+    }
+
+    footer {
+      margin-top: 2rem;
+      padding: 1rem;
+      background-color: #dbeeff;
+      border-top: 2px solid #66b3ff;
+      color: #1e2b3a;
+      border-radius: 10px;
+    }
+
+    .copyright {
+      font-size: 0.7rem;
+      color: #888;
+      margin: 1rem 0 2rem;
+      user-select: none;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <h1>Evenementen</h1>
+    <p>Alle komende Yappelkaas evenementen op een rijtje.</p>
+  </header>
+
+  <nav class="menu">
+    <a href="index.html" class="menu-btn">🏠 Home</a>
+    <a href="kaasklikker.html" class="menu-btn">🧀 Kaasklikker</a>
+    <a href="random-quote.html" class="menu-btn">🎲 Random Quote</a>
+    <a href="appelrun.html" class="menu-btn">🎮 AppelRun</a>
+    <a href="mystery.html" class="menu-btn">🔮 Mystery Knop</a>
+    <a href="https://discord.gg/J95ApheDKV" target="_blank" class="menu-btn">💬 Discord</a>
+  </nav>
+
+  <main>
+    <article class="event-card">
+      <img src="assets/event1.jpg" alt="Evenement 1 afbeelding" class="event-image" />
+      <div class="event-text">
+        <h2>Yappelkaas Meet & Greet</h2>
+        <p>Kom langs en ontmoet Appelkaas persoonlijk! Praat mee over alle chaos en kaasplezier.</p>
+      </div>
+    </article>
+
+    <article class="event-card">
+      <img src="assets/event2.jpg" alt="Evenement 2 afbeelding" class="event-image" />
+      <div class="event-text">
+        <h2>Yappelkaas Gaming Marathon</h2>
+        <p>Een dag vol livestreams, gaming challenges en hilarische momenten samen met Appelkaas.</p>
+      </div>
+    </article>
+
+    <!-- Voeg hier later meer evenementen toe -->
+  </main>
+
+  <footer>
+    <p>🍏🧀 Yappelkaas 2025 – Geen garantie op mentale stabiliteit.</p>
+  </footer>
+
+  <p class="copyright">Gemaakt door: Zeespons.</p>
+
+</body>
+</html>
 
