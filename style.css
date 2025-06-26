@@ -1,1 +1,62 @@
+body {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  margin: 0;
+  background-color: #fffbe6;
+  color: #333;
+  text-align: center;
+}
+
+.hero {
+  padding: 2rem;
+  background-color: #ffe28a;
+  border-bottom: 4px solid #e5c100;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.menu-btn {
+  padding: 1rem 2rem;
+  background-color: #ffd966;
+  border: 2px solid #f1c232;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  color: #333;
+  transition: 0.2s;
+}
+
+.menu-btn:hover {
+  background-color: #ffe599;
+}
+
+.feature-img img {
+  max-width: 80%;
+  margin: 2rem auto;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+footer {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #fff2cc;
+  border-top: 2px solid #f1c232;
+}
+
+/* Live banner styling */
+.live-banner {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 0.5rem;
+  font-weight: bold;
+}
+.live-banner.hidden {
+  display: none;
+}
 
