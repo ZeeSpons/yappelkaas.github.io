@@ -2,51 +2,72 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mystery Knop</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* Extra styling specifiek voor mystery pagina */
-    .tenor-gif-embed {
-      max-width: 300px !important;
-      margin: 0 auto 1rem;
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      margin: 0;
+      background-color: #fffbe6;
+      color: #333;
+      text-align: center;
+      padding: 3rem 2rem;
     }
-    .btn-home {
-      display: inline-block;
-      margin-top: 2rem;
-      padding: 0.7rem 1.5rem;
+    .home-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
       background-color: #66b3ff;
       color: white;
-      border-radius: 10px;
+      padding: 0.8rem 1.8rem;
+      border-radius: 12px;
       text-decoration: none;
       font-weight: bold;
-      box-shadow: 2px 2px 8px rgba(0, 102, 204, 0.3);
+      box-shadow: 2px 4px 10px rgba(0, 102, 204, 0.4);
       transition: background-color 0.3s ease;
+      z-index: 1000;
+      user-select: none;
+      font-size: 1.3rem;
     }
-    .btn-home:hover {
+    .home-btn:hover {
       background-color: #3399ff;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .mystery-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .mystery-gif {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      margin-bottom: 1rem;
+    }
+    .mystery-text {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #9146ff; /* Twitch paars */
+      user-select: none;
     }
   </style>
 </head>
 <body>
-  <header class="hero">
-    <h1>🔮 Mystery Knop</h1>
-    <p>Wat zal het zijn...?</p>
-  </header>
+  <a href="index.html" class="home-btn">🏠 Home</a>
 
-  <main class="mystery">
+  <h1>🔮 Mystery Knop 🔮</h1>
+  <div class="mystery-content">
+    <!-- Vervang de div hieronder door je Tenor embed of een plaatje -->
     <div class="tenor-gif-embed" data-postid="496001393010401237" data-share-method="host" data-aspect-ratio="1" data-width="100%">
       <a href="https://tenor.com/view/cat-gif-496001393010401237">Cat GIF</a> from <a href="https://tenor.com/search/cat-gifs">Cat GIFs</a>
     </div>
     <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
 
-    <h2 class="buh-text">buh</h2>
-
-    <a href="index.html" class="btn-home">🏠 Terug naar Home</a>
-  </main>
-
-  <footer>
-    <p>🧀 De mysterie is onthuld... of is het net begonnen?</p>
-  </footer>
+    <p class="mystery-text">buh</p>
+  </div>
 </body>
 </html>
