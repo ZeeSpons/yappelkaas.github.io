@@ -1,1 +1,122 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Random Quote - Yappelkaas</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: #f0f6ff;
+      color: #1e2b3a;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    /* Home knop */
+    .home-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: #e0f0ff;
+      border: 2px solid #66b3ff;
+      color: #1e2b3a;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.3rem;
+      box-shadow: 2px 2px 8px rgba(0, 0, 50, 0.1);
+      transition: 0.2s ease-in-out;
+      user-select: none;
+      z-index: 1000;
+      display: inline-block;
+    }
+    .home-btn:hover {
+      background-color: #cce6ff;
+      transform: translateY(-2px);
+    }
+
+    header.hero {
+      padding: 2rem;
+      background-color: #d6eaff;
+      border-bottom: 4px solid #3399ff;
+      margin-bottom: 2rem;
+      border-radius: 15px;
+    }
+    header.hero h1 {
+      margin: 0 0 0.5rem;
+      font-size: 2.8rem;
+      color: #1e2b3a;
+      user-select: none;
+    }
+
+    main.quote-container {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1.7rem;
+      font-weight: 600;
+      padding: 2rem;
+      background-color: #e0f0ff;
+      border: 2px solid #66b3ff;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(102, 179, 255, 0.3);
+      user-select: none;
+    }
+
+    button#new-quote {
+      margin-top: 2rem;
+      background-color: #66b3ff;
+      border: none;
+      padding: 1rem 2rem;
+      color: white;
+      font-size: 1.3rem;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 2px 4px 10px rgba(102,179,255,0.6);
+      transition: background-color 0.2s ease;
+      user-select: none;
+    }
+    button#new-quote:hover {
+      background-color: #3399ff;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="home-btn">🏠 Home</a>
+
+  <header class="hero">
+    <h1>🎲 Random Quote</h1>
+  </header>
+
+  <main>
+    <div class="quote-container" id="quote-container">
+      <p id="quote-text">“Klik op de knop voor een nieuwe quote!”</p>
+    </div>
+    <button id="new-quote">Nieuwe Quote</button>
+  </main>
+
+  <script>
+    const quotes = [
+      "YAP zegt: kaas is het antwoord!",
+      "Elke klik brengt meer chaos.",
+      "Altijd een kaasklik verwijderd van geluk.",
+      "Chaos begint met een enkele klik.",
+      "Appelkaas rules de wereld, één kaasklik tegelijk."
+    ];
+
+    const quoteText = document.getElementById('quote-text');
+    const newQuoteBtn = document.getElementById('new-quote');
+
+    newQuoteBtn.addEventListener('click', () => {
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      quoteText.textContent = quotes[randomIndex];
+    });
+  </script>
+</body>
+</html>
 
