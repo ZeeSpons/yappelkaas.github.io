@@ -3,76 +3,93 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mystery Knop</title>
+  <title>Mystery Knop - Yappelkaas</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
-      font-family: 'Comic Sans MS', cursive, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      background-color: #fffbe6; /* zelfde als home */
-      color: #333; /* neutraal donker */
+      background-color: #f0f6ff;
+      color: #1e2b3a;
       text-align: center;
-      padding: 3rem 2rem;
+      padding: 2rem;
     }
+
+    /* Home knop */
     .home-btn {
       position: fixed;
       top: 20px;
       left: 20px;
-      background-color: #66b3ff; /* zelfde als home menu knop blauw */
-      color: white;
-      padding: 0.8rem 1.8rem;
+      background-color: #e0f0ff;
+      border: 2px solid #66b3ff;
+      color: #1e2b3a;
+      padding: 1rem 2rem;
       border-radius: 12px;
       text-decoration: none;
-      font-weight: bold;
-      box-shadow: 2px 4px 10px rgba(102, 179, 255, 0.6);
-      transition: background-color 0.3s ease;
-      z-index: 1000;
-      user-select: none;
+      font-weight: 600;
       font-size: 1.3rem;
+      box-shadow: 2px 2px 8px rgba(0, 0, 50, 0.1);
+      transition: 0.2s ease-in-out;
+      user-select: none;
+      z-index: 1000;
+      display: inline-block;
     }
     .home-btn:hover {
-      background-color: #3399ff;
+      background-color: #cce6ff;
+      transform: translateY(-2px);
     }
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      color: #333;
+
+    header.hero {
+      padding: 2rem;
+      background-color: #d6eaff;
+      border-bottom: 4px solid #3399ff;
+      margin-bottom: 2rem;
+      border-radius: 15px;
+    }
+    header.hero h1 {
+      margin: 0 0 0.5rem;
+      font-size: 2.8rem;
+      color: #1e2b3a;
       user-select: none;
     }
+
     .mystery-content {
       max-width: 600px;
       margin: 0 auto;
     }
+
     .mystery-gif {
       width: 100%;
-      max-width: 500px;
+      max-width: 450px;
       border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
       margin-bottom: 1rem;
       display: block;
-      margin-left: auto;
-      margin-right: auto;
     }
+
     .mystery-text {
       font-size: 2rem;
-      font-weight: bold;
-      color: #333; /* neutraal, geen paars */
+      font-weight: 700;
+      color: #1e2b3a;
       user-select: none;
+      margin-top: 0;
     }
   </style>
 </head>
 <body>
   <a href="index.html" class="home-btn">🏠 Home</a>
 
-  <h1>🔮 Mystery Knop 🔮</h1>
-  <div class="mystery-content">
-    <!-- Embed of plaatje -->
+  <header class="hero">
+    <h1>🔮 Mystery Knop 🔮</h1>
+  </header>
+
+  <main class="mystery-content">
     <div class="tenor-gif-embed" data-postid="496001393010401237" data-share-method="host" data-aspect-ratio="1" data-width="100%">
       <a href="https://tenor.com/view/cat-gif-496001393010401237">Cat GIF</a> from <a href="https://tenor.com/search/cat-gifs">Cat GIFs</a>
     </div>
     <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
 
     <p class="mystery-text">buh</p>
-  </div>
+  </main>
 </body>
 </html>
