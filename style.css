@@ -64,3 +64,8 @@ footer {
 .live-banner.hidden {
   display: none;
 }
+.copyright {
+  font-size: 0.7rem;
+  color: #888;
+  margin: 1rem 0 2rem;
+}
