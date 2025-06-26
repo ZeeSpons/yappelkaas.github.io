@@ -9,8 +9,8 @@
     body {
       font-family: 'Comic Sans MS', cursive, sans-serif;
       margin: 0;
-      background-color: #fffbe6;
-      color: #333;
+      background-color: #fffbe6; /* zelfde als home */
+      color: #333; /* neutraal donker */
       text-align: center;
       padding: 3rem 2rem;
     }
@@ -18,13 +18,13 @@
       position: fixed;
       top: 20px;
       left: 20px;
-      background-color: #66b3ff;
+      background-color: #66b3ff; /* zelfde als home menu knop blauw */
       color: white;
       padding: 0.8rem 1.8rem;
       border-radius: 12px;
       text-decoration: none;
       font-weight: bold;
-      box-shadow: 2px 4px 10px rgba(0, 102, 204, 0.4);
+      box-shadow: 2px 4px 10px rgba(102, 179, 255, 0.6);
       transition: background-color 0.3s ease;
       z-index: 1000;
       user-select: none;
@@ -36,6 +36,8 @@
     h1 {
       font-size: 3rem;
       margin-bottom: 1rem;
+      color: #333;
+      user-select: none;
     }
     .mystery-content {
       max-width: 600px;
@@ -45,13 +47,16 @@
       width: 100%;
       max-width: 500px;
       border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
       margin-bottom: 1rem;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
     .mystery-text {
       font-size: 2rem;
       font-weight: bold;
-      color: #9146ff; /* Twitch paars */
+      color: #333; /* neutraal, geen paars */
       user-select: none;
     }
   </style>
@@ -61,7 +66,7 @@
 
   <h1>🔮 Mystery Knop 🔮</h1>
   <div class="mystery-content">
-    <!-- Vervang de div hieronder door je Tenor embed of een plaatje -->
+    <!-- Embed of plaatje -->
     <div class="tenor-gif-embed" data-postid="496001393010401237" data-share-method="host" data-aspect-ratio="1" data-width="100%">
       <a href="https://tenor.com/view/cat-gif-496001393010401237">Cat GIF</a> from <a href="https://tenor.com/search/cat-gifs">Cat GIFs</a>
     </div>
