@@ -1,15 +1,17 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
-  background-color: #f0f6ff;
-  color: #1e2b3a;
+  background-color: #f0f6ff;      /* lichte blauwe achtergrond */
+  color: #1e2b3a;                /* donkerblauwe tekst */
   text-align: center;
 }
 
 .hero {
   padding: 2rem;
-  background-color: #d6eaff;
-  border-bottom: 4px solid #3399ff;
+  background-color: #d6eaff;     /* zachte lichtblauw */
+  border-bottom: 4px solid #3399ff; /* fellere blauwe rand */
+  border-radius: 15px;
+  color: #1e2b3a;
 }
 
 .menu {
@@ -22,8 +24,8 @@ body {
 
 .menu-btn {
   padding: 1rem 2rem;
-  background-color: #e0f0ff;
-  border: 2px solid #66b3ff;
+  background-color: #e0f0ff;    /* lichte blauwe knop */
+  border: 2px solid #66b3ff;    /* blauwe rand */
   border-radius: 12px;
   text-decoration: none;
   font-size: 1.2rem;
@@ -33,7 +35,7 @@ body {
 }
 
 .menu-btn:hover {
-  background-color: #cce6ff;
+  background-color: #cce6ff;    /* iets donkerder blauw op hover */
   transform: translateY(-2px);
 }
 
@@ -49,60 +51,13 @@ body {
 footer {
   margin-top: 2rem;
   padding: 1rem;
-  background-color: #dbeeff;
+  background-color: #dbeeff;   /* zachte blauwe footer */
   border-top: 2px solid #66b3ff;
   color: #1e2b3a;
+  border-radius: 10px;
 }
 
 /* Live banner styling */
-.live-banner {
-  background-color: #ff4d4d;
-  color: white;
-  padding: 0.5rem;
-  font-weight: bold;
-}
-.live-banner.hidden {
-  display: none;
-}
-.copyright {
-  font-size: 0.7rem;
-  color: #888;
-  margin: 1rem 0 2rem;
-}
-.kaasklikker {
-  padding: 2rem;
-}
-
-#cheese {
-  width: 200px;
-  cursor: pointer;
-  transition: transform 0.1s ease;
-}
-
-#cheese:active {
-  transform: scale(0.95);
-}
-
-.kaasklikker h2,
-.kaasklikker h3 {
-  margin: 1rem 0;
-}
-.mystery {
-  padding: 2rem;
-}
-
-.mystery-img {
-  max-width: 90%;
-  max-height: 500px;
-  border-radius: 20px;
-  box-shadow: 0 0 25px rgba(0,0,0,0.2);
-  margin-bottom: 1rem;
-}
-
-.buh-text {
-  font-size: 2rem;
-  color: #1e2b3a;
-}
 .live-banner {
   background-color: #9146ff; /* Twitch paars */
   color: white;
@@ -143,3 +98,9 @@ body.has-offline-banner {
   padding-bottom: 2.5rem;
 }
 
+/* Copyright */
+.copyright {
+  font-size: 0.7rem;
+  color: #888;
+  margin: 1rem 0 2rem;
+}
