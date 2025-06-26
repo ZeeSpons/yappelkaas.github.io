@@ -3,72 +3,84 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kaasklikker</title>
+  <title>Kaasklikker - Yappelkaas</title>
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
   <style>
-    /* Blauw achtergrond zoals eerst */
     body {
-      font-family: 'Comic Sans MS', cursive, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      background-color: #66b3ff; /* helder blauw */
-      color: #333;
+      background-color: #f0f6ff;       /* dezelfde lichte blauwe achtergrond */
+      color: #1e2b3a;                  /* dezelfde tekstkleur */
       text-align: center;
       padding: 2rem;
     }
 
-    /* Grotere home knop linksboven */
+    /* Home knop linksboven */
     .home-btn {
       position: fixed;
       top: 20px;
       left: 20px;
-      background-color: #005bbb; /* donkerder blauw */
-      color: white;
-      padding: 0.8rem 1.8rem;
+      background-color: #e0f0ff;       /* lichte blauwe knop achtergrond (menu-btn kleur) */
+      border: 2px solid #66b3ff;       /* blauwe rand */
+      color: #1e2b3a;
+      padding: 1rem 2rem;
       border-radius: 12px;
       text-decoration: none;
-      font-weight: bold;
-      box-shadow: 2px 4px 10px rgba(0, 0, 102, 0.6);
-      transition: background-color 0.3s ease;
-      z-index: 1000;
-      user-select: none;
+      font-weight: 600;
       font-size: 1.3rem;
+      box-shadow: 2px 2px 8px rgba(0, 0, 50, 0.1);
+      transition: 0.2s ease-in-out;
+      user-select: none;
+      z-index: 1000;
+      display: inline-block;
     }
     .home-btn:hover {
-      background-color: #003f7f;
+      background-color: #cce6ff;
+      transform: translateY(-2px);
     }
 
+    header.hero {
+      padding: 2rem;
+      background-color: #d6eaff;       /* zelfde als home */
+      border-bottom: 4px solid #3399ff;
+      margin-bottom: 2rem;
+      border-radius: 15px;
+    }
     header.hero h1 {
-      font-size: 3.2rem;
-      margin-bottom: 0.5rem;
-      color: white;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+      margin: 0 0 0.5rem;
+      font-size: 2.8rem;
+      color: #1e2b3a;
+      user-select: none;
     }
     header.hero p {
-      font-size: 1.6rem;
-      margin-top: 0;
-      margin-bottom: 2rem;
-      color: white;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+      margin: 0;
+      font-size: 1.3rem;
+      color: #1e2b3a;
+      user-select: none;
     }
 
+    main.kaasklikker {
+      padding: 2rem;
+    }
     main.kaasklikker h2,
     main.kaasklikker h3 {
-      font-size: 2rem;
       margin: 1rem 0;
-      color: white;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+      font-weight: 600;
+      color: #1e2b3a;
+      user-select: none;
     }
 
     #cheese {
-      width: 350px;
+      width: 250px;                     /* iets groter dan home image */
       max-width: 90vw;
-      margin: 2rem auto;
-      border-radius: 25px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
       cursor: pointer;
-      transition: transform 0.15s ease;
+      transition: transform 0.1s ease;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 102, 204, 0.2);
+      margin: 2rem auto;
       display: block;
+      user-select: none;
     }
     #cheese:active {
       transform: scale(0.95);
@@ -76,15 +88,18 @@
 
     footer {
       margin-top: 3rem;
-      padding: 1.5rem;
-      background-color: #004aad; /* donkerder blauw */
-      color: white;
+      padding: 1rem;
+      background-color: #dbeeff;       /* zelfde als home footer */
+      border-top: 2px solid #66b3ff;
+      color: #1e2b3a;
       font-size: 1rem;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+      user-select: none;
+      border-radius: 10px;
     }
   </style>
 </head>
 <body>
+
   <a href="index.html" class="home-btn">🏠 Home</a>
 
   <header class="hero">
@@ -102,5 +117,6 @@
   <footer>
     <p>🧀 Klik ze! Of klik door. Jij bepaalt.</p>
   </footer>
+
 </body>
 </html>
