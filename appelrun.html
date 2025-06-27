@@ -15,7 +15,7 @@
       user-select: none;
     }
     #gameContainer {
-      max-width: 480px;
+      max-width: 640px; /* Groter dan voorheen */
       margin: 2rem auto;
       position: relative;
       background: #d6eaff;
@@ -28,6 +28,8 @@
       background: #e0f0ff;
       border-radius: 10px;
       margin: 0 auto;
+      width: 100%; /* Canvas schaalt mee */
+      height: auto;
     }
     #startScreen, #gameOverScreen {
       padding: 2rem;
@@ -59,6 +61,7 @@
       box-shadow: none;
       border-radius: 10px;
       text-decoration: none;
+      z-index: 1000;
     }
     #homeBtn:hover {
       background-color: #cce6ff;
@@ -78,7 +81,7 @@
       <button id="startBtn">Start Run!</button>
     </div>
 
-    <canvas id="gameCanvas" width="480" height="270" style="display:none;"></canvas>
+    <canvas id="gameCanvas" width="640" height="360" style="display:none;"></canvas>
 
     <div id="gameOverScreen" style="display:none;">
       <h2>Game Over!</h2>
@@ -111,11 +114,15 @@
       let gameInterval;
       let gravity = 0.6;
       let jumpForce = -12;
+
+      // Vergroot speler en obstakels voor groter canvas:
+      const scaleFactor = canvas.width / 480; // verhouding 640/480 = 1.3333
+
       let player = {
-        x: 50,
+        x: 50 * scaleFactor,
         y: 0,
-        width: 50,
-        height: 50,
+        width: 50 * scaleFactor,
+        height: 50 * scaleFactor,
         dy: 0,
         grounded: false,
         color: '#3399ff'
@@ -123,19 +130,20 @@
       let obstacles = [];
       let collectibles = [];
       let score = 0;
-      let gameSpeed = 4;
+      let baseGameSpeed = 2; // Langzamer begin
+      let gameSpeed = baseGameSpeed;
       let running = false;
       let frameCount = 0;
 
-      // Load images for player, obstacles and collectibles
+      // Images
       const imgPlayer = new Image();
-      imgPlayer.src = 'assets/appelkaas_run.png'; // maak een simpele rennende Appelkaas sprite
+      imgPlayer.src = 'assets/appelkaas_run.png';
 
       const imgCheese = new Image();
-      imgCheese.src = 'assets/kaas.png'; // kaas icoon
+      imgCheese.src = 'assets/kaas.png';
 
       const imgApple = new Image();
-      imgApple.src = 'assets/appel.png'; // appel icoon
+      imgApple.src = 'assets/appel.png';
 
       function resetGame() {
         player.y = canvas.height - player.height - 10;
@@ -144,40 +152,37 @@
         obstacles = [];
         collectibles = [];
         score = 0;
-        gameSpeed = 4;
+        gameSpeed = baseGameSpeed;
         frameCount = 0;
       }
 
       function spawnObstacle() {
-        // Obstakel = een kaasblok of appel (rood of geel)
         let type = Math.random() < 0.7 ? 'kaas' : 'appel';
-        let width = 40;
-        let height = 40;
-        let y = canvas.height - height - 10;
+        let size = 40 * scaleFactor;
+        let y = canvas.height - size - 10;
 
         obstacles.push({
           x: canvas.width + 10,
           y: y,
-          width: width,
-          height: height,
+          width: size,
+          height: size,
           type: type
         });
       }
 
       function spawnCollectible() {
-        // Verzamelbaar object (bijv. kaas of appel hoog in de lucht)
+        let size = 30 * scaleFactor;
         collectibles.push({
           x: canvas.width + 10,
-          y: canvas.height - 80 - Math.random()*50,
-          width: 30,
-          height: 30,
+          y: canvas.height - 80 * scaleFactor - Math.random()*50*scaleFactor,
+          width: size,
+          height: size,
           collected: false,
           type: Math.random() < 0.5 ? 'kaas' : 'appel'
         });
       }
 
       function drawPlayer() {
-        // Als img niet geladen is, fallback naar blauw vierkant
         if (imgPlayer.complete) {
           ctx.drawImage(imgPlayer, player.x, player.y, player.width, player.height);
         } else {
@@ -228,27 +233,21 @@
           player.grounded = false;
         }
 
-        // Move obstacles & collectibles to left
+        // Move obstacles & collectibles left
         obstacles.forEach(obs => obs.x -= gameSpeed);
         collectibles.forEach(col => {
           if (!col.collected) col.x -= gameSpeed;
         });
 
-        // Remove offscreen obstacles
+        // Remove offscreen
         obstacles = obstacles.filter(obs => obs.x + obs.width > 0);
         collectibles = collectibles.filter(col => col.x + col.width > 0 && !col.collected);
 
-        // Spawn new obstacles every ~90 frames
-        if (frameCount % 90 === 0) {
-          spawnObstacle();
-        }
+        // Spawn new obstacles & collectibles
+        if (frameCount % 90 === 0) spawnObstacle();
+        if (frameCount % 150 === 0) spawnCollectible();
 
-        // Spawn collectibles every ~150 frames
-        if (frameCount % 150 === 0) {
-          spawnCollectible();
-        }
-
-        // Check collision with obstacles -> game over
+        // Check collision player - obstacles = game over
         for (let obs of obstacles) {
           if (
             player.x < obs.x + obs.width &&
@@ -261,7 +260,7 @@
           }
         }
 
-        // Check collision with collectibles -> add score and mark collected
+        // Check collision player - collectibles = score up & collected
         collectibles.forEach(col => {
           if (!col.collected &&
               player.x < col.x + col.width &&
@@ -273,15 +272,20 @@
           }
         });
 
-        // Draw everything
+        // Draw all
         drawPlayer();
         drawObstacles();
         drawCollectibles();
 
-        // Draw score
+        // Score text
         ctx.fillStyle = '#1e2b3a';
-        ctx.font = '20px Segoe UI, Tahoma, Geneva, Verdana, sans-serif';
-        ctx.fillText('Score: ' + score, 10, 25);
+        ctx.font = `${20 * scaleFactor}px Segoe UI, Tahoma, Geneva, Verdana, sans-serif`;
+        ctx.fillText('Score: ' + score, 10 * scaleFactor, 25 * scaleFactor);
+
+        // Increase speed *super* langzaam (0.001 per frame)
+        if (gameSpeed < 12) {
+          gameSpeed += 0.001;
+        }
 
         frameCount++;
       }
@@ -320,7 +324,6 @@
       function saveHighscore(name, score) {
         if (!name) return;
         let highscores = JSON.parse(localStorage.getItem('appelrunHighscores') || '[]');
-        // Check for existing name and update if higher
         let existing = highscores.find(h => h.name.toLowerCase() === name.toLowerCase());
         if (existing) {
           if (score > existing.score) existing.score = score;
@@ -359,12 +362,10 @@
         }
       });
 
-      // For mobile tap
       window.addEventListener('touchstart', e => {
         if (running) jump();
       });
 
-      // Init
       resetGame();
       loadHighscores();
 
@@ -372,4 +373,3 @@
   </script>
 </body>
 </html>
-
