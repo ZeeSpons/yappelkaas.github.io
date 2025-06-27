@@ -54,7 +54,7 @@
   const gameOverSound = new Audio("assets/gameover.mp3");
   const powerupSound = new Audio("assets/powerup.mp3");
   const popSound = new Audio("assets/pop.mp3");
-
+  const tshoeSound = new Audio("assets/Tshoe.mp3");
     
   const player = { x: 50, y: canvas.height - 70, width: 50, height: 50, velocityY: 0, grounded: true };
   let gravity = 0.4;
@@ -159,13 +159,16 @@
 
       if (p.x < o.x + o.w && p.x + p.w > o.x && p.y < o.y + o.h && p.y + p.h > o.y) {
         if (ob.type === "kaas") {
-          if (!activePowerup) {
-            gameOverSound.play();
-            gameOver = true;
-            return;
-          }
-          obstacles.splice(i, 1);
-        } else if (ob.type === "appel") {
+  if (!activePowerup) {
+    gameOverSound.play();
+    gameOver = true;
+    return;
+  }
+  tshoeSound.currentTime = 0;
+  tshoeSound.play();
+  obstacles.splice(i, 1);
+}
+ else if (ob.type === "appel") {
   score++;
   obstacles.splice(i, 1);
   popSound.currentTime = 0;
