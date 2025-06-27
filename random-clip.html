@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Random Appelkaas Clip</title>
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -16,7 +17,7 @@
       min-height: 100vh;
     }
     h1 {
-      color: #6441a5; /* Twitch paars */
+      color: #6441a5;
       margin-bottom: 1rem;
     }
     #clip-container {
@@ -48,9 +49,25 @@
     button:hover {
       background-color: #7f5dcf;
     }
+    .home-button {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      text-decoration: none;
+      color: white;
+      background-color: #6441a5;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+    .home-button:hover {
+      background-color: #7f5dcf;
+    }
   </style>
 </head>
 <body>
+  <a href="index.html" class="home-button">🏠 Home</a>
+
   <h1>Random Appelkaas Clip</h1>
   
   <div id="clip-container">
@@ -60,11 +77,10 @@
   <button id="newClipBtn">Nieuw clipje</button>
 
   <script>
-    // Hier plak je ALLE clip-ID's (het stukje na /clip/ in de Twitch link)
     const clipIDs = [
-      "SolidWildGullFreakinStinkin-FCE7SVDX7mmhujZx",  // voorbeeld clip
-      "FriendlyHonorablePidgeonNerfRedBlaster-J7lLFUac7AytRSh3",                            // plak hier je volgende clipID
-      "SillyWimpyGuanacoSoonerLater-2-gncswUN_cK6dzj",                              // etcetera
+      "SolidWildGullFreakinStinkin-FCE7SVDX7mmhujZx",
+      "FriendlyHonorablePidgeonNerfRedBlaster-J7lLFUac7AytRSh3",
+      "SillyWimpyGuanacoSoonerLater-2-gncswUN_cK6dzj",
       "ReliableAgreeableKumquatDatBoi-_rS05OcXtzai2Ev6",
       "BlazingAthleticDragonNononoCat-Z5buqkyKUTaBvtr2",
       "DifferentSeductiveClintTF2John-bFTekNHXr_ScAo3-",
@@ -116,16 +132,13 @@
           src="https://clips.twitch.tv/embed?clip=${clipID}&parent=${window.location.hostname}" 
           allowfullscreen="true" 
           scrolling="no" 
-          frameborder="0"
-          >
+          frameborder="0">
         </iframe>`;
 
       clipContainer.innerHTML = iframeHTML;
     }
 
     newClipBtn.addEventListener("click", loadRandomClip);
-
-    // Direct bij laden een clip tonen
     loadRandomClip();
   </script>
 </body>
