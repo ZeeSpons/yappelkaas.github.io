@@ -40,207 +40,224 @@
   <p class="copyright">Gemaakt door: Zeespons.</p>
 
   <script>
-    const canvas = document.getElementById("gameCanvas");
-    const ctx = canvas.getContext("2d");
+  const canvas = document.getElementById("gameCanvas");
+  const ctx = canvas.getContext("2d");
 
-    // Afbeeldingen en audio
-    const playerImg = new Image(); playerImg.src = "assets/appelkaas_run.png";
-    const appelImg = new Image(); appelImg.src = "assets/appel.png";
-    const kaasImg = new Image(); kaasImg.src = "assets/kaas.png";
-    const zonnebrilImg = new Image(); zonnebrilImg.src = "assets/zonnebril.png";
-    const deluxeImg = new Image(); deluxeImg.src = "assets/mrdeluxe_fly.png";
+  // Afbeeldingen en audio
+  const playerImg = new Image(); playerImg.src = "assets/appelkaas_run.png";
+  const appelImg = new Image(); appelImg.src = "assets/appel.png";
+  const kaasImg = new Image(); kaasImg.src = "assets/kaas.png";
+  const zonnebrilImg = new Image(); zonnebrilImg.src = "assets/zonnebril.png";
+  const deluxeImg = new Image(); deluxeImg.src = "assets/mrdeluxe_fly.png";
 
-    const gameOverSound = new Audio("assets/gameover.mp3");
-    const powerupSound = new Audio("assets/powerup.mp3");
+  const gameOverSound = new Audio("assets/gameover.mp3");
+  const powerupSound = new Audio("assets/powerup.mp3");
 
-    const player = { x: 50, y: canvas.height - 70, width: 50, height: 50, velocityY: 0, grounded: true };
-    let gravity = 0.4;
-    let jumpPower = -12;
-    let speed = 3;
-    let score = 0;
-    let highscore = parseInt(localStorage.getItem("appelrun_highscore")) || 0;
-    let gameStarted = false;
-    let gameOver = false;
-    let framesSinceLastObstacle = 0;
-    let obstacleCooldown = 100;
-    let obstacles = [];
-    let activePowerup = null;
+  const player = { x: 50, y: canvas.height - 70, width: 50, height: 50, velocityY: 0, grounded: true };
+  let gravity = 0.4;
+  let jumpPower = -12;
+  let speed = 3;
+  let score = 0;
+  let highscore = parseInt(localStorage.getItem("appelrun_highscore")) || 0;
+  let gameStarted = false;
+  let gameOver = false;
+  let framesSinceLastObstacle = 0;
+  let obstacleCooldown = 100;
+  let obstacles = [];
+  let activePowerup = null;
 
-    // MrDeluxe info
-    let deluxe = null;
-    const deluxeSize = { width: 50, height: 28 }; // geschaalde afmeting (verhouding behouden)
+  // MrDeluxe info
+  let deluxe = null;
+  const deluxeSize = { width: 50, height: 28 }; // geschaalde afmeting
 
-    function drawPlayer() {
-      const aspect = playerImg.width / playerImg.height;
-      const w = player.height * aspect;
-      const offsetX = (player.width - w) / 2;
-      ctx.drawImage(playerImg, player.x + offsetX, player.y, w, player.height);
+  function drawPlayer() {
+    const aspect = playerImg.width / playerImg.height;
+    const w = player.height * aspect;
+    const offsetX = (player.width - w) / 2;
+    ctx.drawImage(playerImg, player.x + offsetX, player.y, w, player.height);
+  }
+
+  function drawObstacle(ob) {
+    let img;
+    let scaleW = 40;
+    let scaleH = 40;
+
+    if (ob.type === "appel") {
+      img = appelImg;
+    } else if (ob.type === "kaas") {
+      img = kaasImg;
+    } else if (ob.type === "zonnebril") {
+      img = zonnebrilImg;
+      scaleW = 50;
+      scaleH = 28;
     }
 
-    function drawObstacle(ob) {
-      let img;
-      let scaleW = 40;
-      let scaleH = 40;
+    ctx.drawImage(img, ob.x, ob.y, scaleW, scaleH);
+  }
 
-      if (ob.type === "appel") {
-        img = appelImg;
-      } else if (ob.type === "kaas") {
-        img = kaasImg;
-      } else if (ob.type === "zonnebril") {
-        img = zonnebrilImg;
-        scaleW = 50;
-        scaleH = 28;
-      }
+  function drawDeluxe() {
+    if (!deluxe) return;
 
-      ctx.drawImage(img, ob.x, ob.y, scaleW, scaleH);
+    // Knipperen als power-up bijna voorbij is
+    const remaining = activePowerup ? activePowerup.duration - (Date.now() - activePowerup.startTime) : 0;
+    const shouldBlink = remaining <= 3000;
+    const visible = !shouldBlink || Math.floor(Date.now() / 200) % 2 === 0;
+
+    if (visible) {
+      ctx.drawImage(deluxeImg, deluxe.x, deluxe.y, deluxeSize.width, deluxeSize.height);
+    }
+  }
+
+  function resetGame() {
+    if (score > highscore) {
+      highscore = score;
+      localStorage.setItem("appelrun_highscore", highscore);
+    }
+    Object.assign(player, { y: canvas.height - 70, velocityY: 0, grounded: true });
+    obstacles = [];
+    score = 0;
+    speed = 3;
+    gameOver = false;
+    activePowerup = null;
+    deluxe = null;
+  }
+
+  function update() {
+    if (!gameStarted || gameOver) return;
+
+    player.velocityY += gravity;
+    player.y += player.velocityY;
+    if (player.y >= canvas.height - 70) {
+      player.y = canvas.height - 70;
+      player.velocityY = 0;
+      player.grounded = true;
+    } else {
+      player.grounded = false;
     }
 
-    function drawDeluxe() {
-      if (deluxe) {
-        ctx.drawImage(deluxeImg, deluxe.x, deluxe.y, deluxeSize.width, deluxeSize.height);
-      }
-    }
-
-    function resetGame() {
-      if (score > highscore) {
-        highscore = score;
-        localStorage.setItem("appelrun_highscore", highscore);
-      }
-      Object.assign(player, { y: canvas.height - 70, velocityY: 0, grounded: true });
-      obstacles = [];
-      score = 0;
-      speed = 3;
-      gameOver = false;
+    // Powerup-timer verlopen
+    if (activePowerup && Date.now() - activePowerup.startTime > activePowerup.duration) {
       activePowerup = null;
       deluxe = null;
     }
 
-    function update() {
-      if (!gameStarted || gameOver) return;
+    // Obstakels
+    for (let i = obstacles.length - 1; i >= 0; i--) {
+      let ob = obstacles[i];
+      ob.x -= speed;
 
-      player.velocityY += gravity;
-      player.y += player.velocityY;
-      if (player.y >= canvas.height - 70) {
-        player.y = canvas.height - 70;
-        player.velocityY = 0;
-        player.grounded = true;
-      } else {
-        player.grounded = false;
+      if (ob.x + ob.width < 0) {
+        obstacles.splice(i, 1);
+        continue;
       }
 
-      // Powerup-timer
-      if (activePowerup && Date.now() - activePowerup.startTime > activePowerup.duration) {
-        activePowerup = null;
-        deluxe = null;
-      }
+      const p = { x: player.x + 6, y: player.y + 6, w: player.width - 12, h: player.height - 12 };
+      const o = { x: ob.x + 6, y: ob.y + 6, w: ob.width - 12, h: ob.height - 12 };
 
-      // Obstakels
-      for (let i = obstacles.length - 1; i >= 0; i--) {
-        let ob = obstacles[i];
-        ob.x -= speed;
-
-        if (ob.x + ob.width < 0) {
-          obstacles.splice(i, 1);
-          continue;
-        }
-
-        // Collision
-        const p = { x: player.x + 6, y: player.y + 6, w: player.width - 12, h: player.height - 12 };
-        const o = { x: ob.x + 6, y: ob.y + 6, w: ob.width - 12, h: ob.height - 12 };
-
-        if (p.x < o.x + o.w && p.x + p.w > o.x && p.y < o.y + o.h && p.y + p.h > o.y) {
-          if (ob.type === "kaas") {
-            if (!activePowerup) {
-              gameOverSound.play();
-              gameOver = true;
-              return;
-            }
-            obstacles.splice(i, 1);
-          } else if (ob.type === "appel") {
-            score++;
-            obstacles.splice(i, 1);
-            if (score % 5 === 0 && speed < 10) speed += 0.3;
-          } else if (ob.type === "zonnebril") {
-            activePowerup = { startTime: Date.now(), duration: 10000 };
-            powerupSound.currentTime = 0;
-            powerupSound.play();
-            deluxe = {
-              x: player.x - 70,
-              y: player.y + 10,
-              width: deluxeSize.width,
-              height: deluxeSize.height,
-              flyingIn: true
-            };
-            obstacles.splice(i, 1);
+      if (p.x < o.x + o.w && p.x + p.w > o.x && p.y < o.y + o.h && p.y + p.h > o.y) {
+        if (ob.type === "kaas") {
+          if (!activePowerup) {
+            gameOverSound.play();
+            gameOver = true;
+            return;
           }
-        }
-      }
-
-      // Obstakelspawning
-      if (++framesSinceLastObstacle >= obstacleCooldown) {
-        const rand = Math.random();
-        const type = rand < 0.01 ? "zonnebril" : rand < 0.6 ? "appel" : "kaas";
-        obstacles.push({ x: canvas.width, y: canvas.height - 70, width: 40, height: 40, type });
-        framesSinceLastObstacle = 0;
-      }
-
-      // MrDeluxe vliegen
-      if (deluxe) {
-        if (deluxe.flyingIn && deluxe.x < player.x + 60) {
-          deluxe.x += 6;
-        } else {
-          deluxe.flyingIn = false;
-          deluxe.y = player.y + 10;
-          deluxe.x = player.x + 60;
+          obstacles.splice(i, 1);
+        } else if (ob.type === "appel") {
+          score++;
+          obstacles.splice(i, 1);
+          if (score % 5 === 0 && speed < 10) speed += 0.3;
+        } else if (ob.type === "zonnebril") {
+          activePowerup = { startTime: Date.now(), duration: 10000 };
+          powerupSound.currentTime = 0;
+          powerupSound.play();
+          deluxe = {
+            x: player.x - 70,
+            y: player.y + 10,
+            width: deluxeSize.width,
+            height: deluxeSize.height,
+            flyingIn: true
+          };
+          obstacles.splice(i, 1);
         }
       }
     }
 
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      drawPlayer();
-      drawDeluxe();
-      obstacles.forEach(drawObstacle);
+    // Obstakelspawning
+    if (++framesSinceLastObstacle >= obstacleCooldown) {
+      const rand = Math.random();
+      const type = rand < 0.01 ? "zonnebril" : rand < 0.6 ? "appel" : "kaas";
+      obstacles.push({ x: canvas.width, y: canvas.height - 70, width: 40, height: 40, type });
+      framesSinceLastObstacle = 0;
+    }
 
+    // MrDeluxe vliegen
+    if (deluxe) {
+      if (deluxe.flyingIn && deluxe.x < player.x + 60) {
+        deluxe.x += 6;
+      } else {
+        deluxe.flyingIn = false;
+        deluxe.y = player.y + 10;
+        deluxe.x = player.x + 60;
+      }
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawPlayer();
+    drawDeluxe();
+    obstacles.forEach(drawObstacle);
+
+    ctx.fillStyle = "#1e2b3a";
+    ctx.font = "20px Segoe UI";
+    ctx.fillText("Score: " + score, 10, 30);
+    ctx.fillText("Highscore: " + highscore, 10, 55);
+
+    // Power-up timer rechtsboven
+    if (activePowerup) {
+      const remaining = Math.max(0, activePowerup.duration - (Date.now() - activePowerup.startTime));
+      const seconds = Math.ceil(remaining / 1000);
+      ctx.fillStyle = "#ffb347";
+      ctx.font = "20px Segoe UI";
+      ctx.textAlign = "right";
+      ctx.fillText("🕒 " + seconds + "s", canvas.width - 15, 30);
+      ctx.textAlign = "left";
+    }
+
+    if (!gameStarted) {
+      ctx.font = "26px Segoe UI";
+      ctx.fillText("Druk op spatie of tik op het scherm!", 300, 200);
+    }
+    if (gameOver) {
+      ctx.fillStyle = "#ff4d4d";
+      ctx.font = "28px Segoe UI";
+      ctx.fillText("Game Over!", 400, 180);
       ctx.fillStyle = "#1e2b3a";
       ctx.font = "20px Segoe UI";
-      ctx.fillText("Score: " + score, 10, 30);
-      ctx.fillText("Highscore: " + highscore, 10, 55);
-
-      if (!gameStarted) {
-        ctx.font = "26px Segoe UI";
-        ctx.fillText("Druk op spatie of tik op het scherm!", 300, 200);
-      }
-      if (gameOver) {
-        ctx.fillStyle = "#ff4d4d";
-        ctx.font = "28px Segoe UI";
-        ctx.fillText("Game Over!", 400, 180);
-        ctx.fillStyle = "#1e2b3a";
-        ctx.font = "20px Segoe UI";
-        ctx.fillText("Druk op spatie of tik om opnieuw te spelen.", 280, 220);
-      }
+      ctx.fillText("Druk op spatie of tik om opnieuw te spelen.", 280, 220);
     }
+  }
 
-    function gameLoop() {
-      update();
-      draw();
-      requestAnimationFrame(gameLoop);
+  function gameLoop() {
+    update();
+    draw();
+    requestAnimationFrame(gameLoop);
+  }
+
+  function handleJump() {
+    if (!gameStarted || gameOver) {
+      resetGame();
+      gameStarted = true;
+    } else if (player.grounded) {
+      player.velocityY = jumpPower;
     }
+  }
 
-    function handleJump() {
-      if (!gameStarted || gameOver) {
-        resetGame();
-        gameStarted = true;
-      } else if (player.grounded) {
-        player.velocityY = jumpPower;
-      }
-    }
+  document.addEventListener("keydown", e => e.code === "Space" && handleJump());
+  canvas.addEventListener("click", handleJump);
+  canvas.addEventListener("touchstart", e => { e.preventDefault(); handleJump(); });
 
-    document.addEventListener("keydown", e => e.code === "Space" && handleJump());
-    canvas.addEventListener("click", handleJump);
-    canvas.addEventListener("touchstart", e => { e.preventDefault(); handleJump(); });
-
-    gameLoop();
-  </script>
+  gameLoop();
+</script>
 </body>
 </html>
