@@ -42,6 +42,7 @@
     appelImg.src = "assets/appel.png";
     let kaasImg = new Image();
     kaasImg.src = "assets/kaas.png";
+    let gameOverSound = new Audio("assets/gameover.mp3");
 
     let player = {
       x: 50,
@@ -82,7 +83,7 @@
     }
 
     function update() {
-      if (!gameStarted || gameOver) return; // ✅ Stop als game over is
+      if (!gameStarted || gameOver) return;
 
       player.velocityY += gravity;
       player.y += player.velocityY;
@@ -106,7 +107,8 @@
         ) {
           if (obstacles[i].type === "kaas") {
             gameOver = true;
-            return; // ⛔ Stop update direct
+            gameOverSound.play();
+            return;
           } else {
             obstacles.splice(i, 1);
             score++;
