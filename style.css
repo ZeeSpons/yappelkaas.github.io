@@ -104,3 +104,8 @@ body.has-offline-banner {
   color: #888;
   margin: 1rem 0 2rem;
 }
+.uitleg {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #1e2b3a;
+}
