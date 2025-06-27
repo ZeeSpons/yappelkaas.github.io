@@ -109,3 +109,13 @@ body.has-offline-banner {
   font-size: 1rem;
   color: #1e2b3a;
 }
+#akaipfp {
+  position: fixed;
+  bottom: 60px;
+  right: 0;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  z-index: 9999; /* veel hoger dan standaard */
+  pointer-events: none; /* zodat hij niet aanklikbaar is, optioneel */
+}
