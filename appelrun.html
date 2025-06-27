@@ -6,85 +6,45 @@
   <title>AppelRun - Yappelkaas</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="assets/favicon.png" type="image/png" />
-  <style>
-    canvas {
-      background-color: #e6f2ff;
-      border: 3px solid #66b3ff;
-      border-radius: 10px;
-      margin-top: 2rem;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .uitleg {
-      margin-top: 1rem;
-      font-size: 1rem;
-      color: #1e2b3a;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-    }
-    .back-home {
-      margin-top: 2rem;
-      display: inline-block;
-      background-color: #e0f0ff;
-      color: #1e2b3a;
-      border: 2px solid #66b3ff;
-      padding: 0.8rem 1.6rem;
-      border-radius: 10px;
-      text-decoration: none;
-      transition: 0.2s;
-    }
-    .back-home:hover {
-      background-color: #cce6ff;
-    }
-    header.hero {
-      padding: 2rem;
-      background-color: #d6eaff;
-      border-bottom: 4px solid #3399ff;
-      color: #1e2b3a;
-      text-align: center;
-    }
-  </style>
 </head>
 <body>
   <header class="hero">
-    <h1>🎮 AppelRun</h1>
-    <p>Ren, spring en verzamel zoveel mogelijk appels!</p>
+    <a href="index.html" class="menu-btn" style="position: absolute; top: 1rem; left: 1rem;">🏠 Home</a>
+    <h1>AppelRun</h1>
+    <p>Ontwijk de kaas, verzamel de appels!</p>
   </header>
 
   <main class="kaasklikker">
-    <canvas id="gameCanvas" width="800" height="300"></canvas>
-    <p class="uitleg">
-      🎮 Gebruik <strong>Spatie</strong> om te springen. Verzamel appels 🍎 voor punten, ontwijk kazen 🧀!<br>
-      Het spel begint langzaam maar wordt steeds sneller... Hoe lang hou jij het vol?
-    </p>
-    <a href="index.html" class="back-home">🏠 Terug naar homepagina</a>
+    <canvas id="gameCanvas" width="800" height="300" style="border: 2px solid #3399ff; background-color: #ffffff; display: block; margin: 0 auto;"></canvas>
+    
+    <div style="max-width: 700px; margin: 2rem auto; text-align: left;">
+      <h2>Hoe werkt het?</h2>
+      <ul>
+        <li>Druk op <strong>spatie</strong> om te springen.</li>
+        <li>Pak <img src="assets/appel.png" alt="appel" style="height: 20px; vertical-align: middle;"> voor punten.</li>
+        <li>Ontwijk <img src="assets/kaas.png" alt="kaas" style="height: 20px; vertical-align: middle;"> want dat is game over!</li>
+      </ul>
+    </div>
   </main>
+
+  <footer>
+    <p>🍏🧀 Yappelkaas 2025 – Rennen voor je leven.</p>
+  </footer>
+  <p class="copyright">Gemaakt door: Zeespons.</p>
 
   <script>
     const canvas = document.getElementById("gameCanvas");
     const ctx = canvas.getContext("2d");
 
-    const playerImg = new Image();
+    let playerImg = new Image();
     playerImg.src = "assets/appelkaas_run.png";
-
-    const appelImg = new Image();
+    let appelImg = new Image();
     appelImg.src = "assets/appel.png";
-
-    const kaasImg = new Image();
+    let kaasImg = new Image();
     kaasImg.src = "assets/kaas.png";
 
-    const gravity = 0.6;
-    const jumpStrength = -10;
-    let gameStarted = false;
-    let gameOver = false;
-    let score = 0;
-    let speed = 2.2;
-
-    const player = {
-      x: 80,
+    let player = {
+      x: 50,
       y: canvas.height - 70,
       width: 50,
       height: 50,
@@ -92,127 +52,131 @@
       grounded: true
     };
 
-    const obstacles = [];
+    let gravity = 0.6;
+    let jumpPower = -12;
+    let obstacles = [];
+    let score = 0;
+    let speed = 3;
+    let gameStarted = false;
+    let gameOver = false;
+    let framesSinceLastObstacle = 0;
+    let obstacleCooldown = 100;
 
     function drawPlayer() {
       ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
     }
 
-    function drawObstacles() {
-      for (let obs of obstacles) {
-        const img = obs.type === "appel" ? appelImg : kaasImg;
-        ctx.drawImage(img, obs.x, obs.y, obs.width, obs.height);
-      }
+    function drawObstacle(ob) {
+      const img = ob.type === "appel" ? appelImg : kaasImg;
+      ctx.drawImage(img, ob.x, ob.y, ob.width, ob.height);
     }
 
-    function drawScore() {
-      ctx.fillStyle = "#1e2b3a";
-      ctx.font = "20px Segoe UI";
-      ctx.fillText("Score: " + score, 20, 30);
+    function resetGame() {
+      player.y = canvas.height - 70;
+      player.velocityY = 0;
+      player.grounded = true;
+      obstacles = [];
+      score = 0;
+      speed = 3;
+      gameOver = false;
     }
 
     function update() {
-      if (!gameStarted || gameOver) return;
+      if (!gameStarted) return;
 
       player.velocityY += gravity;
       player.y += player.velocityY;
-
-      if (player.y + player.height >= canvas.height) {
-        player.y = canvas.height - player.height;
+      if (player.y >= canvas.height - 70) {
+        player.y = canvas.height - 70;
         player.velocityY = 0;
         player.grounded = true;
       } else {
         player.grounded = false;
       }
 
-      obstacles.forEach(obs => {
-        obs.x -= speed;
-      });
-
-      if (Math.random() < 0.015) {
-        const type = Math.random() < 0.6 ? "appel" : "kaas";
-        obstacles.push({
-          x: canvas.width,
-          y: canvas.height - 50,
-          width: 40,
-          height: 40,
-          type: type
-        });
-      }
-
       for (let i = obstacles.length - 1; i >= 0; i--) {
-        const obs = obstacles[i];
-        if (obs.x + obs.width < 0) {
+        obstacles[i].x -= speed;
+        if (obstacles[i].x + obstacles[i].width < 0) {
+          if (obstacles[i].type === "appel") {
+            score++;
+            if (score % 5 === 0 && speed < 10) speed += 0.3;
+          }
           obstacles.splice(i, 1);
         } else if (
-          player.x < obs.x + obs.width &&
-          player.x + player.width > obs.x &&
-          player.y < obs.y + obs.height &&
-          player.y + player.height > obs.y
+          player.x < obstacles[i].x + obstacles[i].width &&
+          player.x + player.width > obstacles[i].x &&
+          player.y < obstacles[i].y + obstacles[i].height &&
+          player.y + player.height > obstacles[i].y
         ) {
-          if (obs.type === "appel") {
-            score++;
-            obstacles.splice(i, 1);
-            if (score % 6 === 0 && speed < 9) speed += 0.2;
-          } else {
+          if (obstacles[i].type === "kaas") {
             gameOver = true;
-            gameStarted = false;
+          } else {
+            obstacles.splice(i, 1);
+            score++;
+            if (score % 5 === 0 && speed < 10) speed += 0.3;
           }
+        }
+      }
+
+      framesSinceLastObstacle++;
+      if (framesSinceLastObstacle >= obstacleCooldown) {
+        if (Math.random() < 0.03) {
+          let type = Math.random() < 0.6 ? "appel" : "kaas";
+          obstacles.push({
+            x: canvas.width,
+            y: canvas.height - 70,
+            width: 40,
+            height: 40,
+            type: type
+          });
+          framesSinceLastObstacle = 0;
         }
       }
     }
 
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawPlayer();
+      obstacles.forEach(drawObstacle);
 
-      if (!gameStarted && !gameOver) {
+      ctx.fillStyle = "#1e2b3a";
+      ctx.font = "20px Segoe UI";
+      ctx.fillText("Score: " + score, 10, 30);
+
+      if (!gameStarted) {
         ctx.fillStyle = "#1e2b3a";
-        ctx.font = "28px Segoe UI";
-        ctx.fillText("Druk op spatie om te starten", canvas.width / 2 - 180, canvas.height / 2);
-        return;
+        ctx.font = "26px Segoe UI";
+        ctx.fillText("Druk op spatie om te beginnen!", 200, 150);
       }
 
-      drawPlayer();
-      drawObstacles();
-      drawScore();
-
       if (gameOver) {
-        ctx.fillStyle = "#ff3366";
-        ctx.font = "30px Segoe UI";
-        ctx.fillText("GAME OVER", canvas.width / 2 - 90, canvas.height / 2);
+        ctx.fillStyle = "#ff4d4d";
+        ctx.font = "28px Segoe UI";
+        ctx.fillText("Game Over!", 320, 140);
+        ctx.fillStyle = "#1e2b3a";
         ctx.font = "20px Segoe UI";
-        ctx.fillText("Score: " + score, canvas.width / 2 - 40, canvas.height / 2 + 40);
-        ctx.fillText("Druk op spatie om opnieuw te starten", canvas.width / 2 - 150, canvas.height / 2 + 80);
+        ctx.fillText("Druk op spatie om opnieuw te spelen.", 260, 180);
       }
     }
 
-    function loop() {
+    function gameLoop() {
       update();
       draw();
-      requestAnimationFrame(loop);
+      requestAnimationFrame(gameLoop);
     }
 
     document.addEventListener("keydown", function (e) {
       if (e.code === "Space") {
-        if (!gameStarted && !gameOver) {
+        if (!gameStarted || gameOver) {
+          resetGame();
           gameStarted = true;
-          score = 0;
-          speed = 2.2;
-          obstacles.length = 0;
-        } else if (gameOver) {
-          gameOver = false;
-          score = 0;
-          speed = 2.2;
-          player.y = canvas.height - player.height;
-          player.velocityY = 0;
-          obstacles.length = 0;
         } else if (player.grounded) {
-          player.velocityY = jumpStrength;
+          player.velocityY = jumpPower;
         }
       }
     });
 
-    loop();
+    gameLoop();
   </script>
 </body>
 </html>
