@@ -86,7 +86,17 @@
   </section>
 
 <img src="assets/akaipfp.png" alt="Akaipfp" id="akaipfp" />
+  
+<audio id="akaiaudio" src="assets/ikbenappelkaas.mp3"></audio>
+<script>
+  document.getElementById("akaipfp").addEventListener("click", function () {
+    const audio = document.getElementById("akaiaudio");
+    audio.currentTime = 0;
+    audio.play();
+  });
+</script>
 
+  
   <footer>
     <p>🍏🧀 Yappelkaas 2025 – Geen garantie op mentale stabiliteit.</p>
   </footer>
