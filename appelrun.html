@@ -1,1 +1,375 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AppelRun - Yappelkaas</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background-color: #f0f6ff;
+      color: #1e2b3a;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      margin: 0;
+      user-select: none;
+    }
+    #gameContainer {
+      max-width: 480px;
+      margin: 2rem auto;
+      position: relative;
+      background: #d6eaff;
+      border: 4px solid #3399ff;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(51,153,255,0.4);
+    }
+    canvas {
+      display: block;
+      background: #e0f0ff;
+      border-radius: 10px;
+      margin: 0 auto;
+    }
+    #startScreen, #gameOverScreen {
+      padding: 2rem;
+    }
+    button {
+      cursor: pointer;
+      background-color: #66b3ff;
+      border: none;
+      padding: 1rem 2rem;
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      color: white;
+      border-radius: 12px;
+      box-shadow: 2px 2px 8px rgba(0,0,100,0.2);
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #3399ff;
+    }
+    #homeBtn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 0.9rem;
+      padding: 0.4rem 1rem;
+      background: #e0f0ff;
+      color: #1e2b3a;
+      border: 2px solid #3399ff;
+      box-shadow: none;
+      border-radius: 10px;
+      text-decoration: none;
+    }
+    #homeBtn:hover {
+      background-color: #cce6ff;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="index.html" id="homeBtn">🏠 Home</a>
+
+  <div id="gameContainer">
+
+    <div id="startScreen">
+      <h1>AppelRun</h1>
+      <p>Spring en ontwijk obstakels! Verzamel kaas en appels voor extra punten!</p>
+      <p><strong>Gebruik de spatiebalk of tik op het scherm om te springen.</strong></p>
+      <button id="startBtn">Start Run!</button>
+    </div>
+
+    <canvas id="gameCanvas" width="480" height="270" style="display:none;"></canvas>
+
+    <div id="gameOverScreen" style="display:none;">
+      <h2>Game Over!</h2>
+      <p>Je eindscore: <span id="finalScore">0</span></p>
+      <label for="playerName">Voer je naam in voor de highscore:</label><br/>
+      <input type="text" id="playerName" maxlength="12" placeholder="Naam" />
+      <br/>
+      <button id="submitScoreBtn">Score opslaan</button>
+      <button id="restartBtn">Opnieuw proberen</button>
+      <h3>Highscores</h3>
+      <ol id="highscoreList"></ol>
+    </div>
+
+  </div>
+
+  <script>
+    (() => {
+      const canvas = document.getElementById('gameCanvas');
+      const ctx = canvas.getContext('2d');
+
+      const startScreen = document.getElementById('startScreen');
+      const gameOverScreen = document.getElementById('gameOverScreen');
+      const startBtn = document.getElementById('startBtn');
+      const restartBtn = document.getElementById('restartBtn');
+      const submitScoreBtn = document.getElementById('submitScoreBtn');
+      const playerNameInput = document.getElementById('playerName');
+      const finalScoreEl = document.getElementById('finalScore');
+      const highscoreList = document.getElementById('highscoreList');
+
+      let gameInterval;
+      let gravity = 0.6;
+      let jumpForce = -12;
+      let player = {
+        x: 50,
+        y: 0,
+        width: 50,
+        height: 50,
+        dy: 0,
+        grounded: false,
+        color: '#3399ff'
+      };
+      let obstacles = [];
+      let collectibles = [];
+      let score = 0;
+      let gameSpeed = 4;
+      let running = false;
+      let frameCount = 0;
+
+      // Load images for player, obstacles and collectibles
+      const imgPlayer = new Image();
+      imgPlayer.src = 'assets/appelkaas_run.png'; // maak een simpele rennende Appelkaas sprite
+
+      const imgCheese = new Image();
+      imgCheese.src = 'assets/kaas.png'; // kaas icoon
+
+      const imgApple = new Image();
+      imgApple.src = 'assets/appel.png'; // appel icoon
+
+      function resetGame() {
+        player.y = canvas.height - player.height - 10;
+        player.dy = 0;
+        player.grounded = true;
+        obstacles = [];
+        collectibles = [];
+        score = 0;
+        gameSpeed = 4;
+        frameCount = 0;
+      }
+
+      function spawnObstacle() {
+        // Obstakel = een kaasblok of appel (rood of geel)
+        let type = Math.random() < 0.7 ? 'kaas' : 'appel';
+        let width = 40;
+        let height = 40;
+        let y = canvas.height - height - 10;
+
+        obstacles.push({
+          x: canvas.width + 10,
+          y: y,
+          width: width,
+          height: height,
+          type: type
+        });
+      }
+
+      function spawnCollectible() {
+        // Verzamelbaar object (bijv. kaas of appel hoog in de lucht)
+        collectibles.push({
+          x: canvas.width + 10,
+          y: canvas.height - 80 - Math.random()*50,
+          width: 30,
+          height: 30,
+          collected: false,
+          type: Math.random() < 0.5 ? 'kaas' : 'appel'
+        });
+      }
+
+      function drawPlayer() {
+        // Als img niet geladen is, fallback naar blauw vierkant
+        if (imgPlayer.complete) {
+          ctx.drawImage(imgPlayer, player.x, player.y, player.width, player.height);
+        } else {
+          ctx.fillStyle = player.color;
+          ctx.fillRect(player.x, player.y, player.width, player.height);
+        }
+      }
+
+      function drawObstacles() {
+        obstacles.forEach(obs => {
+          if (obs.type === 'kaas' && imgCheese.complete) {
+            ctx.drawImage(imgCheese, obs.x, obs.y, obs.width, obs.height);
+          } else if (obs.type === 'appel' && imgApple.complete) {
+            ctx.drawImage(imgApple, obs.x, obs.y, obs.width, obs.height);
+          } else {
+            ctx.fillStyle = obs.type === 'kaas' ? 'yellow' : 'red';
+            ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+          }
+        });
+      }
+
+      function drawCollectibles() {
+        collectibles.forEach(col => {
+          if (!col.collected) {
+            if (col.type === 'kaas' && imgCheese.complete) {
+              ctx.drawImage(imgCheese, col.x, col.y, col.width, col.height);
+            } else if (col.type === 'appel' && imgApple.complete) {
+              ctx.drawImage(imgApple, col.x, col.y, col.width, col.height);
+            } else {
+              ctx.fillStyle = col.type === 'kaas' ? 'yellow' : 'red';
+              ctx.fillRect(col.x, col.y, col.width, col.height);
+            }
+          }
+        });
+      }
+
+      function update() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Player physics
+        player.dy += gravity;
+        player.y += player.dy;
+        if (player.y + player.height >= canvas.height - 10) {
+          player.y = canvas.height - player.height - 10;
+          player.dy = 0;
+          player.grounded = true;
+        } else {
+          player.grounded = false;
+        }
+
+        // Move obstacles & collectibles to left
+        obstacles.forEach(obs => obs.x -= gameSpeed);
+        collectibles.forEach(col => {
+          if (!col.collected) col.x -= gameSpeed;
+        });
+
+        // Remove offscreen obstacles
+        obstacles = obstacles.filter(obs => obs.x + obs.width > 0);
+        collectibles = collectibles.filter(col => col.x + col.width > 0 && !col.collected);
+
+        // Spawn new obstacles every ~90 frames
+        if (frameCount % 90 === 0) {
+          spawnObstacle();
+        }
+
+        // Spawn collectibles every ~150 frames
+        if (frameCount % 150 === 0) {
+          spawnCollectible();
+        }
+
+        // Check collision with obstacles -> game over
+        for (let obs of obstacles) {
+          if (
+            player.x < obs.x + obs.width &&
+            player.x + player.width > obs.x &&
+            player.y < obs.y + obs.height &&
+            player.y + player.height > obs.y
+          ) {
+            endGame();
+            return;
+          }
+        }
+
+        // Check collision with collectibles -> add score and mark collected
+        collectibles.forEach(col => {
+          if (!col.collected &&
+              player.x < col.x + col.width &&
+              player.x + player.width > col.x &&
+              player.y < col.y + col.height &&
+              player.y + player.height > col.y) {
+                score += col.type === 'kaas' ? 10 : 20;
+                col.collected = true;
+          }
+        });
+
+        // Draw everything
+        drawPlayer();
+        drawObstacles();
+        drawCollectibles();
+
+        // Draw score
+        ctx.fillStyle = '#1e2b3a';
+        ctx.font = '20px Segoe UI, Tahoma, Geneva, Verdana, sans-serif';
+        ctx.fillText('Score: ' + score, 10, 25);
+
+        frameCount++;
+      }
+
+      function gameLoop() {
+        if (!running) return;
+        update();
+        requestAnimationFrame(gameLoop);
+      }
+
+      function jump() {
+        if (player.grounded) {
+          player.dy = jumpForce;
+          player.grounded = false;
+        }
+      }
+
+      function startGame() {
+        resetGame();
+        running = true;
+        startScreen.style.display = 'none';
+        gameOverScreen.style.display = 'none';
+        canvas.style.display = 'block';
+        gameLoop();
+      }
+
+      function endGame() {
+        running = false;
+        canvas.style.display = 'none';
+        gameOverScreen.style.display = 'block';
+        finalScoreEl.textContent = score;
+        playerNameInput.value = '';
+        loadHighscores();
+      }
+
+      function saveHighscore(name, score) {
+        if (!name) return;
+        let highscores = JSON.parse(localStorage.getItem('appelrunHighscores') || '[]');
+        // Check for existing name and update if higher
+        let existing = highscores.find(h => h.name.toLowerCase() === name.toLowerCase());
+        if (existing) {
+          if (score > existing.score) existing.score = score;
+        } else {
+          highscores.push({name: name, score: score});
+        }
+        highscores.sort((a,b) => b.score - a.score);
+        if (highscores.length > 10) highscores = highscores.slice(0,10);
+        localStorage.setItem('appelrunHighscores', JSON.stringify(highscores));
+        loadHighscores();
+      }
+
+      function loadHighscores() {
+        let highscores = JSON.parse(localStorage.getItem('appelrunHighscores') || '[]');
+        highscoreList.innerHTML = '';
+        highscores.forEach(h => {
+          let li = document.createElement('li');
+          li.textContent = `${h.name} - ${h.score}`;
+          highscoreList.appendChild(li);
+        });
+      }
+
+      // Event listeners
+      startBtn.addEventListener('click', startGame);
+      restartBtn.addEventListener('click', startGame);
+      submitScoreBtn.addEventListener('click', () => {
+        let name = playerNameInput.value.trim();
+        saveHighscore(name, score);
+      });
+
+      window.addEventListener('keydown', e => {
+        if (e.code === 'Space') {
+          e.preventDefault();
+          if (!running && startScreen.style.display === 'none') return;
+          jump();
+        }
+      });
+
+      // For mobile tap
+      window.addEventListener('touchstart', e => {
+        if (running) jump();
+      });
+
+      // Init
+      resetGame();
+      loadHighscores();
+
+    })();
+  </script>
+</body>
+</html>
 
