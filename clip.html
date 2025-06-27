@@ -3,73 +3,66 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clips Insturen - Yappelkaas</title>
-  <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <title>Clip Insturen - Yappelkaas</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
   <style>
-    .clip-inzending {
-      margin: 3rem auto;
-      max-width: 600px;
-      background-color: #eaf5ff;
+    .clip-form {
+      max-width: 500px;
+      margin: 2rem auto;
       padding: 2rem;
+      background-color: #e6f3ff;
       border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0, 102, 204, 0.1);
+      box-shadow: 0 0 10px rgba(0, 102, 204, 0.1);
     }
-
-    .clip-inzending h2 {
+    .clip-form h2 {
       margin-bottom: 1rem;
-      color: #1e2b3a;
     }
-
-    .clip-inzending input[type="text"] {
+    .clip-form input[type="url"] {
       width: 100%;
-      padding: 0.8rem;
-      border-radius: 10px;
+      padding: 1rem;
+      font-size: 1rem;
       border: 2px solid #66b3ff;
-      font-size: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
     }
-
-    .clip-inzending button {
-      margin-top: 1rem;
-      padding: 0.7rem 1.5rem;
+    .clip-form button {
+      padding: 1rem 2rem;
       font-size: 1rem;
-      background-color: #66b3ff;
+      background-color: #3399ff;
       color: white;
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      transition: background-color 0.2s ease;
     }
-
-    .clip-inzending button:hover {
-      background-color: #559ae0;
+    .clip-form button:hover {
+      background-color: #1e80e0;
     }
-
-    #clipFeedback {
+    .clip-form .message {
       margin-top: 1rem;
       font-weight: bold;
     }
   </style>
 </head>
-
 <body>
   <header class="hero">
     <a href="index.html" class="menu-btn" style="position: absolute; top: 1rem; left: 1rem;">🏠 Home</a>
-    <h1>📼 Clip Insturen</h1>
-    <p>Deel je favoriete Appelkaas-moment met ons!</p>
+    <h1>Clip Insturen</h1>
+    <p>Stuur jouw favoriete clip van Appelkaas in!</p>
   </header>
 
   <main>
-    <section class="clip-inzending">
-      <h2>📹 Jouw favoriete Appelkaas-clip</h2>
-      <p>Plak hieronder de Twitch-link van je favoriete clip van Appelkaas:</p>
-
-      <input type="text" id="clipInput" placeholder="https://www.twitch.tv/appelkaas/clip/..." />
-      
-      <button onclick="verzendClip()">✅ Verstuur clip</button>
-
-      <p id="clipFeedback"></p>
-    </section>
+    <form class="clip-form" id="clipForm">
+      <h2>Cliplink</h2>
+      <input
+        type="url"
+        id="clipUrl"
+        placeholder="https://www.twitch.tv/appelkaas/clip/..."
+        required
+      />
+      <button type="submit">Insturen</button>
+      <div class="message" id="message"></div>
+    </form>
   </main>
 
   <footer>
@@ -78,23 +71,43 @@
   <p class="copyright">Gemaakt door: Zeespons.</p>
 
   <script>
-    function verzendClip() {
-      const input = document.getElementById("clipInput");
-      const feedback = document.getElementById("clipFeedback");
-      const waarde = input.value.trim();
+    const form = document.getElementById("clipForm");
+    const urlInput = document.getElementById("clipUrl");
+    const messageDiv = document.getElementById("message");
 
-      if (!waarde.startsWith("https://www.twitch.tv/appelkaas/clip/")) {
-        feedback.textContent = "❌ Dat lijkt geen geldige Appelkaas-clip.";
-        feedback.style.color = "red";
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const url = urlInput.value.trim();
+
+      if (!url.startsWith("https://www.twitch.tv/appelkaas/clip")) {
+        messageDiv.style.color = "red";
+        messageDiv.textContent = "❌ Ongeldige link. Alleen clips van Appelkaas zijn toegestaan!";
         return;
       }
 
-      feedback.textContent = "✅ Clip succesvol ingestuurd!";
-      feedback.style.color = "green";
-      input.value = "";
-
-      // 📝 Voeg hier webhookfunctionaliteit toe als dat nodig is
-    }
+      fetch("VUL HIER JE WEBHOOK IN", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content: `📹 Nieuwe ingestuurde clip: ${url}`
+        }),
+      })
+        .then((res) => {
+          if (res.ok) {
+            messageDiv.style.color = "green";
+            messageDiv.textContent = "✅ Clip succesvol ingestuurd!";
+            urlInput.value = "";
+          } else {
+            throw new Error("Fout bij verzenden");
+          }
+        })
+        .catch(() => {
+          messageDiv.style.color = "red";
+          messageDiv.textContent = "⚠️ Er ging iets mis met het versturen.";
+        });
+    });
   </script>
 </body>
 </html>
