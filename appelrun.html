@@ -20,7 +20,7 @@
     <div style="max-width: 700px; margin: 2rem auto; text-align: left;">
       <h2>Hoe werkt het?</h2>
       <ul>
-        <li>Druk op <strong>spatie</strong> om te springen.</li>
+        <li>Druk op <strong>spatie</strong> of tik op het scherm om te springen.</li>
         <li>Pak <img src="assets/appel.png" alt="appel" style="height: 20px; vertical-align: middle;"> voor punten.</li>
         <li>Ontwijk <img src="assets/kaas.png" alt="kaas" style="height: 20px; vertical-align: middle;"> want dat is game over!</li>
       </ul>
@@ -145,7 +145,7 @@
       if (!gameStarted) {
         ctx.fillStyle = "#1e2b3a";
         ctx.font = "26px Segoe UI";
-        ctx.fillText("Druk op spatie om te beginnen!", 200, 150);
+        ctx.fillText("Druk op spatie of tik op het scherm!", 180, 150);
       }
 
       if (gameOver) {
@@ -154,7 +154,7 @@
         ctx.fillText("Game Over!", 320, 140);
         ctx.fillStyle = "#1e2b3a";
         ctx.font = "20px Segoe UI";
-        ctx.fillText("Druk op spatie om opnieuw te spelen.", 260, 180);
+        ctx.fillText("Druk op spatie of tik om opnieuw te spelen.", 220, 180);
       }
     }
 
@@ -164,15 +164,24 @@
       requestAnimationFrame(gameLoop);
     }
 
-    document.addEventListener("keydown", function (e) {
-      if (e.code === "Space") {
-        if (!gameStarted || gameOver) {
-          resetGame();
-          gameStarted = true;
-        } else if (player.grounded) {
-          player.velocityY = jumpPower;
-        }
+    function handleJump() {
+      if (!gameStarted || gameOver) {
+        resetGame();
+        gameStarted = true;
+      } else if (player.grounded) {
+        player.velocityY = jumpPower;
       }
+    }
+
+    document.addEventListener("keydown", function (e) {
+      if (e.code === "Space") handleJump();
+    });
+
+    // ✅ Mobiel & muis ondersteuning
+    canvas.addEventListener("click", handleJump);
+    canvas.addEventListener("touchstart", function (e) {
+      e.preventDefault();
+      handleJump();
     });
 
     gameLoop();
