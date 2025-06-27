@@ -73,8 +73,19 @@
     let highscore = parseInt(localStorage.getItem("appelrun_highscore")) || 0;
 
     function drawPlayer() {
-      ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
-    }
+  const aspectRatio = playerImg.width / playerImg.height;
+  const targetHeight = player.height;
+  const targetWidth = targetHeight * aspectRatio;
+  const offsetX = (player.width - targetWidth) / 2;
+
+  ctx.drawImage(
+    playerImg,
+    0, 0, playerImg.width, playerImg.height,
+    player.x + offsetX, player.y,
+    targetWidth, targetHeight
+  );
+}
+
 
     function drawObstacle(ob) {
       const img = ob.type === "appel" ? appelImg : kaasImg;
