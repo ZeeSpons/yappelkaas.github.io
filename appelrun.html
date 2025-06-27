@@ -24,7 +24,24 @@
     }
     #info {
       font-size: 1.2rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
+    }
+    #uitleg {
+      max-width: 800px;
+      margin: 0 auto 3rem;
+      padding: 1rem 2rem;
+      background-color: #e0f0ff;
+      border: 2px solid #66b3ff;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      text-align: left;
+    }
+    #uitleg h2 {
+      color: #1e2b3a;
+    }
+    #uitleg ul {
+      text-align: left;
+      padding-left: 1.2rem;
     }
     .back-home {
       display: inline-block;
@@ -47,6 +64,19 @@
   <h1>🎮 AppelRun</h1>
   <canvas id="gameCanvas" width="800" height="400"></canvas>
   <div id="info">Druk op spatie om te springen. Ontwijk de obstakels!</div>
+
+  <section id="uitleg">
+    <h2>📘 Uitleg</h2>
+    <ul>
+      <li><strong>Spatiebalk</strong>: Spring om obstakels te ontwijken.</li>
+      <li>Je speelt als <strong>Appelkaas</strong>, en rent automatisch vooruit.</li>
+      <li>⚠️ <strong>Obstakels</strong>: Als je ermee botst is het game over.</li>
+      <li>🍏 <strong>Appels</strong>: Geven extra punten (nog niet toegevoegd).</li>
+      <li>🧀 <strong>Kaasjes</strong>: Maken je tijdelijk onoverwinnelijk (nog niet toegevoegd).</li>
+    </ul>
+    <p>Probeer zo ver mogelijk te rennen. Hoe hoger je score, hoe sneller het gaat!</p>
+  </section>
+
   <a href="index.html" class="back-home">🏠 Terug naar home</a>
 
   <script>
@@ -103,12 +133,10 @@
         player.grounded = false;
       }
 
-      // Obstakels
       obstacles.forEach(obs => {
         obs.x -= speed;
       });
 
-      // Nieuwe obstakels
       if (Math.random() < 0.02) {
         obstacles.push({
           x: canvas.width,
@@ -118,7 +146,6 @@
         });
       }
 
-      // Verwijder obstakels buiten beeld
       for (let i = obstacles.length - 1; i >= 0; i--) {
         if (obstacles[i].x + obstacles[i].width < 0) {
           obstacles.splice(i, 1);
@@ -127,7 +154,6 @@
         }
       }
 
-      // Botsing check
       for (let obs of obstacles) {
         if (
           player.x < obs.x + obs.width &&
@@ -179,7 +205,6 @@
           speed = 4;
           obstacles.length = 0;
         } else if (gameOver) {
-          // Reset game
           gameOver = false;
           score = 0;
           speed = 4;
