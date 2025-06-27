@@ -113,9 +113,10 @@ body.has-offline-banner {
   position: fixed;
   bottom: 60px;
   right: 0;
-  width: 80px;
-  height: 80px;
+  width: 40px;
+  height: 40px;
   object-fit: cover;
-  z-index: 9999; /* veel hoger dan standaard */
-  pointer-events: none; /* zodat hij niet aanklikbaar is, optioneel */
+  z-index: 9999;
+  cursor: pointer;
 }
+
