@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clips Insturen - Yappelkaas</title>
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .clip-inzending {
+      margin: 3rem auto;
+      max-width: 600px;
+      background-color: #eaf5ff;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 102, 204, 0.1);
+    }
+
+    .clip-inzending h2 {
+      margin-bottom: 1rem;
+      color: #1e2b3a;
+    }
+
+    .clip-inzending input[type="text"] {
+      width: 100%;
+      padding: 0.8rem;
+      border-radius: 10px;
+      border: 2px solid #66b3ff;
+      font-size: 1rem;
+    }
+
+    .clip-inzending button {
+      margin-top: 1rem;
+      padding: 0.7rem 1.5rem;
+      font-size: 1rem;
+      background-color: #66b3ff;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .clip-inzending button:hover {
+      background-color: #559ae0;
+    }
+
+    #clipFeedback {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="hero">
+    <a href="index.html" class="menu-btn" style="position: absolute; top: 1rem; left: 1rem;">🏠 Home</a>
+    <h1>📼 Clip Insturen</h1>
+    <p>Deel je favoriete Appelkaas-moment met ons!</p>
+  </header>
+
+  <main>
+    <section class="clip-inzending">
+      <h2>📹 Jouw favoriete Appelkaas-clip</h2>
+      <p>Plak hieronder de Twitch-link van je favoriete clip van Appelkaas:</p>
+
+      <input type="text" id="clipInput" placeholder="https://www.twitch.tv/appelkaas/clip/..." />
+      
+      <button onclick="verzendClip()">✅ Verstuur clip</button>
+
+      <p id="clipFeedback"></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>🍏🧀 Yappelkaas 2025 – Geen garantie op mentale stabiliteit.</p>
+  </footer>
+  <p class="copyright">Gemaakt door: Zeespons.</p>
+
+  <script>
+    function verzendClip() {
+      const input = document.getElementById("clipInput");
+      const feedback = document.getElementById("clipFeedback");
+      const waarde = input.value.trim();
+
+      if (!waarde.startsWith("https://www.twitch.tv/appelkaas/clip/")) {
+        feedback.textContent = "❌ Dat lijkt geen geldige Appelkaas-clip.";
+        feedback.style.color = "red";
+        return;
+      }
+
+      feedback.textContent = "✅ Clip succesvol ingestuurd!";
+      feedback.style.color = "green";
+      input.value = "";
+
+      // 📝 Voeg hier webhookfunctionaliteit toe als dat nodig is
+    }
+  </script>
+</body>
+</html>
