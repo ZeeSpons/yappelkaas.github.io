@@ -22,7 +22,7 @@
       <ul>
         <li>Druk op <strong>spatie</strong> of tik op het scherm om te springen.</li>
         <li>Pak <img src="assets/appel.png" alt="appel" style="height: 20px;"> voor punten.</li>
-        <li>Pak zeldzame <img src="assets/zonnebril.png" alt="zonnebril" style="height: 20px;"> om MrDeluxe op te roepen voor 5 seconden!</li>
+        <li>Pak zeldzame <img src="assets/zonnebril.png" alt="zonnebril" style="height: 20px;"> om MrDeluxe op te roepen voor 10 seconden!</li>
         <li>Ontwijk <img src="assets/kaas.png" alt="kaas" style="height: 20px;"> want dat is game over!</li>
       </ul>
       <p style="margin-top: 1.5rem;">
@@ -161,7 +161,7 @@
             obstacles.splice(i, 1);
             if (score % 5 === 0 && speed < 10) speed += 0.3;
           } else if (ob.type === "zonnebril") {
-            activePowerup = { startTime: Date.now(), duration: 5000 };
+            activePowerup = { startTime: Date.now(), duration: 10000 };
             powerupSound.currentTime = 0;
             powerupSound.play();
             deluxe = {
