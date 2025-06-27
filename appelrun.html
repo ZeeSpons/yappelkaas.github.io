@@ -3,98 +3,91 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AppelRun</title>
+  <title>AppelRun - Yappelkaas</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
   <style>
-    body {
-      background-color: #f0f6ff;
-      color: #1e2b3a;
-      text-align: center;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
     canvas {
-      background-color: #ffffff;
+      background-color: #e6f2ff;
+      border: 3px solid #66b3ff;
+      border-radius: 10px;
+      margin-top: 2rem;
       display: block;
-      margin: 3rem auto 1rem;
-      border: 4px solid #66b3ff;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      margin-left: auto;
+      margin-right: auto;
     }
-    #info {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-    }
-    #uitleg {
-      max-width: 800px;
-      margin: 0 auto 3rem;
-      padding: 1rem 2rem;
-      background-color: #e0f0ff;
-      border: 2px solid #66b3ff;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      text-align: left;
-    }
-    #uitleg h2 {
+    .uitleg {
+      margin-top: 1rem;
+      font-size: 1rem;
       color: #1e2b3a;
-    }
-    #uitleg ul {
-      text-align: left;
-      padding-left: 1.2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
     }
     .back-home {
+      margin-top: 2rem;
       display: inline-block;
-      padding: 0.6rem 1.5rem;
       background-color: #e0f0ff;
-      border: 2px solid #66b3ff;
-      border-radius: 12px;
-      text-decoration: none;
-      font-size: 1.1rem;
       color: #1e2b3a;
-      margin-top: 1rem;
+      border: 2px solid #66b3ff;
+      padding: 0.8rem 1.6rem;
+      border-radius: 10px;
+      text-decoration: none;
       transition: 0.2s;
     }
     .back-home:hover {
       background-color: #cce6ff;
     }
+    header.hero {
+      padding: 2rem;
+      background-color: #d6eaff;
+      border-bottom: 4px solid #3399ff;
+      color: #1e2b3a;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
-  <h1>🎮 AppelRun</h1>
-  <canvas id="gameCanvas" width="800" height="400"></canvas>
-  <div id="info">Druk op spatie om te springen. Ontwijk de obstakels!</div>
+  <header class="hero">
+    <h1>🎮 AppelRun</h1>
+    <p>Ren, spring en verzamel zoveel mogelijk appels!</p>
+  </header>
 
-  <section id="uitleg">
-    <h2>📘 Uitleg</h2>
-    <ul>
-      <li><strong>Spatiebalk</strong>: Spring om obstakels te ontwijken.</li>
-      <li>Je speelt als <strong>Appelkaas</strong>, en rent automatisch vooruit.</li>
-      <li>⚠️ <strong>Obstakels</strong>: Als je ermee botst is het game over.</li>
-      <li>🍏 <strong>Appels</strong>: Geven extra punten (nog niet toegevoegd).</li>
-      <li>🧀 <strong>Kaasjes</strong>: Maken je tijdelijk onoverwinnelijk (nog niet toegevoegd).</li>
-    </ul>
-    <p>Probeer zo ver mogelijk te rennen. Hoe hoger je score, hoe sneller het gaat!</p>
-  </section>
-
-  <a href="index.html" class="back-home">🏠 Terug naar home</a>
+  <main class="kaasklikker">
+    <canvas id="gameCanvas" width="800" height="300"></canvas>
+    <p class="uitleg">
+      🎮 Gebruik <strong>Spatie</strong> om te springen. Verzamel appels 🍎 voor punten, ontwijk kazen 🧀!<br>
+      Het spel begint langzaam maar wordt steeds sneller... Hoe lang hou jij het vol?
+    </p>
+    <a href="index.html" class="back-home">🏠 Terug naar homepagina</a>
+  </main>
 
   <script>
     const canvas = document.getElementById("gameCanvas");
     const ctx = canvas.getContext("2d");
 
+    const playerImg = new Image();
+    playerImg.src = "assets/appelkaas_run.png";
+
+    const appelImg = new Image();
+    appelImg.src = "assets/appel.png";
+
+    const kaasImg = new Image();
+    kaasImg.src = "assets/kaas.png";
+
     const gravity = 0.6;
-    const jumpStrength = -11;
+    const jumpStrength = -10;
     let gameStarted = false;
     let gameOver = false;
     let score = 0;
-    let speed = 4;
+    let speed = 2.2;
 
     const player = {
       x: 80,
-      y: canvas.height - 50,
-      width: 40,
-      height: 40,
+      y: canvas.height - 70,
+      width: 50,
+      height: 50,
       velocityY: 0,
       grounded: true
     };
@@ -102,15 +95,14 @@
     const obstacles = [];
 
     function drawPlayer() {
-      ctx.fillStyle = "#ff3366";
-      ctx.fillRect(player.x, player.y, player.width, player.height);
+      ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
     }
 
     function drawObstacles() {
-      ctx.fillStyle = "#3399ff";
-      obstacles.forEach(obs => {
-        ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
-      });
+      for (let obs of obstacles) {
+        const img = obs.type === "appel" ? appelImg : kaasImg;
+        ctx.drawImage(img, obs.x, obs.y, obs.width, obs.height);
+      }
     }
 
     function drawScore() {
@@ -137,32 +129,35 @@
         obs.x -= speed;
       });
 
-      if (Math.random() < 0.02) {
+      if (Math.random() < 0.015) {
+        const type = Math.random() < 0.6 ? "appel" : "kaas";
         obstacles.push({
           x: canvas.width,
-          y: canvas.height - 40,
-          width: 30,
-          height: 40
+          y: canvas.height - 50,
+          width: 40,
+          height: 40,
+          type: type
         });
       }
 
       for (let i = obstacles.length - 1; i >= 0; i--) {
-        if (obstacles[i].x + obstacles[i].width < 0) {
+        const obs = obstacles[i];
+        if (obs.x + obs.width < 0) {
           obstacles.splice(i, 1);
-          score++;
-          if (score % 5 === 0) speed += 0.2;
-        }
-      }
-
-      for (let obs of obstacles) {
-        if (
+        } else if (
           player.x < obs.x + obs.width &&
           player.x + player.width > obs.x &&
           player.y < obs.y + obs.height &&
           player.y + player.height > obs.y
         ) {
-          gameOver = true;
-          gameStarted = false;
+          if (obs.type === "appel") {
+            score++;
+            obstacles.splice(i, 1);
+            if (score % 6 === 0 && speed < 9) speed += 0.2;
+          } else {
+            gameOver = true;
+            gameStarted = false;
+          }
         }
       }
     }
@@ -202,12 +197,12 @@
         if (!gameStarted && !gameOver) {
           gameStarted = true;
           score = 0;
-          speed = 4;
+          speed = 2.2;
           obstacles.length = 0;
         } else if (gameOver) {
           gameOver = false;
           score = 0;
-          speed = 4;
+          speed = 2.2;
           player.y = canvas.height - player.height;
           player.velocityY = 0;
           obstacles.length = 0;
