@@ -92,14 +92,32 @@
 
 <img src="assets/akaipfp.png" alt="Akaipfp" id="akaipfp" />
   
-<audio id="akaiaudio" src="assets/welkombijmijnparadijs.mp4"></audio>
+<audio id="akaiaudio1" src="assets/welkombijmijnparadijs.mp4"></audio>
+<audio id="akaiaudio2" src="assets/furry.mp3"></audio>
+<audio id="akaiaudio3" src="assets/waf.mp3"></audio>
+
 <script>
+  let clickCount = 0;
+  const audios = [
+    document.getElementById("akaiaudio1"),
+    document.getElementById("akaiaudio2"),
+    document.getElementById("akaiaudio3"),
+  ];
+
   document.getElementById("akaipfp").addEventListener("click", function () {
-    const audio = document.getElementById("akaiaudio");
-    audio.currentTime = 0;
+    const index = clickCount % audios.length;
+    const audio = audios[index];
+    
+    audios.forEach(a => {
+      a.pause();
+      a.currentTime = 0;
+    });
+
     audio.play();
+    clickCount++;
   });
 </script>
+
 
   
   <footer>
