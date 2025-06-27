@@ -18,13 +18,20 @@
     <canvas id="gameCanvas" width="1000" height="400" style="border: 2px solid #3399ff; background-color: #ffffff; display: block; margin: 2rem auto 0 auto; border-radius: 20px;"></canvas>
     
     <div style="max-width: 900px; margin: 2rem auto; text-align: left;">
-      <h2>Hoe werkt het?</h2>
-      <ul>
-        <li>Druk op <strong>spatie</strong> of tik op het scherm om te springen.</li>
-        <li>Pak <img src="assets/appel.png" alt="appel" style="height: 20px; vertical-align: middle;"> voor punten.</li>
-        <li>Ontwijk <img src="assets/kaas.png" alt="kaas" style="height: 20px; vertical-align: middle;"> want dat is game over!</li>
-      </ul>
-    </div>
+  <h2>Hoe werkt het?</h2>
+  <ul>
+    <li>Druk op <strong>spatie</strong> of tik op het scherm om te springen.</li>
+    <li>Pak <img src="assets/appel.png" alt="appel" style="height: 20px; vertical-align: middle;"> voor punten.</li>
+    <li>Ontwijk <img src="assets/kaas.png" alt="kaas" style="height: 20px; vertical-align: middle;"> want dat is game over!</li>
+  </ul>
+  <p style="margin-top: 1.5rem;">
+    Ben je af? Deel je highscore in de 
+    <a href="https://discord.gg/J95ApheDKV" target="_blank" style="color: #5865F2; font-weight: bold; text-decoration: none;">
+      <img src="assets/discord-icon.png" alt="Discord" style="height: 16px; vertical-align: text-bottom; margin-right: 4px;">
+      Discord
+    </a>!
+  </p>
+</div>
   </main>
 
   <footer>
@@ -145,16 +152,16 @@
       if (!gameStarted) {
         ctx.fillStyle = "#1e2b3a";
         ctx.font = "26px Segoe UI";
-        ctx.fillText("Druk op spatie of tik op het scherm!", 180, 150);
+        ctx.fillText("Druk op spatie of tik op het scherm!", 300, 200);
       }
 
       if (gameOver) {
         ctx.fillStyle = "#ff4d4d";
         ctx.font = "28px Segoe UI";
-        ctx.fillText("Game Over!", 320, 140);
+        ctx.fillText("Game Over!", 400, 180);
         ctx.fillStyle = "#1e2b3a";
         ctx.font = "20px Segoe UI";
-        ctx.fillText("Druk op spatie of tik om opnieuw te spelen.", 220, 180);
+        ctx.fillText("Druk op spatie of tik om opnieuw te spelen.", 280, 220);
       }
     }
 
