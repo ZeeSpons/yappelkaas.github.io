@@ -84,14 +84,16 @@
         messageDiv.textContent = "❌ Ongeldige link. Alleen clips van Appelkaas zijn toegestaan!";
         return;
       }
-    /* hier onder de WEBHOOK */
+
+      const clipId = url.split("/").pop();
+
       fetch("https://discord.com/api/webhooks/1388116687995408486/SBFbDr801zv2pRTIgYzvDwVmhxWGlNA7nne4hiNbW1eIzsYiZtC4H7CB3EZDEa9p8SMN", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          content: `📹 Nieuwe ingestuurde clip: ${url}`
+          content: `${url}\n\`\`\`${clipId}\`\`\``
         }),
       })
         .then((res) => {
