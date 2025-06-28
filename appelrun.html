@@ -64,6 +64,7 @@
   let highscore = parseInt(localStorage.getItem("appelrun_highscore")) || 0;
   let gameStarted = false;
   let gameOver = false;
+  let gameOverTime = null; // Toegevoegd
   let framesSinceLastObstacle = 0;
   let obstacleCooldown = 100;
   let obstacles = [];
@@ -86,12 +87,12 @@
 
     if (ob.type === "appel" || ob.type === "kaas") {
       img = ob.type === "appel" ? appelImg : kaasImg;
-      scaleW = 60;  // 0.75 x 80
+      scaleW = 60;
       scaleH = 60;
     } else if (ob.type === "zonnebril") {
       img = zonnebrilImg;
-      scaleW = 75;  // 0.75 x 100
-      scaleH = 42;  // 0.75 x 56
+      scaleW = 75;
+      scaleH = 42;
     }
 
     ctx.drawImage(img, ob.x, ob.y, scaleW, scaleH);
@@ -119,6 +120,7 @@
     score = 0;
     speed = 3;
     gameOver = false;
+    gameOverTime = null; // Reset toegevoegd
     activePowerup = null;
     deluxe = null;
   }
@@ -158,6 +160,7 @@
           if (!activePowerup) {
             gameOverSound.play();
             gameOver = true;
+            gameOverTime = Date.now(); // Tijd noteren
             return;
           }
           obstacles.splice(i, 1);
@@ -261,6 +264,7 @@
 
   function handleJump() {
     if (!gameStarted || gameOver) {
+      if (gameOver && gameOverTime && Date.now() - gameOverTime < 1000) return; // Blokkeer 1 sec
       resetGame();
       gameStarted = true;
     } else if (player.grounded) {
