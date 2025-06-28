@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Live Stream - Appelkaas</title>
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f8ff;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    header {
+      background-color: #dbeeff;
+      padding: 1.5rem;
+      border-bottom: 2px solid #66b3ff;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: #1e2b3a;
+    }
+
+    .button-bar {
+      margin: 2rem 0;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background-color: #6441a5;
+      color: white;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      text-decoration: none;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn:hover {
+      background-color: #7e5bd3;
+    }
+
+    .btn img {
+      height: 24px;
+    }
+
+    .stream-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    iframe {
+      border-radius: 12px;
+    }
+
+    footer {
+      padding: 2rem;
+      background-color: #dbeeff;
+      color: #1e2b3a;
+      border-top: 2px solid #66b3ff;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📡 Live stream van Appelkaas</h1>
+  </header>
+
+  <div class="button-bar">
+    <a href="index" class="btn">🏠 Terug naar Home</a>
+    <a href="https://www.twitch.tv/appelkaas" target="_blank" class="btn">
+      <img src="assets/twitch.png" alt="Twitch"> Open op Twitch
+    </a>
+  </div>
+
+  <div class="stream-container">
+    <iframe
+      src="https://player.twitch.tv/?channel=appelkaas&parent=yappelkaas.nl"
+      allowfullscreen="true"
+      scrolling="no"
+      height="378"
+      width="620"
+      frameborder="0">
+    </iframe>
+
+    <iframe
+      src="https://www.twitch.tv/embed/appelkaas/chat?parent=yappelkaas.nl"
+      scrolling="no"
+      height="378"
+      width="350"
+      frameborder="0">
+    </iframe>
+  </div>
+
+  <footer>
+    <p>🍏🧀 Yappelkaas 2025 – Live, luid, legendarisch.</p>
+  </footer>
+</body>
+</html>
