@@ -56,7 +56,6 @@
   const popSound = new Audio("assets/pop.mp3");
   const tshoeSound = new Audio("assets/Tshoe.mp3");
 
-  // Speler 2x groter
   const player = { x: 50, y: canvas.height - 140, width: 100, height: 100, velocityY: 0, grounded: true };
   let gravity = 0.4;
   let jumpPower = -12;
@@ -70,7 +69,6 @@
   let obstacles = [];
   let activePowerup = null;
 
-  // MrDeluxe 2x groter (origineel 50x28, nu 100x56)
   let deluxe = null;
   const deluxeSize = { width: 100, height: 56 };
 
@@ -84,15 +82,16 @@
 
   function drawObstacle(ob) {
     let img;
-    let scaleW = 80;  // 2x van 40
-    let scaleH = 80;  // 2x van 40
+    let scaleW, scaleH;
 
-    if (ob.type === "appel") img = appelImg;
-    else if (ob.type === "kaas") img = kaasImg;
-    else if (ob.type === "zonnebril") {
+    if (ob.type === "appel" || ob.type === "kaas") {
+      img = ob.type === "appel" ? appelImg : kaasImg;
+      scaleW = 60;  // 0.75 x 80
+      scaleH = 60;
+    } else if (ob.type === "zonnebril") {
       img = zonnebrilImg;
-      scaleW = 100;  // 2x van 50
-      scaleH = 56;   // 2x van 28
+      scaleW = 75;  // 0.75 x 100
+      scaleH = 42;  // 0.75 x 56
     }
 
     ctx.drawImage(img, ob.x, ob.y, scaleW, scaleH);
@@ -151,9 +150,7 @@
         continue;
       }
 
-      // Player hitbox
       const p = { x: player.x + 12, y: player.y + 12, w: player.width - 24, h: player.height - 24 };
-      // Obstacle hitbox
       const o = { x: ob.x + 12, y: ob.y + 12, w: ob.width - 24, h: ob.height - 24 };
 
       if (p.x < o.x + o.w && p.x + p.w > o.x && p.y < o.y + o.h && p.y + p.h > o.y) {
@@ -175,7 +172,7 @@
           powerupSound.currentTime = 0;
           powerupSound.play();
           deluxe = {
-            x: player.x - 140, // 2x verder links
+            x: player.x - 140,
             y: player.y + 20,
             width: deluxeSize.width,
             height: deluxeSize.height,
@@ -185,7 +182,6 @@
         }
       }
 
-      // Deluxe vs kaas collision to destroy kaas
       if (activePowerup && ob.type === "kaas" && deluxe) {
         const d = { x: deluxe.x, y: deluxe.y, w: deluxeSize.width, h: deluxeSize.height };
         if (d.x < o.x + o.w && d.x + d.w > o.x && d.y < o.y + o.h && d.y + d.h > o.y) {
@@ -199,8 +195,15 @@
     if (++framesSinceLastObstacle >= obstacleCooldown) {
       const rand = Math.random();
       const type = rand < 0.01 ? "zonnebril" : rand < 0.6 ? "appel" : "kaas";
-      // Obstacles y fixed to bottom with height 80, so y = canvas.height - 80
-      obstacles.push({ x: canvas.width, y: canvas.height - 80, width: 80, height: 80, type });
+
+      let width = 60;
+      let height = 60;
+      if (type === "zonnebril") {
+        width = 75;
+        height = 42;
+      }
+
+      obstacles.push({ x: canvas.width, y: canvas.height - height, width, height, type });
       framesSinceLastObstacle = 0;
     }
 
