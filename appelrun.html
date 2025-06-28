@@ -24,7 +24,7 @@
         <li>Pak <img src="assets/appel.png" alt="appel" style="height: 20px;"> voor punten.</li>
         <li>Ontwijk <img src="assets/kaas.png" alt="kaas" style="height: 20px;"> want dan is het game over!</li>
         <li>Pak zeldzame <img src="assets/zonnebril.png" alt="zonnebril" style="height: 20px;"> om MrDeluxe op te roepen voor 10 seconden!</li>
-        <li>Als MrDeluxe is opgeroepen beschermt hij appelkaas tegen de kaasjes.
+        <li>Als MrDeluxe is opgeroepen beschermt hij appelkaas tegen de kaasjes.</li>
       </ul>
       <p style="margin-top: 1.5rem;">
         Ben je af? Deel je highscore in de 
@@ -72,7 +72,8 @@
   let activePowerup = null;
 
   let deluxe = null;
-  const deluxeSize = { width: 50, height: 28 };
+  // MrDeluxe even groot als appelkaas, horizontaal (breedte = player.height, hoogte = player.width)
+  const deluxeSize = { width: player.height, height: player.width }; // 150 breed, 75 hoog
 
   const totalFrames = 8;
   const frameWidth = 300;
@@ -196,6 +197,7 @@
         }
       }
 
+      // Hitbox deluxe is exact hetzelfde als zijn afbeelding, geen kleinere marges!
       if (activePowerup && ob.type === "kaas" && deluxe) {
         const d = { x: deluxe.x, y: deluxe.y, w: deluxeSize.width, h: deluxeSize.height };
         if (d.x < o.x + o.w && d.x + d.w > o.x && d.y < o.y + o.h && d.y + d.h > o.y) {
@@ -218,7 +220,7 @@
         deluxe.x += 6;
       } else {
         deluxe.flyingIn = false;
-        deluxe.y = player.y + 10;
+        deluxe.y = player.y + (player.height - deluxeSize.height) / 2;  // Verticaal centreren
         deluxe.x = player.x + 60;
       }
     }
