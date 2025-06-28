@@ -24,7 +24,7 @@
         <li>Pak <img src="assets/appel.png" alt="appel" style="height: 20px;"> voor punten.</li>
         <li>Ontwijk <img src="assets/kaas.png" alt="kaas" style="height: 20px;"> want dan is het game over!</li>
         <li>Pak zeldzame <img src="assets/zonnebril.png" alt="zonnebril" style="height: 20px;"> om MrDeluxe op te roepen voor 10 seconden!</li>
-        <li>Als MrDeluxe is opgeroepen beschermt hij appelkaas tegen de kaasjes.
+        <li>Als MrDeluxe is opgeroepen beschermt hij appelkaas tegen de kaasjes.</li>
       </ul>
       <p style="margin-top: 1.5rem;">
         Ben je af? Deel je highscore in de 
@@ -45,6 +45,7 @@
   const ctx = canvas.getContext("2d");
 
   const playerImg = new Image(); playerImg.src = "assets/appelkaas_run.png";
+  const idleImg = new Image(); idleImg.src = "assets/appelkaas_idle.png";
   const appelImg = new Image(); appelImg.src = "assets/appel.png";
   const kaasImg = new Image(); kaasImg.src = "assets/kaas.png";
   const zonnebrilImg = new Image(); zonnebrilImg.src = "assets/zonnebril.png";
@@ -72,10 +73,11 @@
   const deluxeSize = { width: 50, height: 28 };
 
   function drawPlayer() {
-    const aspect = playerImg.width / playerImg.height;
+    const img = (!gameStarted || gameOver) ? idleImg : playerImg;
+    const aspect = img === idleImg ? 1221 / 2171 : 1410 / 1881;
     const w = player.height * aspect;
     const offsetX = (player.width - w) / 2;
-    ctx.drawImage(playerImg, player.x + offsetX, player.y, w, player.height);
+    ctx.drawImage(img, player.x + offsetX, player.y, w, player.height);
   }
 
   function drawObstacle(ob) {
