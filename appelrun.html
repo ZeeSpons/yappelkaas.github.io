@@ -44,7 +44,10 @@
   const canvas = document.getElementById("gameCanvas");
   const ctx = canvas.getContext("2d");
 
-  const playerImg = new Image(); playerImg.src = "assets/appelkaas_run.png";
+  // Nieuwe spritesheet voor speler
+  const playerImg = new Image();
+  playerImg.src = "assets/appelkaas_run_spritesheet.png";
+
   const appelImg = new Image(); appelImg.src = "assets/appel.png";
   const kaasImg = new Image(); kaasImg.src = "assets/kaas.png";
   const zonnebrilImg = new Image(); zonnebrilImg.src = "assets/zonnebril.png";
@@ -55,7 +58,7 @@
   const popSound = new Audio("assets/pop.mp3");
   const tshoeSound = new Audio("assets/Tshoe.mp3");
 
-  const player = { x: 50, y: canvas.height - 70, width: 50, height: 50, velocityY: 0, grounded: true };
+  const player = { x: 50, y: canvas.height - 70, width: 300, height: 400, velocityY: 0, grounded: true };
   let gravity = 0.4;
   let jumpPower = -12;
   let speed = 3;
@@ -71,11 +74,21 @@
   let deluxe = null;
   const deluxeSize = { width: 50, height: 28 };
 
+  // Spritesheet animatie instellingen
+  const totalFrames = 8;
+  const frameWidth = 300;
+  const frameHeight = 400;
+  let currentFrame = 0;
+  let frameCounter = 0;
+  const framesPerSprite = 6; // snelheid animatie
+
   function drawPlayer() {
-    const aspect = playerImg.width / playerImg.height;
-    const w = player.height * aspect;
-    const offsetX = (player.width - w) / 2;
-    ctx.drawImage(playerImg, player.x + offsetX, player.y, w, player.height);
+    // Bereken bron-y positie in spritesheet
+    const sx = 0;
+    const sy = currentFrame * frameHeight;
+
+    // Tekenen frame uit spritesheet (sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight)
+    ctx.drawImage(playerImg, sx, sy, frameWidth, frameHeight, player.x, player.y, player.width, player.height);
   }
 
   function drawObstacle(ob) {
@@ -122,6 +135,13 @@
 
   function update() {
     if (!gameStarted || gameOver) return;
+
+    // Update animatie frame
+    frameCounter++;
+    if (frameCounter >= framesPerSprite) {
+      currentFrame = (currentFrame + 1) % totalFrames;
+      frameCounter = 0;
+    }
 
     player.velocityY += gravity;
     player.y += player.velocityY;
@@ -262,6 +282,6 @@
   canvas.addEventListener("touchstart", e => { e.preventDefault(); handleJump(); });
 
   gameLoop();
-</script>
+  </script>
 </body>
 </html>
