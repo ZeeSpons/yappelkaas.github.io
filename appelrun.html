@@ -44,8 +44,8 @@
   const canvas = document.getElementById("gameCanvas");
   const ctx = canvas.getContext("2d");
 
-  const playerImg = new Image(); playerImg.src = "assets/appelkaas_run.png";
-  const idleImg = new Image(); idleImg.src = "assets/appelkaas_idle.png";
+  const playerRunImg = new Image(); playerRunImg.src = "assets/appelkaas_run.png";
+  const playerIdleImg = new Image(); playerIdleImg.src = "assets/appelkaas_idle.png";
   const appelImg = new Image(); appelImg.src = "assets/appel.png";
   const kaasImg = new Image(); kaasImg.src = "assets/kaas.png";
   const zonnebrilImg = new Image(); zonnebrilImg.src = "assets/zonnebril.png";
@@ -56,7 +56,8 @@
   const popSound = new Audio("assets/pop.mp3");
   const tshoeSound = new Audio("assets/Tshoe.mp3");
 
-  const player = { x: 50, y: canvas.height - 70, width: 50, height: 50, velocityY: 0, grounded: true };
+  // Speler 2x groter
+  const player = { x: 50, y: canvas.height - 140, width: 100, height: 100, velocityY: 0, grounded: true };
   let gravity = 0.4;
   let jumpPower = -12;
   let speed = 3;
@@ -69,12 +70,13 @@
   let obstacles = [];
   let activePowerup = null;
 
+  // MrDeluxe 2x groter (origineel 50x28, nu 100x56)
   let deluxe = null;
-  const deluxeSize = { width: 50, height: 28 };
+  const deluxeSize = { width: 100, height: 56 };
 
   function drawPlayer() {
-    const img = (!gameStarted || gameOver) ? idleImg : playerImg;
-    const aspect = img === idleImg ? 1221 / 2171 : 1410 / 1881;
+    const img = (!gameStarted || gameOver) ? playerIdleImg : playerRunImg;
+    const aspect = img === playerIdleImg ? 1221 / 2171 : 1410 / 1881;
     const w = player.height * aspect;
     const offsetX = (player.width - w) / 2;
     ctx.drawImage(img, player.x + offsetX, player.y, w, player.height);
@@ -82,15 +84,15 @@
 
   function drawObstacle(ob) {
     let img;
-    let scaleW = 40;
-    let scaleH = 40;
+    let scaleW = 80;  // 2x van 40
+    let scaleH = 80;  // 2x van 40
 
     if (ob.type === "appel") img = appelImg;
     else if (ob.type === "kaas") img = kaasImg;
     else if (ob.type === "zonnebril") {
       img = zonnebrilImg;
-      scaleW = 50;
-      scaleH = 28;
+      scaleW = 100;  // 2x van 50
+      scaleH = 56;   // 2x van 28
     }
 
     ctx.drawImage(img, ob.x, ob.y, scaleW, scaleH);
@@ -113,7 +115,7 @@
       highscore = score;
       localStorage.setItem("appelrun_highscore", highscore);
     }
-    Object.assign(player, { y: canvas.height - 70, velocityY: 0, grounded: true });
+    Object.assign(player, { y: canvas.height - player.height, velocityY: 0, grounded: true });
     obstacles = [];
     score = 0;
     speed = 3;
@@ -127,8 +129,8 @@
 
     player.velocityY += gravity;
     player.y += player.velocityY;
-    if (player.y >= canvas.height - 70) {
-      player.y = canvas.height - 70;
+    if (player.y >= canvas.height - player.height) {
+      player.y = canvas.height - player.height;
       player.velocityY = 0;
       player.grounded = true;
     } else {
@@ -149,8 +151,10 @@
         continue;
       }
 
-      const p = { x: player.x + 6, y: player.y + 6, w: player.width - 12, h: player.height - 12 };
-      const o = { x: ob.x + 6, y: ob.y + 6, w: ob.width - 12, h: ob.height - 12 };
+      // Player hitbox
+      const p = { x: player.x + 12, y: player.y + 12, w: player.width - 24, h: player.height - 24 };
+      // Obstacle hitbox
+      const o = { x: ob.x + 12, y: ob.y + 12, w: ob.width - 24, h: ob.height - 24 };
 
       if (p.x < o.x + o.w && p.x + p.w > o.x && p.y < o.y + o.h && p.y + p.h > o.y) {
         if (ob.type === "kaas") {
@@ -171,8 +175,8 @@
           powerupSound.currentTime = 0;
           powerupSound.play();
           deluxe = {
-            x: player.x - 70,
-            y: player.y + 10,
+            x: player.x - 140, // 2x verder links
+            y: player.y + 20,
             width: deluxeSize.width,
             height: deluxeSize.height,
             flyingIn: true
@@ -181,6 +185,7 @@
         }
       }
 
+      // Deluxe vs kaas collision to destroy kaas
       if (activePowerup && ob.type === "kaas" && deluxe) {
         const d = { x: deluxe.x, y: deluxe.y, w: deluxeSize.width, h: deluxeSize.height };
         if (d.x < o.x + o.w && d.x + d.w > o.x && d.y < o.y + o.h && d.y + d.h > o.y) {
@@ -194,17 +199,18 @@
     if (++framesSinceLastObstacle >= obstacleCooldown) {
       const rand = Math.random();
       const type = rand < 0.01 ? "zonnebril" : rand < 0.6 ? "appel" : "kaas";
-      obstacles.push({ x: canvas.width, y: canvas.height - 70, width: 40, height: 40, type });
+      // Obstacles y fixed to bottom with height 80, so y = canvas.height - 80
+      obstacles.push({ x: canvas.width, y: canvas.height - 80, width: 80, height: 80, type });
       framesSinceLastObstacle = 0;
     }
 
     if (deluxe) {
-      if (deluxe.flyingIn && deluxe.x < player.x + 60) {
+      if (deluxe.flyingIn && deluxe.x < player.x + 120) {
         deluxe.x += 6;
       } else {
         deluxe.flyingIn = false;
-        deluxe.y = player.y + 10;
-        deluxe.x = player.x + 60;
+        deluxe.y = player.y + 20;
+        deluxe.x = player.x + 120;
       }
     }
   }
@@ -264,6 +270,6 @@
   canvas.addEventListener("touchstart", e => { e.preventDefault(); handleJump(); });
 
   gameLoop();
-</script>
+  </script>
 </body>
 </html>
