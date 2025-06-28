@@ -19,6 +19,14 @@
       background-color: #dbeeff;
       padding: 1.5rem;
       border-bottom: 2px solid #66b3ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    header img {
+      height: 32px;
     }
 
     header h1 {
@@ -79,7 +87,8 @@
 </head>
 <body>
   <header>
-    <h1>📡 Live stream van Appelkaas</h1>
+    <img src="assets/twitch.png" alt="Twitch">
+    <h1>Live stream van Appelkaas</h1>
   </header>
 
   <div class="button-bar">
@@ -94,16 +103,16 @@
       src="https://player.twitch.tv/?channel=appelkaas&parent=yappelkaas.nl"
       allowfullscreen="true"
       scrolling="no"
-      height="378"
-      width="620"
+      height="506"
+      width="900"
       frameborder="0">
     </iframe>
 
     <iframe
       src="https://www.twitch.tv/embed/appelkaas/chat?parent=yappelkaas.nl"
       scrolling="no"
-      height="378"
-      width="350"
+      height="506"
+      width="400"
       frameborder="0">
     </iframe>
   </div>
