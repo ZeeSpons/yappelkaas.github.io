@@ -44,10 +44,8 @@
     const canvas = document.getElementById("gameCanvas");
     const ctx = canvas.getContext("2d");
 
-    let runImg = new Image();
-    runImg.src = "assets/appelkaas_run.png";
-    let idleImg = new Image();
-    idleImg.src = "assets/appelkaas_idle.png";
+    let runImg = new Image(); runImg.src = "assets/appelkaas_run.png";
+    let idleImg = new Image(); idleImg.src = "assets/appelkaas_idle.png";
 
     let appelImg = new Image(); appelImg.src = "assets/appel.png";
     let kaasImg = new Image(); kaasImg.src = "assets/kaas.png";
@@ -69,8 +67,9 @@
       active: false,
       x: -100,
       y: player.y,
-      width: 60,
-      height: 60
+      width: 75,
+      height: 150,
+      flyingIn: true
     };
 
     let gravity = 0.4;
@@ -94,12 +93,7 @@
       const targetWidth = targetHeight * aspectRatio;
       const offsetX = (player.width - targetWidth) / 2;
 
-      ctx.drawImage(
-        img,
-        0, 0, img.width, img.height,
-        player.x + offsetX, player.y,
-        targetWidth, targetHeight
-      );
+      ctx.drawImage(img, 0, 0, img.width, img.height, player.x + offsetX, player.y, targetWidth, targetHeight);
     }
 
     function drawObstacle(ob) {
@@ -145,8 +139,14 @@
 
       if (invincible) {
         invincibleTimer--;
-        mrDeluxe.x += 6;
-        mrDeluxe.y = player.y - 10;
+        if (mrDeluxe.flyingIn && mrDeluxe.x < player.x + 85) {
+          mrDeluxe.x += 6;
+        } else {
+          mrDeluxe.flyingIn = false;
+          mrDeluxe.x = player.x + 85;
+        }
+        mrDeluxe.y = player.y;
+
         if (invincibleTimer <= 0) {
           invincible = false;
           mrDeluxe.active = false;
@@ -188,6 +188,8 @@
               invincibleTimer = 60 * 5;
               mrDeluxe.active = true;
               mrDeluxe.x = player.x - 100;
+              mrDeluxe.y = player.y;
+              mrDeluxe.flyingIn = true;
             } else {
               obstacles.splice(i, 1);
               score++;
