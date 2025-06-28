@@ -54,8 +54,11 @@
     }
 
     .mystery-content {
-      max-width: 600px;
-      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      max-width: 100%;
     }
 
     .mystery-gif {
@@ -63,7 +66,7 @@
       max-width: 450px;
       border-radius: 20px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
       display: block;
     }
 
@@ -72,7 +75,8 @@
       font-weight: 700;
       color: #1e2b3a;
       user-select: none;
-      margin-top: 0;
+      margin: 0;
+      text-align: center;
     }
   </style>
 </head>
