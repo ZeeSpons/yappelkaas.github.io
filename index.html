@@ -13,9 +13,10 @@
       gap: 1.5rem;
       padding: 3rem 2rem;
     }
+    /* Alle menu knoppen standaard */
     .menu-btn {
       font-size: 1.5rem;
-      padding: 1.5rem 3rem;
+      padding: 1.1rem 2rem; /* Iets kleinere padding */
       border-radius: 15px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.15);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -25,11 +26,12 @@
       text-decoration: none;
       color: inherit;
     }
+    /* Hover effect */
     .menu-btn:hover {
       transform: scale(1.05);
       box-shadow: 0 6px 12px rgba(0,0,0,0.25);
     }
-    /* LIVE knop rechtsboven */
+    /* LIVE knop rechtsboven - NIET AANGERAAKT */
     .live-button {
       position: absolute;
       top: 1rem;
@@ -55,15 +57,14 @@
         transform: scale(1.08);
       }
     }
-    /* Nog iets grotere AppelRun knop */
+    /* AppelRun knop - NIET AANGERAAKT */
     a.menu-btn.appelrun {
       font-size: 2.2rem; /* nog iets groter dan 1.9rem */
       padding: 2rem 4rem; /* iets meer padding */
     }
-    /* Zorg dat afbeelding in knop netjes zijn verhouding behoudt */
     a.menu-btn.appelrun img {
-      height: 38px; /* iets groter dan 28px */
-      width: auto;  /* breedte automatisch zodat verhouding klopt */
+      height: 38px;
+      width: auto;
       vertical-align: middle;
       object-fit: contain;
     }
