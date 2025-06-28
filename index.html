@@ -12,6 +12,7 @@
     main.menu {
       gap: 1.5rem;
       padding: 3rem 2rem;
+      position: relative; /* voor live knop absolute positioning */
     }
     .menu-btn {
       font-size: 1.5rem;
@@ -19,6 +20,8 @@
       border-radius: 15px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.15);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: inline-block;
+      text-align: center;
     }
     .menu-btn:hover {
       transform: scale(1.05);
@@ -50,22 +53,31 @@
       user-select: none;
     }
 
-    /* LIVE knop rechtsboven */
+    /* LIVE knop, stijl gelijk aan andere menu knoppen */
     .live-button {
       position: absolute;
       top: 1rem;
       right: 1rem;
       background-color: #ff4d4d;
       color: white;
-      padding: 0.6rem 1.2rem;
-      border-radius: 10px;
       font-weight: bold;
+      font-size: 1.5rem;
+      padding: 1.5rem 3rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(255, 77, 77, 0.7);
       text-decoration: none;
-      font-size: 1rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
       animation: pulse 1.6s infinite ease-in-out;
-      box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+      display: inline-block;
+      text-align: center;
+      z-index: 10;
+    }
+    .live-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(255, 77, 77, 0.9);
     }
 
+    /* Pulse animatie */
     @keyframes pulse {
       0%, 100% {
         transform: scale(1);
@@ -75,10 +87,17 @@
       }
     }
 
+    /* Iets grotere AppelRun knop */
+    a.menu-btn.appelrun {
+      font-size: 1.65rem;
+      padding: 1.65rem 3.3rem;
+    }
+
     header.hero {
       position: relative;
       text-align: center;
       padding-top: 2rem;
+      margin-bottom: 3rem;
     }
   </style>
 </head>
@@ -95,7 +114,7 @@
     <a href="kaasklikker" class="menu-btn">🧀 Kaasklikker</a>
     <a href="random-clip" class="menu-btn">🎲 Random Clip</a>
     <a href="evenementen" class="menu-btn">📅 Evenementen</a>
-    <a href="appelrun" class="menu-btn">🎮 AppelRun</a>
+    <a href="appelrun" class="menu-btn appelrun">🎮 AppelRun</a>
     <a href="mystery" class="menu-btn">🔮 Mystery Knop</a>
     <a href="https://discord.gg/J95ApheDKV" target="_blank" class="menu-btn">
       <img src="assets/discord-icon.png" alt="Discord" style="height: 20px; vertical-align: middle; margin-right: 8px;">
