@@ -216,12 +216,12 @@
     }
 
     if (deluxe) {
-      if (deluxe.flyingIn && deluxe.x < player.x + 60) {
+      if (deluxe.flyingIn && deluxe.x < player.x + 85) {
         deluxe.x += 6;
       } else {
         deluxe.flyingIn = false;
         deluxe.y = player.y + (player.height - deluxeSize.height) / 2;  // Verticaal centreren
-        deluxe.x = player.x + 60;
+        deluxe.x = player.x + 85; // Iets verder naar rechts naast appelkaas
       }
     }
   }
