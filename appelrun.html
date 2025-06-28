@@ -202,7 +202,7 @@
       framesSinceLastObstacle++;
       if (framesSinceLastObstacle >= obstacleCooldown) {
         let rand = Math.random();
-        let type = rand < 0.01 ? "zonnebril" : rand < 0.6 ? "appel" : "kaas";
+        let type = rand < 0.02 ? "zonnebril" : rand < 0.6 ? "appel" : "kaas";
         obstacles.push({
           x: canvas.width,
           y: canvas.height - 70,
