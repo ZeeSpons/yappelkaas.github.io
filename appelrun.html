@@ -103,7 +103,10 @@
 
     function drawMrDeluxe() {
       if (!mrDeluxe.active) return;
-      ctx.drawImage(mrDeluxeImg, mrDeluxe.x, mrDeluxe.y, mrDeluxe.width, mrDeluxe.height);
+      const deluxeAspect = mrDeluxeImg.width / mrDeluxeImg.height;
+const deluxeTargetHeight = mrDeluxe.height;
+const deluxeTargetWidth = deluxeTargetHeight * deluxeAspect;
+ctx.drawImage(mrDeluxeImg, 0, 0, mrDeluxeImg.width, mrDeluxeImg.height, mrDeluxe.x, mrDeluxe.y, deluxeTargetWidth, deluxeTargetHeight);
     }
 
     function resetGame() {
@@ -202,7 +205,7 @@
       framesSinceLastObstacle++;
       if (framesSinceLastObstacle >= obstacleCooldown) {
         let rand = Math.random();
-        let type = rand < 0.02 ? "zonnebril" : rand < 0.6 ? "appel" : "kaas";
+        let type = rand < 0.01 ? "zonnebril" : rand < 0.6 ? "appel" : "kaas";
         obstacles.push({
           x: canvas.width,
           y: canvas.height - 70,
