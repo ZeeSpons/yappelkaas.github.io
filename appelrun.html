@@ -9,7 +9,7 @@
 </head>
 <body>
   <header class="hero">
-    <a href="index" class="menu-btn" style="position: absolute; top: 1rem; left: 1rem;">🏠 Home</a>
+    <a href="index.html" class="menu-btn" style="position: absolute; top: 1rem; left: 1rem;">🏠 Home</a>
     <h1>AppelRun</h1>
     <p>Ontwijk de kaas, verzamel de appels!</p>
   </header>
@@ -21,15 +21,15 @@
       <h2>Hoe werkt het?</h2>
       <ul>
         <li>Druk op <strong>spatie</strong> of tik op het scherm om te springen.</li>
-        <li>Pak <img src="assets/appel.png" alt="appel" style="height: 20px;"> voor punten.</li>
-        <li>Ontwijk <img src="assets/kaas.png" alt="kaas" style="height: 20px;"> want dan is het game over!</li>
-        <li>Pak zeldzame <img src="assets/zonnebril.png" alt="zonnebril" style="height: 20px;"> om MrDeluxe op te roepen voor 10 seconden!</li>
-        <li>Als MrDeluxe is opgeroepen beschermt hij appelkaas tegen de kaasjes.</li>
+        <li>Pak <img src="assets/appel.png" alt="appel" style="height: 20px; vertical-align: middle;"> voor punten.</li>
+        <li>Ontwijk <img src="assets/kaas.png" alt="kaas" style="height: 20px; vertical-align: middle;"> want dat is game over!</li>
+        <li>Pak de zeldzame <img src="assets/zonnebril.png" alt="zonnebril" style="height: 20px; vertical-align: middle;"> om 5 seconden onoverwinnelijkheid te krijgen!</li>
       </ul>
       <p style="margin-top: 1.5rem;">
         Ben je af? Deel je highscore in de 
-        <a href="https://discord.gg/J95ApheDKV" target="_blank" style="color: #5865F2; font-weight: bold;">
-          <img src="assets/discord-icon.png" alt="Discord" style="height: 16px; vertical-align: text-bottom;"> Discord
+        <a href="https://discord.gg/J95ApheDKV" target="_blank" style="color: #5865F2; font-weight: bold; text-decoration: none;">
+          <img src="assets/discord-icon.png" alt="Discord" style="height: 16px; vertical-align: text-bottom; margin-right: 4px;">
+          Discord
         </a>!
       </p>
     </div>
@@ -41,246 +41,230 @@
   <p class="copyright">Gemaakt door: Zeespons.</p>
 
   <script>
-  const canvas = document.getElementById("gameCanvas");
-  const ctx = canvas.getContext("2d");
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
 
-  const playerImg = new Image();
-  playerImg.src = "assets/appelkaas_run_spritesheet.png";
+    let runImg = new Image();
+    runImg.src = "assets/appelkaas_run.png";
+    let idleImg = new Image();
+    idleImg.src = "assets/appelkaas_idle.png";
 
-  const appelImg = new Image(); appelImg.src = "assets/appel.png";
-  const kaasImg = new Image(); kaasImg.src = "assets/kaas.png";
-  const zonnebrilImg = new Image(); zonnebrilImg.src = "assets/zonnebril.png";
-  const deluxeImg = new Image(); deluxeImg.src = "assets/mrdeluxe_fly.png";
+    let appelImg = new Image(); appelImg.src = "assets/appel.png";
+    let kaasImg = new Image(); kaasImg.src = "assets/kaas.png";
+    let zonnebrilImg = new Image(); zonnebrilImg.src = "assets/zonnebril.png";
+    let mrDeluxeImg = new Image(); mrDeluxeImg.src = "assets/mrdeluxe_fly.png";
 
-  const gameOverSound = new Audio("assets/gameover.mp3");
-  const powerupSound = new Audio("assets/powerup.mp3");
-  const popSound = new Audio("assets/pop.mp3");
-  const tshoeSound = new Audio("assets/Tshoe.mp3");
+    let gameOverSound = new Audio("assets/gameover.mp3");
 
-  const player = { x: 50, y: canvas.height - 150, width: 75, height: 150, velocityY: 0, grounded: true };
+    let player = {
+      x: 50,
+      y: canvas.height - 150,
+      width: 75,
+      height: 150,
+      velocityY: 0,
+      grounded: true
+    };
 
-  let gravity = 0.4;
-  let jumpPower = -12;
-  let speed = 3;
-  let score = 0;
-  let highscore = parseInt(localStorage.getItem("appelrun_highscore")) || 0;
-  let gameStarted = false;
-  let gameOver = false;
-  let framesSinceLastObstacle = 0;
-  let obstacleCooldown = 100;
-  let obstacles = [];
-  let activePowerup = null;
+    let mrDeluxe = {
+      active: false,
+      x: -100,
+      y: player.y,
+      width: 60,
+      height: 60
+    };
 
-  let deluxe = null;
-  // MrDeluxe even groot als appelkaas, horizontaal (breedte = player.height, hoogte = player.width)
-  const deluxeSize = { width: player.height, height: player.width }; // 150 breed, 75 hoog
+    let gravity = 0.4;
+    let jumpPower = -12;
+    let obstacles = [];
+    let score = 0;
+    let speed = 3;
+    let gameStarted = false;
+    let gameOver = false;
+    let framesSinceLastObstacle = 0;
+    let obstacleCooldown = 100;
+    let invincible = false;
+    let invincibleTimer = 0;
 
-  const totalFrames = 8;
-  const frameWidth = 300;
-  const frameHeight = 400;
-  let currentFrame = 0;
-  let frameCounter = 0;
-  const framesPerSprite = 6;
+    let highscore = parseInt(localStorage.getItem("appelrun_highscore")) || 0;
 
-  function drawPlayer() {
-    const sx = 0;
-    const sy = currentFrame * frameHeight;
+    function drawPlayer() {
+      let img = (!gameStarted || gameOver) ? idleImg : runImg;
+      const aspectRatio = img.width / img.height;
+      const targetHeight = player.height;
+      const targetWidth = targetHeight * aspectRatio;
+      const offsetX = (player.width - targetWidth) / 2;
 
-    ctx.drawImage(playerImg, sx, sy, frameWidth, frameHeight, player.x, player.y, player.width, player.height);
-  }
-
-  function drawObstacle(ob) {
-    let img;
-    let scaleW = 40;
-    let scaleH = 40;
-
-    if (ob.type === "appel") img = appelImg;
-    else if (ob.type === "kaas") img = kaasImg;
-    else if (ob.type === "zonnebril") {
-      img = zonnebrilImg;
-      scaleW = 50;
-      scaleH = 28;
+      ctx.drawImage(
+        img,
+        0, 0, img.width, img.height,
+        player.x + offsetX, player.y,
+        targetWidth, targetHeight
+      );
     }
 
-    ctx.drawImage(img, ob.x, ob.y, scaleW, scaleH);
-  }
-
-  function drawDeluxe() {
-    if (!deluxe) return;
-
-    const remaining = activePowerup ? activePowerup.duration - (Date.now() - activePowerup.startTime) : 0;
-    const shouldBlink = remaining <= 3000;
-    const visible = !shouldBlink || Math.floor(Date.now() / 200) % 2 === 0;
-
-    if (visible) {
-      ctx.drawImage(deluxeImg, deluxe.x, deluxe.y, deluxeSize.width, deluxeSize.height);
-    }
-  }
-
-  function resetGame() {
-    if (score > highscore) {
-      highscore = score;
-      localStorage.setItem("appelrun_highscore", highscore);
-    }
-    Object.assign(player, { y: canvas.height - player.height, velocityY: 0, grounded: true });
-    obstacles = [];
-    score = 0;
-    speed = 3;
-    gameOver = false;
-    activePowerup = null;
-    deluxe = null;
-  }
-
-  function update() {
-    if (!gameStarted || gameOver) return;
-
-    frameCounter++;
-    if (frameCounter >= framesPerSprite) {
-      currentFrame = (currentFrame + 1) % totalFrames;
-      frameCounter = 0;
+    function drawObstacle(ob) {
+      const img = ob.type === "appel" ? appelImg : ob.type === "kaas" ? kaasImg : zonnebrilImg;
+      ctx.drawImage(img, ob.x, ob.y, ob.width, ob.height);
     }
 
-    player.velocityY += gravity;
-    player.y += player.velocityY;
+    function drawMrDeluxe() {
+      if (!mrDeluxe.active) return;
+      ctx.drawImage(mrDeluxeImg, mrDeluxe.x, mrDeluxe.y, mrDeluxe.width, mrDeluxe.height);
+    }
 
-    if (player.y >= canvas.height - player.height) {
+    function resetGame() {
+      if (score > highscore) {
+        highscore = score;
+        localStorage.setItem("appelrun_highscore", highscore);
+      }
       player.y = canvas.height - player.height;
       player.velocityY = 0;
       player.grounded = true;
-    } else {
-      player.grounded = false;
+      obstacles = [];
+      score = 0;
+      speed = 3;
+      gameOver = false;
+      invincible = false;
+      invincibleTimer = 0;
+      mrDeluxe.active = false;
+      mrDeluxe.x = -100;
     }
 
-    if (activePowerup && Date.now() - activePowerup.startTime > activePowerup.duration) {
-      activePowerup = null;
-      deluxe = null;
-    }
+    function update() {
+      if (!gameStarted || gameOver) return;
 
-    for (let i = obstacles.length - 1; i >= 0; i--) {
-      let ob = obstacles[i];
-      ob.x -= speed;
-
-      if (ob.x + ob.width < 0) {
-        obstacles.splice(i, 1);
-        continue;
-      }
-
-      const p = { x: player.x + 6, y: player.y + 6, w: player.width - 12, h: player.height - 12 };
-      const o = { x: ob.x + 6, y: ob.y + 6, w: ob.width - 12, h: ob.height - 12 };
-
-      if (p.x < o.x + o.w && p.x + p.w > o.x && p.y < o.y + o.h && p.y + p.h > o.y) {
-        if (ob.type === "kaas") {
-          if (!activePowerup) {
-            gameOverSound.play();
-            gameOver = true;
-            return;
-          }
-          obstacles.splice(i, 1);
-        } else if (ob.type === "appel") {
-          score++;
-          obstacles.splice(i, 1);
-          popSound.currentTime = 0;
-          popSound.play();
-          if (score % 5 === 0 && speed < 10) speed += 0.3;
-        } else if (ob.type === "zonnebril") {
-          activePowerup = { startTime: Date.now(), duration: 10000 };
-          powerupSound.currentTime = 0;
-          powerupSound.play();
-          deluxe = {
-            x: player.x - 70,
-            y: player.y + 10,
-            width: deluxeSize.width,
-            height: deluxeSize.height,
-            flyingIn: true
-          };
-          obstacles.splice(i, 1);
-        }
-      }
-
-      // Hitbox deluxe is exact hetzelfde als zijn afbeelding, geen kleinere marges!
-      if (activePowerup && ob.type === "kaas" && deluxe) {
-        const d = { x: deluxe.x, y: deluxe.y, w: deluxeSize.width, h: deluxeSize.height };
-        if (d.x < o.x + o.w && d.x + d.w > o.x && d.y < o.y + o.h && d.y + d.h > o.y) {
-          tshoeSound.currentTime = 0;
-          tshoeSound.play();
-          obstacles.splice(i, 1);
-        }
-      }
-    }
-
-    if (++framesSinceLastObstacle >= obstacleCooldown) {
-      const rand = Math.random();
-      const type = rand < 0.01 ? "zonnebril" : rand < 0.6 ? "appel" : "kaas";
-      obstacles.push({ x: canvas.width, y: canvas.height - 70, width: 40, height: 40, type });
-      framesSinceLastObstacle = 0;
-    }
-
-    if (deluxe) {
-      if (deluxe.flyingIn && deluxe.x < player.x + 85) {
-        deluxe.x += 6;
+      player.velocityY += gravity;
+      player.y += player.velocityY;
+      if (player.y >= canvas.height - player.height) {
+        player.y = canvas.height - player.height;
+        player.velocityY = 0;
+        player.grounded = true;
       } else {
-        deluxe.flyingIn = false;
-        deluxe.y = player.y + (player.height - deluxeSize.height) / 2;  // Verticaal centreren
-        deluxe.x = player.x + 85; // Iets verder naar rechts naast appelkaas
+        player.grounded = false;
+      }
+
+      if (invincible) {
+        invincibleTimer--;
+        mrDeluxe.x += 6;
+        mrDeluxe.y = player.y - 10;
+        if (invincibleTimer <= 0) {
+          invincible = false;
+          mrDeluxe.active = false;
+          mrDeluxe.x = -100;
+        }
+      }
+
+      for (let i = obstacles.length - 1; i >= 0; i--) {
+        obstacles[i].x -= speed;
+        if (obstacles[i].x + obstacles[i].width < 0) {
+          obstacles.splice(i, 1);
+        } else {
+          const padding = 6;
+
+          const px = player.x + padding;
+          const py = player.y + padding;
+          const pw = player.width - padding * 2;
+          const ph = player.height - padding * 2;
+
+          const ox = obstacles[i].x + padding;
+          const oy = obstacles[i].y + padding;
+          const ow = obstacles[i].width - padding * 2;
+          const oh = obstacles[i].height - padding * 2;
+
+          if (
+            px < ox + ow &&
+            px + pw > ox &&
+            py < oy + oh &&
+            py + ph > oy
+          ) {
+            if (obstacles[i].type === "kaas") {
+              if (!invincible) {
+                gameOver = true;
+                gameOverSound.play();
+                return;
+              }
+            } else if (obstacles[i].type === "zonnebril") {
+              invincible = true;
+              invincibleTimer = 60 * 5;
+              mrDeluxe.active = true;
+              mrDeluxe.x = player.x - 100;
+            } else {
+              obstacles.splice(i, 1);
+              score++;
+              if (score % 5 === 0 && speed < 10) speed += 0.3;
+            }
+          }
+        }
+      }
+
+      framesSinceLastObstacle++;
+      if (framesSinceLastObstacle >= obstacleCooldown) {
+        let rand = Math.random();
+        let type = rand < 0.01 ? "zonnebril" : rand < 0.6 ? "appel" : "kaas";
+        obstacles.push({
+          x: canvas.width,
+          y: canvas.height - 70,
+          width: 40,
+          height: 40,
+          type: type
+        });
+        framesSinceLastObstacle = 0;
       }
     }
-  }
 
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawPlayer();
-    drawDeluxe();
-    obstacles.forEach(drawObstacle);
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawPlayer();
+      drawMrDeluxe();
+      obstacles.forEach(drawObstacle);
 
-    ctx.fillStyle = "#1e2b3a";
-    ctx.font = "20px Segoe UI";
-    ctx.fillText("Score: " + score, 10, 30);
-    ctx.fillText("Highscore: " + highscore, 10, 55);
-
-    if (activePowerup) {
-      const remaining = Math.max(0, activePowerup.duration - (Date.now() - activePowerup.startTime));
-      const seconds = Math.ceil(remaining / 1000);
-      ctx.fillStyle = "#ffb347";
-      ctx.font = "20px Segoe UI";
-      ctx.textAlign = "right";
-      ctx.fillText("🕒 " + seconds + "s", canvas.width - 15, 30);
-      ctx.textAlign = "left";
-    }
-
-    if (!gameStarted) {
-      ctx.font = "26px Segoe UI";
-      ctx.fillText("Druk op spatie of tik op het scherm!", 300, 200);
-    }
-    if (gameOver) {
-      ctx.fillStyle = "#ff4d4d";
-      ctx.font = "28px Segoe UI";
-      ctx.fillText("Game Over!", 400, 180);
       ctx.fillStyle = "#1e2b3a";
       ctx.font = "20px Segoe UI";
-      ctx.fillText("Druk op spatie of tik om opnieuw te spelen.", 280, 220);
+      ctx.fillText("Score: " + score, 10, 30);
+      ctx.fillText("Highscore: " + highscore, 10, 55);
+
+      if (!gameStarted) {
+        ctx.fillStyle = "#1e2b3a";
+        ctx.font = "26px Segoe UI";
+        ctx.fillText("Druk op spatie of tik op het scherm!", 300, 200);
+      }
+
+      if (gameOver) {
+        ctx.fillStyle = "#ff4d4d";
+        ctx.font = "28px Segoe UI";
+        ctx.fillText("Game Over!", 400, 180);
+        ctx.fillStyle = "#1e2b3a";
+        ctx.font = "20px Segoe UI";
+        ctx.fillText("Druk op spatie of tik om opnieuw te spelen.", 280, 220);
+      }
     }
-  }
 
-  function gameLoop() {
-    update();
-    draw();
-    requestAnimationFrame(gameLoop);
-  }
-
-  function handleJump() {
-    if (!gameStarted || gameOver) {
-      resetGame();
-      gameStarted = true;
-    } else if (player.grounded) {
-      player.velocityY = jumpPower;
+    function gameLoop() {
+      update();
+      draw();
+      requestAnimationFrame(gameLoop);
     }
-  }
 
-  document.addEventListener("keydown", e => e.code === "Space" && handleJump());
-  canvas.addEventListener("click", handleJump);
-  canvas.addEventListener("touchstart", e => { e.preventDefault(); handleJump(); });
+    function handleJump() {
+      if (!gameStarted || gameOver) {
+        resetGame();
+        gameStarted = true;
+      } else if (player.grounded) {
+        player.velocityY = jumpPower;
+      }
+    }
 
-  gameLoop();
+    document.addEventListener("keydown", function (e) {
+      if (e.code === "Space") handleJump();
+    });
+
+    canvas.addEventListener("click", handleJump);
+    canvas.addEventListener("touchstart", function (e) {
+      e.preventDefault();
+      handleJump();
+    });
+
+    gameLoop();
   </script>
 </body>
 </html>
