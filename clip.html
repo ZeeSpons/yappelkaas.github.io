@@ -1,1 +1,108 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clip Insturen - Yappelkaas</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <style>
+    .clip-form {
+      max-width: 500px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: #e6f3ff;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0, 102, 204, 0.1);
+    }
+    .clip-form h2 {
+      margin-bottom: 1rem;
+    }
+    .clip-form input[type="url"] {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1rem;
+      border: 2px solid #66b3ff;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+    .clip-form button {
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      background-color: #3399ff;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .clip-form button:hover {
+      background-color: #1e80e0;
+    }
+    .clip-form .message {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <a href="index" class="menu-btn" style="position: absolute; top: 1rem; left: 1rem;">🏠 Home</a>
+    <h1>Clip Insturen</h1>
+    <p>Stuur jouw favoriete clip van Appelkaas in en mischien komt hij wel op de <a href="random-clip" >Random clips pagina
+    </a>!
+      </p>
+  </header>
 
+  <main>
+    <form class="clip-form" id="clipForm">
+      <h2>Cliplink</h2>
+      <input
+        type="url"
+        id="clipUrl"
+        placeholder="https://www.twitch.tv/appelkaas/clip/..."
+        required
+      />
+      <button type="submit">Insturen</button>
+      <div class="message" id="message"></div>
+    </form>
+  </main>
+
+  <footer>
+    <p>🍏🧀 Yappelkaas 2025 – Geen garantie op mentale stabiliteit.</p>
+  </footer>
+  <p class="copyright">Gemaakt door: Zeespons.</p>
+
+ <script>
+  const form = document.getElementById("clipForm");
+  const urlInput = document.getElementById("clipUrl");
+  const messageDiv = document.getElementById("message");
+
+  const API_KEY = "yappelkaas2025supergeheim"; // Moet overeenkomen met script
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const url = urlInput.value.trim();
+
+    fetch("https://script.google.com/macros/s/AKfycbzfHxvs32oi5fjbajrwCAWsm1Gl0_jtUOvTgi-aEY0AU-ki_Ih_kojm03-ZthYEIji_/exec", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ url, apiKey: API_KEY }),
+    })
+      .then((res) => res.text())
+      .then((text) => {
+        messageDiv.style.color = text.startsWith("✅") ? "green" : "red";
+        messageDiv.textContent = text;
+        if (text.startsWith("✅")) {
+          urlInput.value = "";
+        }
+      })
+      .catch(() => {
+        messageDiv.style.color = "red";
+        messageDiv.textContent = "⚠️ Er ging iets mis met het versturen.";
+      });
+  });
+</script>
+</body>
+</html>
