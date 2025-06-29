@@ -117,6 +117,7 @@
 
     <div class="video-embed" id="videoContainer">
       <iframe
+        id="ytframe"
         src="https://www.youtube.com/embed/uSOJbMCJBTE?autoplay=1&loop=1&playlist=uSOJbMCJBTE&si=9OLrytRPp80HLBiY"
         title="YouTube video player"
         allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -129,25 +130,31 @@
   </main>
 
   <script>
-    const videoContainer = document.getElementById('videoContainer');
-    const src = "https://www.youtube.com/embed/uSOJbMCJBTE?autoplay=1&loop=1&playlist=uSOJbMCJBTE&si=9OLrytRPp80HLBiY";
-
-    function replaceIframe() {
-      const iframe = document.createElement("iframe");
-      iframe.src = src;
-      iframe.allow = "autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-      iframe.allowFullscreen = true;
-      iframe.title = "YouTube video player";
-      iframe.referrerPolicy = "strict-origin-when-cross-origin";
-      iframe.style.width = "100%";
-      iframe.style.height = "100%";
-      iframe.style.border = "none";
-      videoContainer.innerHTML = "";
-      videoContainer.appendChild(iframe);
+    function isMobile() {
+      return /iPhone|iPad|iPod|Android|webOS/i.test(navigator.userAgent);
     }
 
-    document.body.addEventListener("click", replaceIframe, { once: true });
-    document.body.addEventListener("touchstart", replaceIframe, { once: true });
+    if (isMobile()) {
+      const videoContainer = document.getElementById('videoContainer');
+      const src = "https://www.youtube.com/embed/uSOJbMCJBTE?autoplay=1&loop=1&playlist=uSOJbMCJBTE&si=9OLrytRPp80HLBiY";
+
+      function replaceIframe() {
+        const iframe = document.createElement("iframe");
+        iframe.src = src;
+        iframe.allow = "autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        iframe.allowFullscreen = true;
+        iframe.title = "YouTube video player";
+        iframe.referrerPolicy = "strict-origin-when-cross-origin";
+        iframe.style.width = "100%";
+        iframe.style.height = "100%";
+        iframe.style.border = "none";
+        videoContainer.innerHTML = "";
+        videoContainer.appendChild(iframe);
+      }
+
+      document.body.addEventListener("click", replaceIframe, { once: true });
+      document.body.addEventListener("touchstart", replaceIframe, { once: true });
+    }
   </script>
 </body>
 </html>
