@@ -83,25 +83,25 @@
     e.preventDefault();
     const url = urlInput.value.trim();
 
-    fetch("https://script.google.com/macros/s/AKfycbzfHxvs32oi5fjbajrwCAWsm1Gl0_jtUOvTgi-aEY0AU-ki_Ih_kojm03-ZthYEIji_/exec", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ url, apiKey: API_KEY }),
-    })
-      .then((res) => res.text())
-      .then((text) => {
-        messageDiv.style.color = text.startsWith("✅") ? "green" : "red";
-        messageDiv.textContent = text;
-        if (text.startsWith("✅")) {
-          urlInput.value = "";
-        }
-      })
-      .catch(() => {
-        messageDiv.style.color = "red";
-        messageDiv.textContent = "⚠️ Er ging iets mis met het versturen.";
-      });
+fetch("https://script.google.com/macros/s/AKfycbzfHxvs32oi5fjbajrwCAWsm1Gl0_jtUOvTgi-aEY0AU-ki_Ih_kojm03-ZthYEIji_/exec", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({ url, apiKey: API_KEY }),
+})
+  .then((res) => res.json())
+  .then((data) => {
+    messageDiv.style.color = data.success ? "green" : "red";
+    messageDiv.textContent = data.message;
+    if (data.success) {
+      urlInput.value = "";
+    }
+  })
+  .catch(() => {
+    messageDiv.style.color = "red";
+    messageDiv.textContent = "⚠️ Er ging iets mis met het versturen.";
+  });
   });
 </script>
 </body>
