@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clip Insturen - Yappelkaas</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="assets/favicon.png" type="image/png" />
@@ -38,32 +38,74 @@
     .clip-form button:hover {
       background-color: #1e80e0;
     }
+    .clip-form .message {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
   <header class="hero">
     <a href="index" class="menu-btn" style="position: absolute; top: 1rem; left: 1rem;">🏠 Home</a>
     <h1>Clip Insturen</h1>
-    <p>Stuur jouw favoriete clip van Appelkaas in en misschien komt hij wel op de <a href="random-clip">Random clips pagina</a>!</p>
+    <p>
+      Stuur jouw favoriete clip van Appelkaas in en misschien komt hij wel op de
+      <a href="random-clip">Random clips pagina</a>!
+    </p>
   </header>
 
   <main>
-    <form class="clip-form" method="POST" action="https://script.google.com/macros/s/AKfycbw1Y9DLTTvFlfijb6j915gyKAsGD5IatsYpozf2UPXVcwjxVs8x3XXBji8bgQyf4fbVqQ/exec">
+    <form
+      class="clip-form"
+      method="POST"
+      action="https://script.google.com/macros/s/AKfycbw1Y9DLTTvFlfijb6j915gyKAsGD5IatsYpozf2UPXVcwjxVs8x3XXBji8bgQyf4fbVqQ/exec"
+      target="hidden_iframe"
+      onsubmit="return handleSubmit();"
+    >
       <h2>Cliplink</h2>
       <input
         type="url"
         name="url"
+        id="clipUrl"
         placeholder="https://www.twitch.tv/appelkaas/clip/..."
         required
       />
       <input type="hidden" name="apiKey" value="yappelkaas2025supergeheim" />
       <button type="submit">Insturen</button>
+      <div class="message" id="message"></div>
     </form>
+
+    <iframe name="hidden_iframe" style="display: none;"></iframe>
   </main>
 
   <footer>
     <p>🍏🧀 Yappelkaas 2025 – Geen garantie op mentale stabiliteit.</p>
   </footer>
   <p class="copyright">Gemaakt door: Zeespons.</p>
+
+  <script>
+    function handleSubmit() {
+      const urlInput = document.getElementById("clipUrl");
+      const messageDiv = document.getElementById("message");
+
+      const url = urlInput.value.trim();
+      if (!url.startsWith("https://www.twitch.tv/appelkaas/clip/")) {
+        messageDiv.style.color = "red";
+        messageDiv.textContent = "❌ Ongeldige link. Alleen clips van Appelkaas zijn toegestaan!";
+        return false;
+      }
+
+      messageDiv.style.color = "black";
+      messageDiv.textContent = "⏳ Clip wordt ingestuurd...";
+
+      setTimeout(() => {
+        messageDiv.style.color = "green";
+        messageDiv.textContent = "✅ Clip succesvol ingestuurd!";
+        urlInput.value = "";
+      }, 1500);
+
+      return true;
+    }
+  </script>
 </body>
 </html>
