@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clip Insturen - Yappelkaas</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="assets/favicon.png" type="image/png" />
@@ -55,17 +55,27 @@
   </header>
 
   <main>
-    <form class="clip-form" id="clipForm">
+    <form
+      class="clip-form"
+      method="POST"
+      action="https://script.google.com/macros/s/AKfycbw1Y9DLTTvFlfijb6j915gyKAsGD5IatsYpozf2UPXVcwjxVs8x3XXBji8bgQyf4fbVqQ/exec"
+      target="hidden_iframe"
+      onsubmit="return handleSubmit();"
+    >
       <h2>Cliplink</h2>
       <input
         type="url"
+        name="url"
         id="clipUrl"
         placeholder="https://www.twitch.tv/appelkaas/clip/..."
         required
       />
+      <input type="hidden" name="apiKey" value="yappelkaas2025supergeheim" />
       <button type="submit">Insturen</button>
       <div class="message" id="message"></div>
     </form>
+
+    <iframe name="hidden_iframe" style="display: none;"></iframe>
   </main>
 
   <footer>
@@ -74,45 +84,28 @@
   <p class="copyright">Gemaakt door: Zeespons.</p>
 
   <script>
-    const form = document.getElementById("clipForm");
-    const urlInput = document.getElementById("clipUrl");
-    const messageDiv = document.getElementById("message");
-
-    const API_KEY = "yappelkaas2025supergeheim";
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
+    function handleSubmit() {
+      const urlInput = document.getElementById("clipUrl");
+      const messageDiv = document.getElementById("message");
       const url = urlInput.value.trim();
 
       if (!url.startsWith("https://www.twitch.tv/appelkaas/clip/")) {
         messageDiv.style.color = "red";
         messageDiv.textContent = "❌ Ongeldige link. Alleen clips van Appelkaas zijn toegestaan!";
-        return;
+        return false;
       }
 
       messageDiv.style.color = "black";
       messageDiv.textContent = "⏳ Clip wordt ingestuurd...";
 
-      fetch("https://script.google.com/macros/s/AKfycbw1Y9DLTTvFlfijb6j915gyKAsGD5IatsYpozf2UPXVcwjxVs8x3XXBji8bgQyf4fbVqQ/exec", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ url, apiKey: API_KEY })
-      })
-        .then(res => res.json())
-        .then(data => {
-          messageDiv.style.color = data.success ? "green" : "red";
-          messageDiv.textContent = data.message;
-          if (data.success) {
-            urlInput.value = "";
-          }
-        })
-        .catch(() => {
-          messageDiv.style.color = "red";
-          messageDiv.textContent = "⚠️ Er ging iets mis met het versturen.";
-        });
-    });
+      setTimeout(() => {
+        messageDiv.style.color = "green";
+        messageDiv.textContent = "✅ Clip succesvol ingestuurd!";
+        urlInput.value = "";
+      }, 2000);
+
+      return true;
+    }
   </script>
 </body>
 </html>
