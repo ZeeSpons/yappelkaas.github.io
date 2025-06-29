@@ -7,14 +7,37 @@
   <link rel="icon" href="assets/favicon.png" type="image/png" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* Specifieke styling voor evenementenpagina */
-
     body {
       background-color: #f0f6ff;
       color: #1e2b3a;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       text-align: center;
+      padding: 2rem;
+    }
+
+    .home-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: #e0f0ff;
+      border: 2px solid #66b3ff;
+      color: #1e2b3a;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.3rem;
+      box-shadow: 2px 2px 8px rgba(0, 0, 50, 0.1);
+      transition: 0.2s ease-in-out;
+      user-select: none;
+      z-index: 1000;
+      display: inline-block;
+    }
+
+    .home-btn:hover {
+      background-color: #cce6ff;
+      transform: translateY(-2px);
     }
 
     header.hero {
@@ -22,39 +45,14 @@
       background-color: #d6eaff;
       border-bottom: 4px solid #3399ff;
       border-radius: 15px;
-    }
-
-    header.hero h1 {
-      margin: 0;
-    }
-
-    .menu {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      padding: 2rem;
-      background-color: #e0f0ff;
-      border-radius: 15px;
-      border: 2px solid #66b3ff;
       margin-bottom: 2rem;
     }
 
-    .menu-btn {
-      padding: 1rem 2rem;
-      background-color: #e0f0ff;
-      border: 2px solid #66b3ff;
-      border-radius: 12px;
-      text-decoration: none;
-      font-size: 1.2rem;
+    header.hero h1 {
+      margin: 0 0 0.5rem;
+      font-size: 2.8rem;
       color: #1e2b3a;
-      box-shadow: 2px 2px 8px rgba(0, 0, 50, 0.1);
-      transition: 0.2s ease-in-out;
-    }
-
-    .menu-btn:hover {
-      background-color: #cce6ff;
-      transform: translateY(-2px);
+      user-select: none;
     }
 
     main {
@@ -76,8 +74,8 @@
     }
 
     .event-image {
-      flex: 0 0 200px; /* vaste breedte */
-      height: 200px;   /* vierkant */
+      flex: 0 0 200px;
+      height: 200px;
       border-radius: 12px;
       object-fit: cover;
       box-shadow: 0 0 15px rgba(0, 102, 204, 0.3);
@@ -97,10 +95,9 @@
     .event-text p {
       margin: 0;
       line-height: 1.5;
-      white-space: pre-line; /* zorgt dat nieuwe regels worden getoond */
+      white-space: pre-line;
     }
 
-    /* Mobile responsive: afbeelding boven tekst, verticale stapeling */
     @media (max-width: 600px) {
       .event-card {
         flex-direction: column;
@@ -140,19 +137,12 @@
 </head>
 <body>
 
+  <a href="index" class="home-btn">🏠 Home</a>
+
   <header class="hero">
     <h1>Evenementen</h1>
     <p>Alle komende Yappelkaas evenementen op een rijtje.</p>
   </header>
-
-  <nav class="menu">
-    <a href="index" class="menu-btn">🏠 Home</a>
-    <a href="kaasklikker" class="menu-btn">🧀 Kaasklikker</a>
-    <a href="random-clip" class="menu-btn">🎲 Random Clip</a>
-    <a href="appelrun" class="menu-btn">🎮 AppelRun</a>
-    <a href="mystery" class="menu-btn">🔮 Mystery Knop</a>
-    <a href="https://discord.gg/J95ApheDKV" target="_blank" class="menu-btn">💬 Discord</a>
-  </nav>
 
   <main>
     <article class="event-card">
