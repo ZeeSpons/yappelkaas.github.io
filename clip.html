@@ -78,13 +78,12 @@
     const urlInput = document.getElementById("clipUrl");
     const messageDiv = document.getElementById("message");
 
-    const API_KEY = "yappelkaas2025supergeheim"; // Moet overeenkomen met script
+    const API_KEY = "yappelkaas2025supergeheim";
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       const url = urlInput.value.trim();
 
-      // Frontend check voor geldigheid (extra veiligheid)
       if (!url.startsWith("https://www.twitch.tv/appelkaas/clip/")) {
         messageDiv.style.color = "red";
         messageDiv.textContent = "❌ Ongeldige link. Alleen clips van Appelkaas zijn toegestaan!";
@@ -97,12 +96,12 @@
       fetch("https://script.google.com/macros/s/AKfycbw1Y9DLTTvFlfijb6j915gyKAsGD5IatsYpozf2UPXVcwjxVs8x3XXBji8bgQyf4fbVqQ/exec", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
-        body: JSON.stringify({ url, apiKey: API_KEY }),
+        body: JSON.stringify({ url, apiKey: API_KEY })
       })
-        .then((res) => res.json())
-        .then((data) => {
+        .then(res => res.json())
+        .then(data => {
           messageDiv.style.color = data.success ? "green" : "red";
           messageDiv.textContent = data.message;
           if (data.success) {
