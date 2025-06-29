@@ -57,7 +57,7 @@
   const tshoeSound = new Audio("assets/Tshoe.mp3");
 
   const player = { x: 50, y: canvas.height - 140, width: 100, height: 100, velocityY: 0, grounded: true };
-  let gravity = 0.3;
+  let gravity = 0.4;
   let jumpPower = -10;
   let speed = 3;
   let score = 0;
@@ -264,7 +264,7 @@
 
   function handleJump() {
     if (!gameStarted || gameOver) {
-      if (gameOver && gameOverTime && Date.now() - gameOverTime < 1000) return; // Blokkeer 1 sec
+      if (gameOver && gameOverTime && Date.now() - gameOverTime < 250) return; // Blokkeer 0,25 sec
       resetGame();
       gameStarted = true;
     } else if (player.grounded) {
