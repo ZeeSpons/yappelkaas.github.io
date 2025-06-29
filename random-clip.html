@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Random Appelkaas Clip</title>
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0; padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+    }
+    h1 {
+      color: #6441a5;
+      margin-bottom: 1rem;
+    }
+    #clip-container {
+      margin-top: 1rem;
+      width: 80vw;
+      max-width: 800px;
+      aspect-ratio: 16 / 9;
+      border: 2px solid #6441a5;
+      border-radius: 12px;
+      overflow: hidden;
+      background-color: black;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    button {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 6px;
+      background-color: #6441a5;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #7f5dcf;
+    }
+    .home-button {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      text-decoration: none;
+      color: white;
+      background-color: #6441a5;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+    .home-button:hover {
+      background-color: #7f5dcf;
+    }
+  </style>
+</head>
+<body>
+  <a href="index" class="home-button">🏠 Home</a>
+
+  <h1>Random Appelkaas Clip</h1>
+  
+  <div id="clip-container">
+    <!-- Twitch clip iframe komt hier -->
+  </div>
+
+  <button id="newClipBtn">Nieuw clipje</button>
+
+  <script>
+    const clipIDs = [
+      "SolidWildGullFreakinStinkin-FCE7SVDX7mmhujZx",
+      "FriendlyHonorablePidgeonNerfRedBlaster-J7lLFUac7AytRSh3",
+      "SillyWimpyGuanacoSoonerLater-2-gncswUN_cK6dzj",
+      "ReliableAgreeableKumquatDatBoi-_rS05OcXtzai2Ev6",
+      "BlazingAthleticDragonNononoCat-Z5buqkyKUTaBvtr2",
+      "DifferentSeductiveClintTF2John-bFTekNHXr_ScAo3-",
+      "LazyProudWhaleStoneLightning-b07eXZQLuY63G4AB",
+      "ExuberantGentleHawkJonCarnage-r0JLEnNEy7BmfKkJ",
+      "SpotlessGlutenFreeLlamaShazBotstix-iNioqjmGJUg8oTL1",
+      "ExpensiveVibrantHamburgerAMPEnergyCherry-NTLU4IaicWj1cyu7",
+      "IntelligentAverageLettuceTooSpicy-JuTrewkEJKEfWrZk",
+      "RefinedCoyMartenKappaClaus-IY1wFRx3rRAhe3Cf",
+      "AcceptableJoyousStinkbugSoBayed-LWxHEsIVDEYNAKVO",
+      "YawningCarelessMallardKlappa-LBthPUBJ9OGB5o3X",
+      "FilthyDeafTermiteBigBrother-kgHsGY2urtYueo1k",
+      "EnchantingRefinedCoffeeFloof-lg7X-7XKLZOSW3ab",
+      "TacitOnerousTireResidentSleeper-PRrzZx04HY-BHaZr",
+      "LazyDeadMonitorPRChase-5Y2DcoEZOjjPJyCj",
+      "ObedientEnergeticKittenUnSane-9nLLtgAtawD6RMh3",
+      "SwissFlirtyGazelleTheThing-ZRHQ_DV717wODKr4",
+      "AmericanEvilTofuFloof-57pieIgrNNyTkrJc",
+      "EagerWealthyNarwhalRedCoat-xg9rHaBR-UuPsIlH",
+      "PiliableSmoggyYogurtBlargNaut-LMcBG7ubBTJVsxBP",
+      "StrangeStylishSwallowMVGame-FHNjSRrFOtv-LUyv",
+      "GleamingTentativeGnatCopyThis-Hw2grBSzeu7Wq7Nd",
+      "PunchyGleamingBarracudaPMSTwin-Zhc3wE9N7JiKUJCg",
+      "FancyInventiveMangoPanicBasket-leBrbUCoQfaS769R",
+      "AdventurousAgreeableChoughPunchTrees-qmtYVcbGbtJfPSF3",
+      "AnnoyingOptimisticGazelleBlargNaut-CjW0y6EhFcv38hAj",
+      "HandsomeThoughtfulCatPunchTrees-ChfaRGR88slLPXQZ",
+      "LittleCourageousRutabagaFrankerZ-1jaf4LXIYJd71BlI",
+      "WrongFuriousDoveCharlieBitMe-iBE1GYFGNKA_rbTT",
+      "DeterminedEnthusiasticYakStrawBeary-dzyAl7HOX9cSEJ0C",
+      "RichNaiveAxeRuleFive-TSR3IRMGYSXia29y",
+      "BrainyPoliteOwlSmoocherZ-KDb2m-1_qkixztGM",
+      "ProudAverageBeefGingerPower-c2K04wEBx4j5TmOv",
+      "ConcernedClumsyVultureTBTacoLeft-j0vH1uzUYAw1X--F",
+      "FlirtyAbrasiveSwordOSkomodo-ahkYZPtof_BJl52U",
+      "GoldenTolerantStrawberryCopyThis-GOi255pIfrSW2TW2",
+      "DreamyOilyKuduDansGame-fUsNB6xkBwiHTD30"
+    ];
+
+    const clipContainer = document.getElementById("clip-container");
+    const newClipBtn = document.getElementById("newClipBtn");
+
+    function loadRandomClip() {
+      if (clipIDs.length === 0) {
+        clipContainer.innerHTML = "<p>Geen clips beschikbaar.</p>";
+        return;
+      }
+      const randomIndex = Math.floor(Math.random() * clipIDs.length);
+      const clipID = clipIDs[randomIndex];
+
+      const iframeHTML = `
+        <iframe 
+          src="https://clips.twitch.tv/embed?clip=${clipID}&parent=${window.location.hostname}" 
+          allowfullscreen="true" 
+          scrolling="no" 
+          frameborder="0">
+        </iframe>`;
+
+      clipContainer.innerHTML = iframeHTML;
+    }
+
+    newClipBtn.addEventListener("click", loadRandomClip);
+    loadRandomClip();
+  </script>
+</body>
+</html>
