@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Clip Insturen - Yappelkaas</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="assets/favicon.png" type="image/png" />
@@ -84,7 +84,7 @@
       e.preventDefault();
       const url = urlInput.value.trim();
 
-      // Client-side check, voor UX
+      // Frontend check voor geldigheid (extra veiligheid)
       if (!url.startsWith("https://www.twitch.tv/appelkaas/clip/")) {
         messageDiv.style.color = "red";
         messageDiv.textContent = "❌ Ongeldige link. Alleen clips van Appelkaas zijn toegestaan!";
@@ -97,12 +97,9 @@
       fetch("https://script.google.com/macros/s/AKfycbw1Y9DLTTvFlfijb6j915gyKAsGD5IatsYpozf2UPXVcwjxVs8x3XXBji8bgQyf4fbVqQ/exec", {
         method: "POST",
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+          "Content-Type": "application/json",
         },
-        body: new URLSearchParams({
-          url: url,
-          apiKey: API_KEY
-        }),
+        body: JSON.stringify({ url, apiKey: API_KEY }),
       })
         .then((res) => res.json())
         .then((data) => {
