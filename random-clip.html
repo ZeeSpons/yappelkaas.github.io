@@ -63,6 +63,11 @@
     .home-button:hover {
       background-color: #7f5dcf;
     }
+    #error-msg {
+      margin-top: 1rem;
+      color: red;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -71,21 +76,53 @@
   <h1>Random Appelkaas Clip</h1>
   
   <div id="clip-container">
-    <p style="color: white; text-align: center;">⏳ Clipje laden...</p>
+    <!-- Twitch clip iframe komt hier -->
   </div>
 
-  <button id="newClipBtn" disabled>Nieuw clipje</button>
+  <button id="newClipBtn">Nieuw clipje</button>
+  <div id="error-msg"></div>
 
   <script>
+    // Jouw CSV url van de gepubliceerde sheet met output=csv
+    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRrugVtjs-wxRUtGm96uiwByYhZIndY5pRbShTy0Towzva-sqQDTpKLo-UHcIr5qTk_Rks-e4_GtuPt/pub?output=csv';
+
     const clipContainer = document.getElementById("clip-container");
     const newClipBtn = document.getElementById("newClipBtn");
-    const webAppUrl = "https://script.google.com/macros/s/AKfycbyBdYtFR0u7k6AaZlOgeEnHNrM8tzgOahU_vHfIJUdwrSpiyko5ZMI9l1trDENR5BN3AQ/exec";
+    const errorMsg = document.getElementById("error-msg");
 
     let clipIDs = [];
 
+    // Functie om CSV te fetchen en clipIDs te laden
+    async function loadClipsFromCSV() {
+      try {
+        const response = await fetch(csvUrl);
+        if (!response.ok) throw new Error('CSV laden mislukt');
+
+        const text = await response.text();
+        // CSV is simpel: elke regel is een clip ID
+        clipIDs = text
+          .split('\n')
+          .map(line => line.trim())
+          .filter(line => line.length > 0);
+
+        if (clipIDs.length === 0) {
+          throw new Error('Geen clips gevonden in CSV');
+        }
+
+        errorMsg.textContent = '';
+        loadRandomClip();
+
+      } catch (err) {
+        errorMsg.textContent = '⚠️ Kan clips niet laden: ' + err.message;
+        clipContainer.innerHTML = '<p>Geen clips beschikbaar.</p>';
+        newClipBtn.disabled = true;
+      }
+    }
+
+    // Toon een random clip uit clipIDs
     function loadRandomClip() {
       if (clipIDs.length === 0) {
-        clipContainer.innerHTML = "<p style='color: red;'>⚠️ Geen clips gevonden.</p>";
+        clipContainer.innerHTML = "<p>Geen clips beschikbaar.</p>";
         return;
       }
       const randomIndex = Math.floor(Math.random() * clipIDs.length);
@@ -102,25 +139,10 @@
       clipContainer.innerHTML = iframeHTML;
     }
 
-    async function fetchClips() {
-      try {
-        const res = await fetch(webAppUrl);
-        const data = await res.json();
-        clipIDs = data.clips || [];
-        if (clipIDs.length > 0) {
-          loadRandomClip();
-          newClipBtn.disabled = false;
-        } else {
-          clipContainer.innerHTML = "<p style='color: red;'>⚠️ Geen clips beschikbaar.</p>";
-        }
-      } catch (err) {
-        console.error("Fout bij ophalen clips:", err);
-        clipContainer.innerHTML = "<p style='color: red;'>⚠️ Kan clips niet laden.</p>";
-      }
-    }
-
     newClipBtn.addEventListener("click", loadRandomClip);
-    fetchClips();
+
+    // Laad clips direct bij het openen
+    loadClipsFromCSV();
   </script>
 </body>
 </html>
