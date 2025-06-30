@@ -55,13 +55,8 @@
   </header>
 
   <main>
-    <form
-      class="clip-form"
-      method="POST"
-      action="https://script.google.com/macros/s/AKfycbw1Y9DLTTvFlfijb6j915gyKAsGD5IatsYpozf2UPXVcwjxVs8x3XXBji8bgQyf4fbVqQ/exec"
-      target="hidden_iframe"
-      onsubmit="return handleSubmit();"
-    >
+    <form class="clip-form" onsubmit="return handleSubmit();">
+
       <h2>Cliplink</h2>
       <input
         type="url"
@@ -75,7 +70,6 @@
       <div class="message" id="message"></div>
     </form>
 
-    <iframe name="hidden_iframe" style="display: none;"></iframe>
   </main>
 
   <footer>
