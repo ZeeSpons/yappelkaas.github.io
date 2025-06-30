@@ -1,3 +1,4 @@
+<!-- random-clip.html (automatisch geladen vanuit spreadsheet) -->
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -67,61 +68,14 @@
 </head>
 <body>
   <a href="index" class="home-button">🏠 Home</a>
-
   <h1>Random Appelkaas Clip</h1>
-  
-  <div id="clip-container">
-    <!-- Twitch clip iframe komt hier -->
-  </div>
-
+  <div id="clip-container"></div>
   <button id="newClipBtn">Nieuw clipje</button>
 
   <script>
-    const clipIDs = [
-      "SolidWildGullFreakinStinkin-FCE7SVDX7mmhujZx",
-      "FriendlyHonorablePidgeonNerfRedBlaster-J7lLFUac7AytRSh3",
-      "SillyWimpyGuanacoSoonerLater-2-gncswUN_cK6dzj",
-      "ReliableAgreeableKumquatDatBoi-_rS05OcXtzai2Ev6",
-      "BlazingAthleticDragonNononoCat-Z5buqkyKUTaBvtr2",
-      "DifferentSeductiveClintTF2John-bFTekNHXr_ScAo3-",
-      "LazyProudWhaleStoneLightning-b07eXZQLuY63G4AB",
-      "ExuberantGentleHawkJonCarnage-r0JLEnNEy7BmfKkJ",
-      "SpotlessGlutenFreeLlamaShazBotstix-iNioqjmGJUg8oTL1",
-      "ExpensiveVibrantHamburgerAMPEnergyCherry-NTLU4IaicWj1cyu7",
-      "IntelligentAverageLettuceTooSpicy-JuTrewkEJKEfWrZk",
-      "RefinedCoyMartenKappaClaus-IY1wFRx3rRAhe3Cf",
-      "AcceptableJoyousStinkbugSoBayed-LWxHEsIVDEYNAKVO",
-      "YawningCarelessMallardKlappa-LBthPUBJ9OGB5o3X",
-      "FilthyDeafTermiteBigBrother-kgHsGY2urtYueo1k",
-      "EnchantingRefinedCoffeeFloof-lg7X-7XKLZOSW3ab",
-      "TacitOnerousTireResidentSleeper-PRrzZx04HY-BHaZr",
-      "LazyDeadMonitorPRChase-5Y2DcoEZOjjPJyCj",
-      "ObedientEnergeticKittenUnSane-9nLLtgAtawD6RMh3",
-      "SwissFlirtyGazelleTheThing-ZRHQ_DV717wODKr4",
-      "AmericanEvilTofuFloof-57pieIgrNNyTkrJc",
-      "EagerWealthyNarwhalRedCoat-xg9rHaBR-UuPsIlH",
-      "PiliableSmoggyYogurtBlargNaut-LMcBG7ubBTJVsxBP",
-      "StrangeStylishSwallowMVGame-FHNjSRrFOtv-LUyv",
-      "GleamingTentativeGnatCopyThis-Hw2grBSzeu7Wq7Nd",
-      "PunchyGleamingBarracudaPMSTwin-Zhc3wE9N7JiKUJCg",
-      "FancyInventiveMangoPanicBasket-leBrbUCoQfaS769R",
-      "AdventurousAgreeableChoughPunchTrees-qmtYVcbGbtJfPSF3",
-      "AnnoyingOptimisticGazelleBlargNaut-CjW0y6EhFcv38hAj",
-      "HandsomeThoughtfulCatPunchTrees-ChfaRGR88slLPXQZ",
-      "LittleCourageousRutabagaFrankerZ-1jaf4LXIYJd71BlI",
-      "WrongFuriousDoveCharlieBitMe-iBE1GYFGNKA_rbTT",
-      "DeterminedEnthusiasticYakStrawBeary-dzyAl7HOX9cSEJ0C",
-      "RichNaiveAxeRuleFive-TSR3IRMGYSXia29y",
-      "BrainyPoliteOwlSmoocherZ-KDb2m-1_qkixztGM",
-      "ProudAverageBeefGingerPower-c2K04wEBx4j5TmOv",
-      "ConcernedClumsyVultureTBTacoLeft-j0vH1uzUYAw1X--F",
-      "FlirtyAbrasiveSwordOSkomodo-ahkYZPtof_BJl52U",
-      "GoldenTolerantStrawberryCopyThis-GOi255pIfrSW2TW2",
-      "DreamyOilyKuduDansGame-fUsNB6xkBwiHTD30"
-    ];
-
     const clipContainer = document.getElementById("clip-container");
     const newClipBtn = document.getElementById("newClipBtn");
+    let clipIDs = [];
 
     function loadRandomClip() {
       if (clipIDs.length === 0) {
@@ -130,7 +84,6 @@
       }
       const randomIndex = Math.floor(Math.random() * clipIDs.length);
       const clipID = clipIDs[randomIndex];
-
       const iframeHTML = `
         <iframe 
           src="https://clips.twitch.tv/embed?clip=${clipID}&parent=${window.location.hostname}" 
@@ -138,12 +91,24 @@
           scrolling="no" 
           frameborder="0">
         </iframe>`;
-
       clipContainer.innerHTML = iframeHTML;
     }
 
+    function fetchClips() {
+      fetch("https://script.google.com/macros/s/AKfycbyBdYtFR0u7k6AaZlOgeEnHNrM8tzgOahU_vHfIJUdwrSpiyko5ZMI9l1trDENR5BN3AQ/exec")
+        .then(res => res.json())
+        .then(data => {
+          clipIDs = data;
+          loadRandomClip();
+        })
+        .catch(err => {
+          clipContainer.innerHTML = `<p>⚠️ Kon clips niet laden.</p>`;
+          console.error("Fout bij laden clips:", err);
+        });
+    }
+
     newClipBtn.addEventListener("click", loadRandomClip);
-    loadRandomClip();
+    fetchClips();
   </script>
 </body>
 </html>
