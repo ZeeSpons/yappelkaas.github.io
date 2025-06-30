@@ -196,19 +196,27 @@
     }
 
     if (++framesSinceLastObstacle >= obstacleCooldown) {
-      const rand = Math.random();
-      const type = rand < 0.01 ? "zonnebril" : rand < 0.6 ? "appel" : "kaas";
+  let type;
+  const rand = Math.random();
 
-      let width = 60;
-      let height = 60;
-      if (type === "zonnebril") {
-        width = 75;
-        height = 42;
-      }
+  if (!activePowerup && rand < 0.01) {
+    type = "zonnebril";
+  } else if (rand < 0.6) {
+    type = "appel";
+  } else {
+    type = "kaas";
+  }
 
-      obstacles.push({ x: canvas.width, y: canvas.height - height, width, height, type });
-      framesSinceLastObstacle = 0;
-    }
+  let width = 60;
+  let height = 60;
+  if (type === "zonnebril") {
+    width = 75;
+    height = 42;
+  }
+
+  obstacles.push({ x: canvas.width, y: canvas.height - height, width, height, type });
+  framesSinceLastObstacle = 0;
+}
 
     if (deluxe) {
       if (deluxe.flyingIn && deluxe.x < player.x + 120) {
