@@ -1,4 +1,3 @@
-<!-- random-clip.html (automatisch geladen vanuit spreadsheet) -->
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -68,22 +67,30 @@
 </head>
 <body>
   <a href="index" class="home-button">🏠 Home</a>
+
   <h1>Random Appelkaas Clip</h1>
-  <div id="clip-container"></div>
-  <button id="newClipBtn">Nieuw clipje</button>
+  
+  <div id="clip-container">
+    <p style="color: white; text-align: center;">⏳ Clipje laden...</p>
+  </div>
+
+  <button id="newClipBtn" disabled>Nieuw clipje</button>
 
   <script>
     const clipContainer = document.getElementById("clip-container");
     const newClipBtn = document.getElementById("newClipBtn");
+    const webAppUrl = "https://script.google.com/macros/s/AKfycbyBdYtFR0u7k6AaZlOgeEnHNrM8tzgOahU_vHfIJUdwrSpiyko5ZMI9l1trDENR5BN3AQ/exec";
+
     let clipIDs = [];
 
     function loadRandomClip() {
       if (clipIDs.length === 0) {
-        clipContainer.innerHTML = "<p>Geen clips beschikbaar.</p>";
+        clipContainer.innerHTML = "<p style='color: red;'>⚠️ Geen clips gevonden.</p>";
         return;
       }
       const randomIndex = Math.floor(Math.random() * clipIDs.length);
       const clipID = clipIDs[randomIndex];
+
       const iframeHTML = `
         <iframe 
           src="https://clips.twitch.tv/embed?clip=${clipID}&parent=${window.location.hostname}" 
@@ -91,20 +98,25 @@
           scrolling="no" 
           frameborder="0">
         </iframe>`;
+
       clipContainer.innerHTML = iframeHTML;
     }
 
-    function fetchClips() {
-      fetch("https://script.google.com/macros/s/AKfycbyBdYtFR0u7k6AaZlOgeEnHNrM8tzgOahU_vHfIJUdwrSpiyko5ZMI9l1trDENR5BN3AQ/exec")
-        .then(res => res.json())
-        .then(data => {
-          clipIDs = data;
+    async function fetchClips() {
+      try {
+        const res = await fetch(webAppUrl);
+        const data = await res.json();
+        clipIDs = data.clips || [];
+        if (clipIDs.length > 0) {
           loadRandomClip();
-        })
-        .catch(err => {
-          clipContainer.innerHTML = `<p>⚠️ Kon clips niet laden.</p>`;
-          console.error("Fout bij laden clips:", err);
-        });
+          newClipBtn.disabled = false;
+        } else {
+          clipContainer.innerHTML = "<p style='color: red;'>⚠️ Geen clips beschikbaar.</p>";
+        }
+      } catch (err) {
+        console.error("Fout bij ophalen clips:", err);
+        clipContainer.innerHTML = "<p style='color: red;'>⚠️ Kan clips niet laden.</p>";
+      }
     }
 
     newClipBtn.addEventListener("click", loadRandomClip);
