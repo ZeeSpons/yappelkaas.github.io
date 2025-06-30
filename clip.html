@@ -84,28 +84,47 @@
   <p class="copyright">Gemaakt door: Zeespons.</p>
 
   <script>
-    function handleSubmit() {
-      const urlInput = document.getElementById("clipUrl");
-      const messageDiv = document.getElementById("message");
-      const url = urlInput.value.trim();
+  async function handleSubmit() {
+    const urlInput = document.getElementById("clipUrl");
+    const messageDiv = document.getElementById("message");
+    const url = urlInput.value.trim();
 
-      if (!url.startsWith("https://www.twitch.tv/appelkaas/clip/")) {
-        messageDiv.style.color = "red";
-        messageDiv.textContent = "❌ Ongeldige link. Alleen clips van Appelkaas zijn toegestaan!";
-        return false;
-      }
-
-      messageDiv.style.color = "black";
-      messageDiv.textContent = "⏳ Clip wordt ingestuurd...";
-
-      setTimeout(() => {
-        messageDiv.style.color = "green";
-        messageDiv.textContent = "✅ Clip succesvol ingestuurd!";
-        urlInput.value = "";
-      }, 2000);
-
-      return true;
+    if (!url.startsWith("https://www.twitch.tv/appelkaas/clip/")) {
+      messageDiv.style.color = "red";
+      messageDiv.textContent = "❌ Ongeldige link. Alleen clips van Appelkaas zijn toegestaan!";
+      return false;
     }
-  </script>
+
+    messageDiv.style.color = "black";
+    messageDiv.textContent = "⏳ Clip wordt ingestuurd...";
+
+    const formData = new FormData();
+    formData.append("url", url);
+    formData.append("apiKey", "yappelkaas2025supergeheim");
+
+    try {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbw1Y9DLTTvFlfijb6j915gyKAsGD5IatsYpozf2UPXVcwjxVs8x3XXBji8bgQyf4fbVqQ/exec", {
+        method: "POST",
+        body: formData,
+      });
+
+      const text = await response.text();
+
+      if (text.includes("✅")) {
+        messageDiv.style.color = "green";
+        messageDiv.textContent = text;
+        urlInput.value = "";
+      } else {
+        messageDiv.style.color = "red";
+        messageDiv.textContent = text;
+      }
+    } catch (err) {
+      messageDiv.style.color = "red";
+      messageDiv.textContent = "⚠️ Fout bij verzenden: " + err.message;
+    }
+
+    return false;
+  }
+</script>
 </body>
 </html>
