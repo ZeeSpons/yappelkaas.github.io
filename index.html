@@ -16,7 +16,7 @@
     /* Alle menu knoppen standaard */
     .menu-btn {
       font-size: 1.5rem;
-      padding: 1.1rem 2rem; /* Iets kleinere padding */
+      padding: 1.1rem 2rem;
       border-radius: 15px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.15);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -25,20 +25,19 @@
       gap: 0.6rem;
       text-decoration: none;
       color: inherit;
+      cursor: pointer;
     }
-    /* Hover effect */
     .menu-btn:hover {
       transform: scale(1.05);
       box-shadow: 0 6px 12px rgba(0,0,0,0.25);
     }
-    /* LIVE knop rechtsboven - NIET AANGERAAKT */
     .live-button {
       position: absolute;
       top: 1rem;
       right: 1rem;
       background-color: #ff4d4d;
       color: white;
-      padding: 1.5rem 3rem; /* gelijk aan andere menu knoppen */
+      padding: 1.5rem 3rem;
       border-radius: 10px;
       font-weight: bold;
       text-decoration: none;
@@ -50,17 +49,12 @@
       gap: 0.4rem;
     }
     @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.08);
-      }
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
     }
-    /* AppelRun knop - NIET AANGERAAKT */
     a.menu-btn.appelrun {
-      font-size: 2.2rem; /* nog iets groter dan 1.9rem */
-      padding: 2rem 4rem; /* iets meer padding */
+      font-size: 2.2rem;
+      padding: 2rem 4rem;
     }
     a.menu-btn.appelrun img {
       height: 38px;
@@ -68,7 +62,6 @@
       vertical-align: middle;
       object-fit: contain;
     }
-
     section.feature-img img {
       max-width: 450px;
       margin: 2.5rem auto;
@@ -127,6 +120,7 @@
       <img src="assets/discord-icon.png" alt="Discord" style="height: 20px; vertical-align: middle; margin-right: 8px;">
       Join de Discord
     </a>
+    <a onclick="loginWithTwitch()" class="menu-btn">🔑 Login met Twitch</a>
   </main>
 
   <section class="feature-img">
@@ -134,12 +128,12 @@
   </section>
 
   <img src="assets/akaipfp.png" alt="Akaipfp" id="akaipfp" />
-  
+
   <audio id="akaiaudio1" src="assets/welkombijmijnparadijs.mp4"></audio>
   <audio id="akaiaudio2" src="assets/furry.mp3"></audio>
   <audio id="akaiaudio3" src="assets/waf.mp3"></audio>
   <audio id="akaiaudio4" src="assets/ja.mp3"></audio>
-  
+
   <script>
     let clickCount = 0;
     const audios = [
@@ -152,7 +146,7 @@
     document.getElementById("akaipfp").addEventListener("click", function () {
       const index = clickCount % audios.length;
       const audio = audios[index];
-      
+
       audios.forEach(a => {
         a.pause();
         a.currentTime = 0;
@@ -161,6 +155,45 @@
       audio.play();
       clickCount++;
     });
+
+    // Twitch login + live check
+    const clientId = "ngm5c8xsu9goghmx5okavd5r081mii";
+    const redirectUri = "https://yappelkaas.nl/twitch-callback.html";
+    const twitchUser = "appelkaas";
+
+    function loginWithTwitch() {
+      const authUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=user:read:email`;
+      window.location.href = authUrl;
+    }
+
+    async function checkLiveStatus() {
+      try {
+        const res = await fetch(`https://api.twitch.tv/helix/streams?user_login=${twitchUser}`, {
+          headers: {
+            "Client-ID": clientId,
+          }
+        });
+        const data = await res.json();
+        const isLive = data.data && data.data.length > 0;
+        const liveButton = document.querySelector(".live-button");
+
+        if (liveButton) {
+          if (isLive) {
+            liveButton.style.backgroundColor = "#ff4d4d";
+            liveButton.textContent = "LIVE 🔴";
+            liveButton.style.pointerEvents = "auto";
+          } else {
+            liveButton.style.backgroundColor = "#888";
+            liveButton.textContent = "OFFLINE ⚪";
+            liveButton.style.pointerEvents = "none";
+          }
+        }
+      } catch (err) {
+        console.error("Twitch live status check mislukt:", err);
+      }
+    }
+
+    checkLiveStatus(sessionStorage.getItem("twitch_token"));
   </script>
 
   <footer>
