@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Twitch login callback</title>
+  <script>
+    const hash = window.location.hash.substring(1);
+    const params = new URLSearchParams(hash);
+    const token = params.get("access_token");
+
+    if (token) {
+      // Terug naar index met token tijdelijk in memory
+      sessionStorage.setItem("twitch_token", token);
+      window.location.href = "/";
+    } else {
+      document.body.innerHTML = "<h2>Inloggen mislukt. Probeer het opnieuw.</h2>";
+    }
+  </script>
+</head>
+<body>
+  <p>Even geduld, je wordt doorgestuurd...</p>
+</body>
+</html>
