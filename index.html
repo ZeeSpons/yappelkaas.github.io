@@ -46,6 +46,14 @@
       align-items: center;
       gap: 0.4rem;
     }
+    /* Stil de offline knop (grijs) zodat hij geen pulse of gloed heeft */
+    .live-button.offline {
+      animation: none !important;
+      box-shadow: none !important;
+      background-color: #888 !important;
+      color: white !important;
+      pointer-events: auto !important;
+    }
     @keyframes pulse {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.08); }
@@ -195,13 +203,16 @@
 
         if (liveButton) {
           if (isLive) {
+            liveButton.classList.remove("offline");
             liveButton.style.backgroundColor = "#ff4d4d";
             liveButton.textContent = "LIVE 🔴";
             liveButton.style.pointerEvents = "auto";
+            liveButton.style.animation = "pulse 1.6s infinite ease-in-out";
+            liveButton.style.boxShadow = "0 0 10px rgba(255, 0, 0, 0.4)";
           } else {
-            liveButton.style.backgroundColor = "#888";
+            liveButton.classList.add("offline");
             liveButton.textContent = "OFFLINE ⚪";
-            liveButton.style.pointerEvents = "auto";
+            // Styles uit CSS class offline pakken
           }
         }
       } catch (err) {
