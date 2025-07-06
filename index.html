@@ -8,12 +8,10 @@
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
   <style>
-    /* Extra styling voor grotere knoppen en afbeelding op homepage */
     main.menu {
       gap: 1.5rem;
       padding: 3rem 2rem;
     }
-    /* Alle menu knoppen standaard */
     .menu-btn {
       font-size: 1.5rem;
       padding: 1.1rem 2rem;
@@ -92,6 +90,18 @@
       text-align: center;
       padding-top: 2rem;
     }
+    #twitch-auth-status {
+      position: absolute;
+      top: 6.2rem;
+      right: 1rem;
+      font-size: 1rem;
+      color: #333;
+    }
+    #twitch-auth-status span {
+      text-decoration: underline;
+      cursor: pointer;
+      color: #3366cc;
+    }
   </style>
 </head>
 
@@ -99,6 +109,7 @@
 
   <header class="hero">
     <a href="live" class="live-button">LIVE 🔴</a>
+    <div id="twitch-auth-status">Log in met Twitch</div>
     <h1>Welkom op Yappelkaas.nl</h1>
     <p>DE thuisbasis van alles wat YAP zegt: van kaaskliks tot chaos, van quote tot run.</p>
   </header>
@@ -120,7 +131,6 @@
       <img src="assets/discord-icon.png" alt="Discord" style="height: 20px; vertical-align: middle; margin-right: 8px;">
       Join de Discord
     </a>
-    <a onclick="loginWithTwitch()" class="menu-btn">🔑 Login met Twitch</a>
   </main>
 
   <section class="feature-img">
@@ -159,18 +169,24 @@
     // Twitch login + live check
     const clientId = "ngm5c8xsu9goghmx5okavd5r081mii";
     const redirectUri = "https://yappelkaas.nl/twitch-callback.html";
-    const twitchUser = "appelkaas";
+    const twitchUser = "APPELKAAS";
 
     function loginWithTwitch() {
       const authUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=user:read:email`;
       window.location.href = authUrl;
     }
 
-    async function checkLiveStatus() {
+    function logoutTwitch() {
+      sessionStorage.removeItem("twitch_token");
+      location.reload();
+    }
+
+    async function checkLiveStatus(token = null) {
       try {
         const res = await fetch(`https://api.twitch.tv/helix/streams?user_login=${twitchUser}`, {
           headers: {
             "Client-ID": clientId,
+            ...(token && { "Authorization": `Bearer ${token}` }),
           }
         });
         const data = await res.json();
@@ -185,7 +201,7 @@
           } else {
             liveButton.style.backgroundColor = "#888";
             liveButton.textContent = "OFFLINE ⚪";
-            liveButton.style.pointerEvents = "none";
+            liveButton.style.pointerEvents = "auto";
           }
         }
       } catch (err) {
@@ -193,7 +209,15 @@
       }
     }
 
-    checkLiveStatus(sessionStorage.getItem("twitch_token"));
+    const token = sessionStorage.getItem("twitch_token");
+    checkLiveStatus(token);
+
+    const statusDiv = document.getElementById("twitch-auth-status");
+    if (token) {
+      statusDiv.innerHTML = `<span onclick="logoutTwitch()">Uitloggen</span>`;
+    } else {
+      statusDiv.innerHTML = `<span onclick="loginWithTwitch()">Log in met Twitch</span>`;
+    }
   </script>
 
   <footer>
