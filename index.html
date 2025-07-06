@@ -133,12 +133,15 @@
   width: 90%;
   max-width: 300px;
   text-align: center;
-  animation: pulse 1.6s infinite ease-in-out;
-  box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
-  /* Voeg dit toe: */
-  box-sizing: border-box;  /* voorkomt overflow */
+  box-sizing: border-box;
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+/* Alleen als live actief is, mag hij animeren op mobiel */
+.live-button.live-active {
+  animation: pulse 1.6s infinite ease-in-out;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
 }
       #twitch-auth-status {
         position: static;
