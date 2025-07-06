@@ -30,22 +30,26 @@
       box-shadow: 0 6px 12px rgba(0,0,0,0.25);
     }
     .live-button {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background-color: #ff4d4d;
-      color: white;
-      padding: 1.5rem 3rem;
-      border-radius: 10px;
-      font-weight: bold;
-      text-decoration: none;
-      font-size: 1.5rem;
-      animation: pulse 1.6s infinite ease-in-out;
-      box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: #ff4d4d;
+  color: white;
+  padding: 1.5rem 3rem;
+  border-radius: 10px;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Alleen animatie toevoegen als de knop echt live is */
+.live-button.live-active {
+  animation: pulse 1.6s infinite ease-in-out;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+}
     @keyframes pulse {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.08); }
