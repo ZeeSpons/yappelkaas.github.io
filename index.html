@@ -123,15 +123,19 @@
         padding: 1.5rem 0;
       }
       .live-button {
-        position: static;
-        margin: 1rem auto;
-        display: block;
-        width: 90%;
-        max-width: 300px;
-        text-align: center;
-        animation: pulse 1.6s infinite ease-in-out;
-        box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
-      }
+  position: static;
+  margin: 1rem auto;
+  display: block;
+  width: 90%;
+  max-width: 300px;
+  text-align: center;
+  animation: pulse 1.6s infinite ease-in-out;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+  /* Voeg dit toe: */
+  box-sizing: border-box;  /* voorkomt overflow */
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
       #twitch-auth-status {
         position: static;
         margin: 0.5rem auto 1.5rem;
