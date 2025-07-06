@@ -6,6 +6,36 @@
   <title>AppelRun - Yappelkaas</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <style>
+    /* Alleen mobiel/tablet styles */
+    @media (max-width: 900px) {
+      canvas#gameCanvas {
+        width: 90vw !important;  /* 90% van viewport width */
+        height: auto !important; /* hoogte proportioneel */
+        max-height: 50vh;
+        display: block;
+        margin: 2rem auto 0 auto !important;
+        border-radius: 20px;
+        border: 2px solid #3399ff !important;
+        background-color: #ffffff !important;
+      }
+
+      /* Maak header en tekst wat smaller en met padding voor betere leesbaarheid */
+      header.hero {
+        padding: 1rem 1.5rem;
+      }
+
+      main.kaasklikker {
+        padding: 0 1rem 2rem 1rem;
+      }
+
+      /* Home knop op mobiel net wat beter te bereiken */
+      a.menu-btn {
+        position: static !important;
+        margin-bottom: 1rem !important;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="hero">
@@ -44,6 +74,7 @@
   const canvas = document.getElementById("gameCanvas");
   const ctx = canvas.getContext("2d");
 
+  // Bestaande images, geluiden en game-variabelen (niet veranderd)
   const playerRunImg = new Image(); playerRunImg.src = "assets/appelkaas_run.png";
   const playerIdleImg = new Image(); playerIdleImg.src = "assets/appelkaas_idle.png";
   const appelImg = new Image(); appelImg.src = "assets/appel.png";
@@ -64,14 +95,43 @@
   let highscore = parseInt(localStorage.getItem("appelrun_highscore")) || 0;
   let gameStarted = false;
   let gameOver = false;
-  let gameOverTime = null; // Toegevoegd
+  let gameOverTime = null;
   let framesSinceLastObstacle = 0;
   let obstacleCooldown = 100;
   let obstacles = [];
   let activePowerup = null;
-
   let deluxe = null;
   const deluxeSize = { width: 100, height: 56 };
+
+  // --- Responsieve canvas grootte aanpassing ---
+  function resizeCanvas() {
+    if(window.innerWidth <= 900) {
+      // Breedte is 90% viewport width
+      const newWidth = window.innerWidth * 0.9;
+      // Verhouding 1000:400 = 2.5
+      const newHeight = newWidth / 2.5;
+      canvas.style.width = newWidth + "px";
+      canvas.style.height = newHeight + "px";
+      // Houd de interne canvas resolution hetzelfde voor scherpte:
+      canvas.width = 1000;
+      canvas.height = 400;
+      // Pas speler Y aan (voor consistentie bij tekenen)
+      player.y = canvas.height - player.height;
+    } else {
+      // Desktop default
+      canvas.style.width = "1000px";
+      canvas.style.height = "400px";
+      canvas.width = 1000;
+      canvas.height = 400;
+      player.y = canvas.height - player.height;
+    }
+  }
+
+  window.addEventListener("resize", resizeCanvas);
+  window.addEventListener("orientationchange", resizeCanvas);
+  resizeCanvas();
+
+  // --- De rest van je bestaande game code hier (update, draw, gameLoop, enz) ---
 
   function drawPlayer() {
     const img = (!gameStarted || gameOver) ? playerIdleImg : playerRunImg;
@@ -120,7 +180,7 @@
     score = 0;
     speed = 3;
     gameOver = false;
-    gameOverTime = null; // Reset toegevoegd
+    gameOverTime = null;
     activePowerup = null;
     deluxe = null;
   }
@@ -160,7 +220,7 @@
           if (!activePowerup) {
             gameOverSound.play();
             gameOver = true;
-            gameOverTime = Date.now(); // Tijd noteren
+            gameOverTime = Date.now();
             return;
           }
           obstacles.splice(i, 1);
@@ -196,27 +256,27 @@
     }
 
     if (++framesSinceLastObstacle >= obstacleCooldown) {
-  let type;
-  const rand = Math.random();
+      let type;
+      const rand = Math.random();
 
-  if (!activePowerup && rand < 0.01) {
-    type = "zonnebril";
-  } else if (rand < 0.6) {
-    type = "appel";
-  } else {
-    type = "kaas";
-  }
+      if (!activePowerup && rand < 0.01) {
+        type = "zonnebril";
+      } else if (rand < 0.6) {
+        type = "appel";
+      } else {
+        type = "kaas";
+      }
 
-  let width = 60;
-  let height = 60;
-  if (type === "zonnebril") {
-    width = 75;
-    height = 42;
-  }
+      let width = 60;
+      let height = 60;
+      if (type === "zonnebril") {
+        width = 75;
+        height = 42;
+      }
 
-  obstacles.push({ x: canvas.width, y: canvas.height - height, width, height, type });
-  framesSinceLastObstacle = 0;
-}
+      obstacles.push({ x: canvas.width, y: canvas.height - height, width, height, type });
+      framesSinceLastObstacle = 0;
+    }
 
     if (deluxe) {
       if (deluxe.flyingIn && deluxe.x < player.x + 120) {
@@ -272,7 +332,7 @@
 
   function handleJump() {
     if (!gameStarted || gameOver) {
-      if (gameOver && gameOverTime && Date.now() - gameOverTime < 250) return; // Blokkeer 0,25 sec
+      if (gameOver && gameOverTime && Date.now() - gameOverTime < 250) return;
       resetGame();
       gameStarted = true;
     } else if (player.grounded) {
