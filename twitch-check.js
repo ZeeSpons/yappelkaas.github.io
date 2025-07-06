@@ -24,14 +24,14 @@ async function checkLiveStatus(token = null) {
     const liveButton = document.querySelector(".live-button");
     if (liveButton) {
       if (isLive) {
-        liveButton.style.backgroundColor = "#ff4d4d";
-        liveButton.style.pointerEvents = "auto";
-        liveButton.textContent = "LIVE 🔴";
-      } else {
-        liveButton.style.backgroundColor = "#888";
-        liveButton.style.pointerEvents = "none";
-        liveButton.textContent = "OFFLINE ⚪";
-      }
+  liveButton.style.backgroundColor = "#ff4d4d";
+  liveButton.textContent = "LIVE 🔴";
+  liveButton.classList.add("live-active");
+} else {
+  liveButton.style.backgroundColor = "#888";
+  liveButton.textContent = "OFFLINE ⚪";
+  liveButton.classList.remove("live-active");
+}
     }
   } catch (e) {
     console.error("Live status check failed:", e);
