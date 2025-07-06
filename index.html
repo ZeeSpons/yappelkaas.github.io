@@ -46,14 +46,6 @@
       align-items: center;
       gap: 0.4rem;
     }
-    /* Stil de offline knop (grijs) zodat hij geen pulse of gloed heeft */
-    .live-button.offline {
-      animation: none !important;
-      box-shadow: none !important;
-      background-color: #888 !important;
-      color: white !important;
-      pointer-events: auto !important;
-    }
     @keyframes pulse {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.08); }
@@ -109,6 +101,58 @@
       text-decoration: underline;
       cursor: pointer;
       color: #3366cc;
+    }
+
+    /* ===== MOBIEL/SMALLER SCREEN ===== */
+    @media (max-width: 767px) {
+      main.menu {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        padding: 2rem 1rem;
+      }
+      .menu-btn {
+        width: 100%;
+        justify-content: center;
+        font-size: 1.7rem;
+        padding: 1.3rem 0;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      }
+      a.menu-btn.appelrun {
+        font-size: 1.8rem;
+        padding: 1.5rem 0;
+      }
+      .live-button {
+        position: static;
+        margin: 1rem auto;
+        display: block;
+        width: 90%;
+        max-width: 300px;
+        text-align: center;
+        animation: pulse 1.6s infinite ease-in-out;
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+      }
+      #twitch-auth-status {
+        position: static;
+        margin: 0.5rem auto 1.5rem;
+        text-align: center;
+      }
+      header.hero {
+        padding-top: 1rem;
+      }
+      section.feature-img img {
+        max-width: 90vw;
+        margin: 2rem auto;
+      }
+      /* Zorg dat de header h1 en p ook wat meer ruimte krijgen */
+      header.hero h1 {
+        font-size: 2rem;
+        margin-bottom: 0.3rem;
+      }
+      header.hero p {
+        font-size: 1.1rem;
+        margin-top: 0;
+      }
     }
   </style>
 </head>
@@ -203,16 +247,13 @@
 
         if (liveButton) {
           if (isLive) {
-            liveButton.classList.remove("offline");
             liveButton.style.backgroundColor = "#ff4d4d";
             liveButton.textContent = "LIVE 🔴";
             liveButton.style.pointerEvents = "auto";
-            liveButton.style.animation = "pulse 1.6s infinite ease-in-out";
-            liveButton.style.boxShadow = "0 0 10px rgba(255, 0, 0, 0.4)";
           } else {
-            liveButton.classList.add("offline");
+            liveButton.style.backgroundColor = "#888";
             liveButton.textContent = "OFFLINE ⚪";
-            // Styles uit CSS class offline pakken
+            liveButton.style.pointerEvents = "auto";
           }
         }
       } catch (err) {
