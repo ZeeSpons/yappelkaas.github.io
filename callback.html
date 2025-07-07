@@ -23,39 +23,46 @@
   </style>
   <script>
     async function handleDiscordLogin() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const code = urlParams.get('code');
-      const state = urlParams.get('state'); // 'kaasklikker' of 'appelrun'
+  const urlParams = new URLSearchParams(window.location.search);
+  const code = urlParams.get('code');
+  const state = urlParams.get('state'); 
 
-      if (!code) {
-        document.getElementById("status").innerText = "Geen code gevonden in URL...";
-        return;
-      }
+  if (!code) {
+    document.getElementById("status").innerText = "Geen code gevonden in URL...";
+    return;
+  }
 
-      try {
-        const res = await fetch("https://script.google.com/macros/s/AKfycbwwqhuYA4DgWVftl9z18nIIreJKLDqyvPgRh-trEM2a0TsfjQFGukvo0kFNIxxz0sku/exec", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-          },
-          body: `code=${encodeURIComponent(code)}`
-        });
+  try {
+    const res = await fetch("https://script.google.com/macros/s/AKfycbwwqhuYA4DgWVftl9z18nIIreJKLDqyvPgRh-trEM2a0TsfjQFGukvo0kFNIxxz0sku/exec", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: `code=${encodeURIComponent(code)}`
+    });
 
-        if (!res.ok) throw new Error('Fout bij ophalen token');
-
-        // Succes! Redirect terug naar het juiste spel
-        if (state === 'kaasklikker') {
-          window.location.href = 'kaasklikker.html';
-        } else if (state === 'appelrun') {
-          window.location.href = 'appelrun.html';
-        } else {
-          window.location.href = 'index.html';
-        }
-      } catch (error) {
-        document.getElementById("status").innerText = "Fout bij inloggen...";
-        console.error(error);
-      }
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error("Fetch response error:", res.status, errorText);
+      document.getElementById("status").innerText = `Fout bij inloggen: ${res.status} - ${errorText}`;
+      return;
     }
+
+    const data = await res.json();
+    console.log("Fetch response data:", data);
+
+    if (state === 'kaasklikker') {
+      window.location.href = 'kaasklikker.html';
+    } else if (state === 'appelrun') {
+      window.location.href = 'appelrun.html';
+    } else {
+      window.location.href = 'index.html';
+    }
+  } catch (error) {
+    console.error("Fetch error:", error);
+    document.getElementById("status").innerText = "Fout bij inloggen...";
+  }
+}
 
     window.onload = handleDiscordLogin;
   </script>
