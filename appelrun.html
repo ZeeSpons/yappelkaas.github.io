@@ -38,16 +38,17 @@
     <h1>AppelRun</h1>
     <p>Ontwijk de kaas, verzamel de appels!</p>
   </header>
+  
 <!-- ✅ Login-knop -->
-<div style="margin: 1rem auto; text-align: center;">
-  <a id="discord-login" href="https://discord.com/oauth2/authorize?client_id=1391855738590335086&response_type=code&redirect_uri=https%3A%2F%2Fyappelkaas.nl%2Fappelrun.html&scope=identify" style="text-decoration: none;">
-    <button style="background-color: #5865F2; color: white; border: none; padding: 0.8rem 1.4rem; border-radius: 8px; font-size: 1rem; display: inline-flex; align-items: center; gap: 10px; cursor: pointer;">
-      <img src="assets/discord-icon.png" alt="Discord" width="24" height="24" />
-      Log in via Discord om je score op te slaan
-    </button>
-  </a>
-  <p id="login-status" style="margin-top: 0.5rem; font-weight: bold;"></p>
-</div>
+  <div style="margin-bottom: 1rem;">
+    <a id="discord-login" href="https://discord.com/oauth2/authorize?client_id=1391855738590335086&response_type=code&redirect_uri=https%3A%2F%2Fyappelkaas.nl%2Fcallback.html&scope=identify&state=appelrun" style="text-decoration: none;">
+      <button style="background-color: #5865F2; color: white; border: none; padding: 0.8rem 1.4rem; border-radius: 8px; font-size: 1rem; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+        <img src="assets/discord-icon.png" alt="Discord" width="24" height="24" />
+        Log in via Discord om je score op te slaan
+      </button>
+    </a>
+    <p id="login-status" style="margin-top: 0.5rem; font-weight: bold;"></p>
+  </div>
 
   <main class="kaasklikker">
     <canvas id="gameCanvas" width="1000" height="400" style="border: 2px solid #3399ff; background-color: #ffffff; display: block; margin: 2rem auto 0 auto; border-radius: 20px;"></canvas>
