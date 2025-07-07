@@ -1,4 +1,3 @@
-<script>
 function handleDiscordLogin() {
   const urlParams = new URLSearchParams(window.location.search);
   const code = urlParams.get('code');
@@ -19,4 +18,3 @@ function handleDiscordLogin() {
   });
 }
 window.onload = handleDiscordLogin;
-</script>
