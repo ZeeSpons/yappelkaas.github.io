@@ -2,37 +2,31 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
-  <title>Discord Login...</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 20vh;
-      color: #333;
-    }
-  </style>
+  <title>Discord Login Callback</title>
   <script>
     async function handleLogin() {
       const urlParams = new URLSearchParams(window.location.search);
       const code = urlParams.get('code');
-      const state = urlParams.get('state'); // kaasklikker of appelrun
+      const state = urlParams.get('state');
 
-      if (!code) {
-        document.body.textContent = "Geen code in URL, probeer opnieuw in te loggen.";
+      if (!code || !state) {
+        document.body.innerText = "Geen code of state in URL.";
         return;
       }
 
       try {
-        // Roep Apps Script aan met code en state, verwacht een HTML response met inline script die sessionStorage vult en redirect
-        const response = await fetch('https://script.google.com/macros/s/AKfycbwwqhuYA4DgWVftl9z18nIIreJKLDqyvPgRh-trEM2a0TsfjQFGukvo0kFNIxxz0sku/exec?code=' + encodeURIComponent(code) + '&state=' + encodeURIComponent(state));
+        const response = await fetch(
+          `https://script.google.com/macros/s/AKfycbwwqhuYA4DgWVftl9z18nIIreJKLDqyvPgRh-trEM2a0TsfjQFGukvo0kFNIxxz0sku/exec?code=${encodeURIComponent(code)}&state=${encodeURIComponent(state)}`
+        );
+        const text = await response.text();
 
-        if (!response.ok) throw new Error('Fout bij inloggen.');
+        // Schrijf inline script terug zodat Apps Script redirect doet
+        document.open();
+        document.write(text);
+        document.close();
 
-        const html = await response.text();
-        document.write(html);
-      } catch (e) {
-        document.body.textContent = "Inloggen mislukt. Probeer opnieuw.";
-        console.error(e);
+      } catch (err) {
+        document.body.innerText = "Inloggen mislukt, probeer opnieuw.";
       }
     }
 
@@ -40,7 +34,6 @@
   </script>
 </head>
 <body>
-  <h1>Even inloggen met Discord...</h1>
-  <p>Momentje hoor 👀</p>
+  <h1>Inloggen via Discord...</h1>
 </body>
 </html>
