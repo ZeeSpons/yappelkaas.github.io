@@ -3,7 +3,7 @@ function handleDiscordLogin() {
   const code = urlParams.get('code');
   if (!code) return;
 
-  fetch("https://SCRIPT_WEB_APP_URL_HIER", {
+  fetch("https://script.google.com/macros/s/AKfycbwwqhuYA4DgWVftl9z18nIIreJKLDqyvPgRh-trEM2a0TsfjQFGukvo0kFNIxxz0sku/exec", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
