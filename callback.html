@@ -15,7 +15,7 @@
     async function handleLogin() {
       const urlParams = new URLSearchParams(window.location.search);
       const code = urlParams.get('code');
-      const state = urlParams.get('state'); // 'kaasklikker' of 'appelrun'
+      const state = urlParams.get('state'); // kaasklikker of appelrun
 
       if (!code) {
         document.body.textContent = "Geen code in URL, probeer opnieuw in te loggen.";
@@ -23,19 +23,19 @@
       }
 
       try {
-        // Doe token-uitwisseling via Apps Script endpoint
+        // Roep Apps Script aan met code en state, verwacht een HTML response met inline script die sessionStorage vult en redirect
         const response = await fetch('https://script.google.com/macros/s/AKfycbwwqhuYA4DgWVftl9z18nIIreJKLDqyvPgRh-trEM2a0TsfjQFGukvo0kFNIxxz0sku/exec?code=' + encodeURIComponent(code) + '&state=' + encodeURIComponent(state));
-        
-        if (!response.ok) throw new Error('Fout bij login');
 
-        // Deze response geeft een script terug die sessionStorage vult en redirect naar game
+        if (!response.ok) throw new Error('Fout bij inloggen.');
+
         const html = await response.text();
         document.write(html);
       } catch (e) {
-        document.body.textContent = "Inloggen mislukt. Probeer het opnieuw.";
+        document.body.textContent = "Inloggen mislukt. Probeer opnieuw.";
         console.error(e);
       }
     }
+
     window.onload = handleLogin;
   </script>
 </head>
