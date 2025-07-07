@@ -2,73 +2,27 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
-  <title>Discord Login</title>
+  <title>Je wordt doorgestuurd...</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       text-align: center;
-      margin-top: 15vh;
+      margin-top: 20vh;
       background: #f0f2f5;
       color: #333;
     }
     h1 {
-      font-size: 2.8rem;
+      font-size: 2.4rem;
       margin-bottom: 1rem;
     }
-    p#status {
-      font-size: 1.6rem;
-      font-weight: 600;
+    p {
+      font-size: 1.4rem;
       color: #555;
     }
   </style>
-  <script>
-    async function handleDiscordLogin() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const code = urlParams.get('code');
-  const state = urlParams.get('state'); 
-
-  if (!code) {
-    document.getElementById("status").innerText = "Geen code gevonden in URL...";
-    return;
-  }
-
-  try {
-    const res = await fetch("https://script.google.com/macros/s/AKfycbwwqhuYA4DgWVftl9z18nIIreJKLDqyvPgRh-trEM2a0TsfjQFGukvo0kFNIxxz0sku/exec", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: `code=${encodeURIComponent(code)}`
-    });
-
-    if (!res.ok) {
-      const errorText = await res.text();
-      console.error("Fetch response error:", res.status, errorText);
-      document.getElementById("status").innerText = `Fout bij inloggen: ${res.status} - ${errorText}`;
-      return;
-    }
-
-    const data = await res.json();
-    console.log("Fetch response data:", data);
-
-    if (state === 'kaasklikker') {
-      window.location.href = 'kaasklikker.html';
-    } else if (state === 'appelrun') {
-      window.location.href = 'appelrun.html';
-    } else {
-      window.location.href = 'index.html';
-    }
-  } catch (error) {
-    console.error("Fetch error:", error);
-    document.getElementById("status").innerText = "Fout bij inloggen...";
-  }
-}
-
-    window.onload = handleDiscordLogin;
-  </script>
 </head>
 <body>
   <h1>Even inloggen met Discord...</h1>
-  <p id="status">Momentje hoor 👀</p>
+  <p>Als je dit scherm blijft zien, probeer opnieuw of neem contact op.</p>
 </body>
 </html>
