@@ -1,9 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html lang="nl">
 <head>
   <meta charset="UTF-8" />
   <title>Discord Login</title>
-  <script src="callback.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      margin-top: 15vh;
+      background: #f0f2f5;
+      color: #333;
+    }
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+    }
+    p#status {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #555;
+    }
+  </style>
+  <script>
+    async function handleDiscordLogin() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get('code');
+      const state = urlParams.get('state'); // 'kaasklikker' of 'appelrun'
+
+      if (!code) {
+        document.getElementById("status").innerText = "Geen code gevonden in URL...";
+        return;
+      }
+
+      try {
+        const res = await fetch("https://script.google.com/macros/s/AKfycbwwqhuYA4DgWVftl9z18nIIreJKLDqyvPgRh-trEM2a0TsfjQFGukvo0kFNIxxz0sku/exec", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: `code=${encodeURIComponent(code)}`
+        });
+
+        if (!res.ok) throw new Error('Fout bij ophalen token');
+
+        // Succes! Redirect terug naar het juiste spel
+        if (state === 'kaasklikker') {
+          window.location.href = 'kaasklikker.html';
+        } else if (state === 'appelrun') {
+          window.location.href = 'appelrun.html';
+        } else {
+          window.location.href = 'index.html';
+        }
+      } catch (error) {
+        document.getElementById("status").innerText = "Fout bij inloggen...";
+        console.error(error);
+      }
+    }
+
+    window.onload = handleDiscordLogin;
+  </script>
 </head>
 <body>
   <h1>Even inloggen met Discord...</h1>
