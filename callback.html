@@ -1,39 +1,21 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8" />
-  <title>Discord Login Callback</title>
+  <meta charset="UTF-8">
+  <title>Even inloggen...</title>
   <script>
-    async function handleLogin() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const code = urlParams.get('code');
-      const state = urlParams.get('state');
+    const url = new URL(window.location.href);
+    const code = url.searchParams.get("code");
+    const state = url.searchParams.get("state"); // kaasklikker of appelrun
 
-      if (!code || !state) {
-        document.body.innerText = "Geen code of state in URL.";
-        return;
-      }
-
-      try {
-        const response = await fetch(
-          `https://script.google.com/macros/s/AKfycbwwqhuYA4DgWVftl9z18nIIreJKLDqyvPgRh-trEM2a0TsfjQFGukvo0kFNIxxz0sku/exec?code=${encodeURIComponent(code)}&state=${encodeURIComponent(state)}`
-        );
-        const text = await response.text();
-
-        // Schrijf inline script terug zodat Apps Script redirect doet
-        document.open();
-        document.write(text);
-        document.close();
-
-      } catch (err) {
-        document.body.innerText = "Inloggen mislukt, probeer opnieuw.";
-      }
+    if (code && state) {
+      window.location.href = `https://script.google.com/macros/s/AKfycbwwqhuYA4DgWVftl9z18nIIreJKLDqyvPgRh-trEM2a0TsfjQFGukvo0kFNIxxz0sku/exec?code=${encodeURIComponent(code)}&state=${encodeURIComponent(state)}`;
+    } else {
+      document.body.innerText = "Geen code of state in URL gevonden.";
     }
-
-    window.onload = handleLogin;
   </script>
 </head>
 <body>
-  <h1>Inloggen via Discord...</h1>
+  <p>Even inloggen via Discord... 🍪</p>
 </body>
 </html>
