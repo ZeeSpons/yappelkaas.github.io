@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>404 – Oeps, verdwaald!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background-color: #fff7e6;
+      color: #333;
+      text-align: center;
+      padding: 50px;
+    }
+    h1 {
+      font-size: 72px;
+      margin-bottom: 0;
+    }
+    p {
+      font-size: 24px;
+    }
+    .cheese {
+      font-size: 100px;
+      animation: wobble 2s infinite;
+    }
+    a.button {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 15px 30px;
+      background-color: #f4b400;
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 12px;
+      transition: background-color 0.3s;
+    }
+    a.button:hover {
+      background-color: #ffd54f;
+    }
+    @keyframes wobble {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(5deg); }
+      75% { transform: rotate(-5deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cheese">🧀</div>
+  <h1>404</h1>
+  <p>Oei! Deze pagina is gesmolten of nooit gebakken.</p>
+  <p>Misschien ben je verdwaald in een kaasdoolhof?</p>
+
+  <a href="index.html" class="button">↩️ Terug naar de homepage</a>
+
+</body>
+</html>
