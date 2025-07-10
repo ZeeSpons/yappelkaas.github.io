@@ -38,23 +38,6 @@
     <h1>AppelRun</h1>
     <p>Ontwijk de kaas, verzamel de appels!</p>
   </header>
-  
-<!-- ✅ Login-knop -->
- <div style="margin-bottom: 1rem;">
-  <a
-    id="discord-login"
-    href="https://discord.com/oauth2/authorize?client_id=1391855738590335086&response_type=code&redirect_uri=https%3A%2F%2Fyappelkaas.nl%2Fcallback.html&scope=identify&state=appelrun"
-    style="text-decoration: none;"
-  >
-    <button
-      style="background-color: #5865F2; color: white; border: none; padding: 0.8rem 1.4rem; border-radius: 8px; font-size: 1rem; display: flex; align-items: center; gap: 10px; cursor: pointer;"
-    >
-      <img src="assets/discord-icon.png" alt="Discord" width="24" height="24" />
-      Log in via Discord om je score op te slaan
-    </button>
-  </a>
-  <p id="login-status" style="margin-top: 0.5rem; font-weight: bold;"></p>
-</div>
 
   <main class="kaasklikker">
     <canvas id="gameCanvas" width="1000" height="400" style="border: 2px solid #3399ff; background-color: #ffffff; display: block; margin: 2rem auto 0 auto; border-radius: 20px;"></canvas>
@@ -78,11 +61,6 @@
   <div class="checkmark" style="position: absolute; top: 5px; right: 5px; display: none;">✅</div>
   <p style="margin: 0.5rem 0 0;">Cavia</p>
 </div>
-<div class="skin-option" data-skin="kliko" style="position: relative; cursor: pointer;">
-  <img src="assets/kliko_idle.png" alt="Kliko" style="height: 80px;">
-  <div class="checkmark" style="position: absolute; top: 5px; right: 5px; display: none;">✅</div>
-  <p style="margin: 0.5rem 0 0;">Kliko</p>
-</div>
       </div>
     </div>
 
@@ -93,7 +71,7 @@
         <li>Pak <img src="assets/appel.png" alt="appel" style="height: 20px;"> voor punten.</li>
         <li>Ontwijk <img src="assets/kaas.png" alt="kaas" style="height: 20px;"> want dan is het game over!</li>
         <li>Pak zeldzame <img src="assets/zonnebril.png" alt="zonnebril" style="height: 20px;"> om MrDeluxe op te roepen voor 10 seconden!</li>
-        <li>Als MrDeluxe is opgeroepen beschermt hij jou tegen de kaasjes.</li>
+        <li>Als MrDeluxe is opgeroepen beschermt hij appelkaas tegen de kaasjes.</li>
       </ul>
       <p style="margin-top: 1.5rem;">
         Ben je af? Deel je highscore in de 
@@ -108,8 +86,6 @@
     <p>🍏🧀 Yappelkaas 2025 – Rennen voor je leven.</p>
   </footer>
   <p class="copyright">Gemaakt door: Zeespons.</p>
-
-<script src="callback-score.js" defer></script>
 
   <script>
   const canvas = document.getElementById("gameCanvas");
