@@ -6,6 +6,7 @@
   <title>Kaasklikker - Yappelkaas</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <script src="script.js" defer></script>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -107,24 +108,6 @@
     <p>Klik op de kaas en laat het yappen beginnen!</p>
   </header>
 
-  <!-- ✅ Login-knop -->
-  <div style="margin-bottom: 1rem;">
-  <a
-    id="discord-login"
-    href="https://discord.com/oauth2/authorize?client_id=1391855738590335086&response_type=code&redirect_uri=https%3A%2F%2Fyappelkaas.nl%2Fcallback.html&scope=identify&state=kaasklikker"
-    style="text-decoration: none;"
-  >
-    <button
-      style="background-color: #5865F2; color: white; border: none; padding: 0.8rem 1.4rem; border-radius: 8px; font-size: 1rem; display: flex; align-items: center; gap: 10px; cursor: pointer;"
-    >
-      <img src="assets/discord-icon.png" alt="Discord" width="24" height="24" />
-      Log in via Discord om je score op te slaan
-    </button>
-  </a>
-  <p id="login-status" style="margin-top: 0.5rem; font-weight: bold;"></p>
-</div>
-
-
   <main class="kaasklikker">
     <h2>Score: <span id="score">0</span></h2>
     <h3>🏆 Highscore: <span id="highscore">0</span></h3>
@@ -136,9 +119,5 @@
     <p>🧀 Klik ze! Of klik weg. Jij bepaalt.</p>
   </footer>
 
-  <!-- ⬇️ Voeg dit script toe onderaan -->
-  <script src="callback-score.js" defer></script>
-  <script src="oauth.js" defer></script>
-  <script src="script.js" defer></script>
 </body>
 </html>
