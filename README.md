@@ -35,18 +35,17 @@ Bezoek de website hier:
 
 ## 📁 Bestandsstructuur
 
-📁 assets/ → Afbeeldingen, audio, video en andere media
-│ ├─ og.png → Open Graph preview-afbeelding (1200×630)
-│ ├─ favicon.png, audio’s, sprites en meer
-│
-📄 style.css → Opmaak voor alle pagina's
-📄 script.js → Algemene JS, inclusief Twitch live-status check
-📄 sitemap.xml → Sitemap voor zoekmachines
-📄 robots.txt → Crawling-regels voor zoekmachines
-📄 twitch-check.js → JS die Twitch live-status ophaalt
-
+| Bestand/folder          | Functie                                                |
+|--------------------------|---------------------------------------------------------|
+| `assets/`                | Afbeeldingen, audio, video en andere media              |
+| `style.css`              | Opmaak voor alle pagina's                               |
+| `script.js`              | Kaasklikker JS,                                         |
+| `twitch-check.js`        | Twitch status checker (los script)                      |
+| `sitemap.xml`            | Sitemap voor zoekmachines                               |
+| `robots.txt`             | Crawling-regels voor zoekmachines                       |
 
 ---
+
 
 ## 🧙 Technologieën
 
