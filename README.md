@@ -10,7 +10,7 @@ Gebouwd voor plezier, niet voor productiviteit.
 ## 🔗 Live site
 
 Bezoek de website hier:  
-👉 [https://yappelkaas.nl](https://yappelkaas.nl)
+👉 [https://www.yappelkaas.nl](https://www.yappelkaas.nl)
 
 ---
 
