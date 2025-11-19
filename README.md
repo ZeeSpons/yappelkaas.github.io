@@ -60,7 +60,7 @@ Bezoek de website hier:
 
 Heb je vragen, feedback of memes?  
 📨 Stuur een bericht via Discord: `zee_spons`  
-📧 Of mail naar: [officialzeespons@gmail.com](mailto:officialzeespons@gmail.com)
+📧 Of mail naar: [contact@yappelkaas.nl](contact@yappelkaas.nl)
 
 ---
 
