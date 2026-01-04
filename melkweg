@@ -1,1 +1,69 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MELKWEG CONCERT</title>
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <link rel="stylesheet" href="style.css" />
+  <meta property="og:title" content="Melkweg">
+<meta property="og:description" content="Informatie over het aankomede concert!">
+<meta property="og:image" content="https://yappelkaas.nl/assets/og.png">
+<meta property="og:url" content="https://yappelkaas.nl/melkweg.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 
+  <style>
+    body {
+      background-color: #f0f6ff;
+      color: #1e2b3a;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .home-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: #e0f0ff;
+      border: 2px solid #66b3ff;
+      color: #1e2b3a;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.3rem;
+      box-shadow: 2px 2px 8px rgba(0, 0, 50, 0.1);
+      transition: 0.2s ease-in-out;
+      user-select: none;
+      z-index: 1000;
+      display: inline-block;
+    }
+
+    .home-btn:hover {
+      background-color: #cce6ff;
+      transform: translateY(-2px);
+    }
+
+    header.hero {
+      padding: 2rem;
+      background-color: #d6eaff;
+      border-bottom: 4px solid #3399ff;
+      border-radius: 15px;
+      margin-bottom: 2rem;
+    }
+
+    header.hero h1 {
+      margin: 0 0 0.5rem;
+      font-size: 2.8rem;
+      color: #1e2b3a;
+      user-select: none;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto 3rem;
+      padding: 0 1rem;
+    }
