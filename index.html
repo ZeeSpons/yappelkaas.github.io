@@ -143,6 +143,14 @@
   width: 90%;
   max-width: 300px;
 }
+      .appelkaas-button {
+  position: static;
+  display: block;
+  margin: 1rem auto;
+  text-align: center;
+  width: 90%;
+  max-width: 300px;
+}
       .live-button {
   position: static;
   margin: 1rem auto;
@@ -202,14 +210,33 @@
   transform: scale(1.05);
   box-shadow: 0 6px 14px rgba(0,0,0,0.3);
 }
+.appelkaas-button {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: #ffd43b;
+  color: #1e2b3a;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
+.appelkaas-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+}
   </style>
 </head>
 
 <body>
 
   <header class="hero">
-    <a href="mrdeluxe-event.html" class="mrdeluxe-button">MR.DELUXE EVENT</a>
+    <a href="mrdeluxe-event" class="mrdeluxe-button">MR.DELUXE EVENT</a>
+    <a href="appelkaas-event" class="appelkaas-button">APPELKAAS EVENT</a>
     
     <a href="live" class="live-button">LIVE 🔴</a>
     <div id="twitch-auth-status">Log in met Twitch</div>
