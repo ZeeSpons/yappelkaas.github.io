@@ -1,76 +1,140 @@
-# 🧀 Yappelkaas.nl
+# 🍏🧀 Yappelkaas.nl
 
-Welkom op de mafste plek van het internet.
+Welkom op **Yappelkaas.nl** — een onofficiële, door de community gemaakte website rondom **Appelkaas**.
 
-Deze website is een verzameling chaos, humor, minigames en meligheid.  
-Gebouwd voor plezier, niet voor productiviteit.
+Deze site is half-serieus, half-chaos, en vooral bedoeld voor lol. Denk aan simpele games, Twitch-integratie en een plek waar events en memes samenkomen.
 
-> Klik. Ren. Lach. – Dat is Yappelkaas.
-
-## 🔗 Live site
-
-Bezoek de website hier:  
-👉 [https://www.yappelkaas.nl](https://www.yappelkaas.nl)
+> ⚠️ Dit is **geen officiële website** van Appelkaas. Alles hier is gemaakt door fans / de community.
 
 ---
 
-## 🎮 Inhoud
+## 🌐 Wat is Yappelkaas.nl?
 
-| Bestand                 | Wat het doet                                 |
-|-------------------------|-----------------------------------------------|
-| `index.html`            | De vrolijke homepage                         |
-| `kaasklikker.html`      | Klik als een malle op kaas 🧀                |
-| `appelrun.html`         | Platformspel met appels en kliko's 🍏🗑️     |
-| `clip.html`             | Stuur je eigen clip in 📸                    |
-| `random-clip.html`      | Ontvang een willekeurige clip 🎲             |
-| `evenementen.html`      | Bekijk geplande Yappelkaas-gekte 📅         |
-| `live.html`             | Linkt naar live content 📡                   |
-| `mystery.html`          | Niemand weet wat dit is. Zelfs jij niet. 🔮  |
-| `privacy-policy.html`   | Wettelijke saaiheid                          |
-| `terms-of-service.html` | Meer wettelijke saaiheid                     |
-| `404.html`              | Speciale pagina voor verdwaalde bezoekers 😵 |
-| `twitch-callback.html`  | Callback voor Twitch login                   |
+Yappelkaas.nl is een statische website gehost via **GitHub Pages**. De site bevat:
+
+* 🧀 **Kaasklikker** – klikspel met nul consequenties
+* 🍎 **AppelRun** – ren, spring, chaos
+* 🔴 **Live-pagina** met een embedded Twitch-stream + chat
+* 📅 **Evenementenpagina** met echte (community / stream) events
+* 🎲 Random clips & mystery-knoppen
+
+Alles is gemaakt om lichtgewicht, snel en vooral leuk te zijn.
 
 ---
 
-## 📁 Bestandsstructuur
+## 🔴 Live & Twitch
 
-| Bestand/folder          | Functie                                                |
-|--------------------------|---------------------------------------------------------|
-| `assets/`                | Afbeeldingen, audio, video en andere media              |
-| `style.css`              | Opmaak voor alle pagina's                               |
-| `script.js`              | Kaasklikker JS,                                         |
-| `twitch-check.js`        | Twitch status checker (los script)                      |
-| `sitemap.xml`            | Sitemap voor zoekmachines                               |
-| `robots.txt`             | Crawling-regels voor zoekmachines                       |
+* De **LIVE-knop** stuurt je naar `live.html`
+* Daar staat:
 
----
+  * een embedded Twitch-stream
+  * een embedded Twitch-chat
 
+### Twitch login
 
-## 🧙 Technologieën
-
-- HTML, CSS, JavaScript
-- GitHub Pages voor hosting
-- Twitch API voor live-status van streams
-- Geen frameworks – alles handmatig voor maximale gekte
+* Inloggen met Twitch is **optioneel**
+* Het wordt **alleen gebruikt** om te checken of Appelkaas live is
+* Er worden **geen accounts**, profielen of scores opgeslagen
 
 ---
 
-## 📮 Contact
+## 🎮 Games & Scores
 
-Heb je vragen, feedback of memes?  
-📨 Stuur een bericht via Discord: `zee_spons`  
-📧 Of mail naar: [contact@yappelkaas.nl](contact@yappelkaas.nl)
+Belangrijk:
 
----
+* ❌ Scores worden **niet opgeslagen**
+* ❌ Geen accounts
+* ❌ Geen databases
 
-## 🧀 Credits & Chaos
-
-Yappelkaas is een project van Zeespons.  
-Geen winstoogmerk. Geen advertenties.  
-Alleen kaas, klikken en komedie.
+Alles draait lokaal in je browser. Sluit je tab? Weg score. Dat is geen bug, dat is een feature.
 
 ---
 
-**© 2025 – Gemaakt door Zeespons.**  
-*Geen garantie op mentale stabiliteit.*
+## 📅 Events
+
+De evenementen die op de site staan:
+
+* zijn **echte events**
+* worden handmatig op een rij gezet
+* kunnen IRL, stream- of community-gerelateerd zijn
+
+De site fungeert alleen als overzicht, niet als ticketsysteem.
+
+---
+
+## 🧑‍🤝‍🧑 Community & Regels
+
+Deze site volgt exact dezelfde regels als de Discord-server:
+
+```
+@everyone
+
+ik ban je als je vervelend bent, grts appelkaas
+
+als een mod je vraagt te stoppen met vervelend doen, stop dat ook 🙏
+
+P.S NIET JE LEEFTIJD ZEGGEN !!!!
+```
+
+Zo simpel is het.
+
+---
+
+## 🔐 Privacy & Security
+
+* Geen persoonlijke data-opslag
+* Geen tracking
+* Geen analytics
+* Geen scores in databases
+
+Zie ook:
+
+* `privacy-policy.html`
+* `terms-of-service.html`
+* `SECURITY.md` voor vulnerability reporting
+
+---
+
+## 🛠️ Techniek (kort & krachtig)
+
+* **Hosting:** GitHub Pages
+* **Stack:** HTML / CSS / JavaScript
+* **Backend:** geen
+* **Assets:** `/assets`
+* **Login:** Twitch OAuth (client-side, minimaal gebruik)
+
+Alles is bewust simpel gehouden.
+
+---
+
+## 🚨 Misbruik
+
+Zolang de site niet wordt misbruikt: prima.
+
+Bij misbruik gelden:
+
+* de Terms of Service
+* gezond verstand
+* en eventueel een snelle fix of blokkade
+
+---
+
+## 📬 Contact & Security
+
+Security issues of kwetsbaarheden kun je mailen naar:
+
+📧 **[report@yappelkaas.nl](mailto:report@yappelkaas.nl)**
+
+Zie `SECURITY.md` voor details.
+
+---
+
+## ✨ Disclaimer
+
+* Dit project is gemaakt **voor de lol**
+* Geen commerciële bedoelingen
+* Geen officiële affiliatie met Twitch of Appelkaas
+
+---
+
+Gemaakt met 🍏🧀 en een beetje chaos door **Zeespons**.
