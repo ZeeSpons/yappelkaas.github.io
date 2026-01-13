@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
+  <style>
+  .home-btn {
+      font-weight: 600;
+      font-size: 1.3rem;
+      box-shadow: 2px 2px 8px rgba(0, 0, 50, 0.1);
+      transition: 0.2s ease-in-out;
+      user-select: none;
+      z-index: 1000;
+      display: inline-block;
+    }
+    .home-btn:hover {
+      background-color: #cce6ff;
+      transform: translateY(-2px);
+    }
+  </style>
   <meta charset="UTF-8">
   <title>Twitch login callback</title>
   <link rel="icon" href="assets/favicon.png" type="image/png" />
@@ -20,5 +35,6 @@
 </head>
 <body>
   <p>Even geduld, je wordt doorgestuurd...</p>
+  Duurt het te lang? ga dan terug naar <a href="index" class="home-btn">🏠 Home</a>
 </body>
 </html>
