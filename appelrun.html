@@ -54,32 +54,32 @@
       <h3>Kies je skin:</h3>
       <div style="display: flex; gap: 1.5rem; justify-content: center; overflow-x: auto; padding: 1rem;">
         <div class="skin-option" data-skin="appelkaas" style="position: relative; cursor: pointer;">
-          <img src="assets/appelkaas_idle.png" alt="Appelkaas" style="height: 80px;">
+          <img src="assets/appelkaas_idle.webp" alt="Appelkaas" style="height: 80px;">
           <div class="checkmark" style="position: absolute; top: 5px; right: 5px; display: none;">✅</div>
           <p style="margin: 0.5rem 0 0;">Appelkaas</p>
         </div>
         <div class="skin-option" data-skin="gio" style="position: relative; cursor: pointer;">
-          <img src="assets/gio_idle.png" alt="Gio" style="height: 80px;">
+          <img src="assets/gio_idle.webp" alt="Gio" style="height: 80px;">
           <div class="checkmark" style="position: absolute; top: 5px; right: 5px; display: none;">✅</div>
           <p style="margin: 0.5rem 0 0;">Gio</p>
         </div>
         <div class="skin-option" data-skin="cavia" style="position: relative; cursor: pointer;">
-  <img src="assets/cavia_idle.png" alt="Cavia" style="height: 80px;">
+  <img src="assets/cavia_idle.webp" alt="Cavia" style="height: 80px;">
   <div class="checkmark" style="position: absolute; top: 5px; right: 5px; display: none;">✅</div>
   <p style="margin: 0.5rem 0 0;">Cavia</p>
 </div>
 <div class="skin-option" data-skin="kliko" style="position: relative; cursor: pointer;">
-          <img src="assets/kliko_idle.png" alt="Kliko" style="height: 80px;">
+          <img src="assets/kliko_idle.webp" alt="Kliko" style="height: 80px;">
           <div class="checkmark" style="position: absolute; top: 5px; right: 5px; display: none;">✅</div>
           <p style="margin: 0.5rem 0 0;">Kliko</p>
         </div>
         <div class="skin-option" data-skin="benja" style="position: relative; cursor: pointer;">
-          <img src="assets/benja_idle.png" alt="Benja" style="height: 80px;">
+          <img src="assets/benja_idle.webp" alt="Benja" style="height: 80px;">
           <div class="checkmark" style="position: absolute; top: 5px; right: 5px; display: none;">✅</div>
           <p style="margin: 0.5rem 0 0;">Benja</p>
         </div>
         <div class="skin-option" data-skin="furry" style="position: relative; cursor: pointer;">
-          <img src="assets/furry_idle.png" alt="Furry" style="height: 80px;">
+          <img src="assets/furry_idle.webp" alt="Furry" style="height: 80px;">
           <div class="checkmark" style="position: absolute; top: 5px; right: 5px; display: none;">✅</div>
           <p style="margin: 0.5rem 0 0;">Furry</p>
         </div>
@@ -90,15 +90,15 @@
       <h2>Hoe werkt het?</h2>
       <ul>
         <li>Druk op <strong>spatie</strong> of tik op het scherm om te springen.</li>
-        <li>Pak <img src="assets/appel.png" alt="appel" style="height: 20px;"> voor punten.</li>
-        <li>Ontwijk <img src="assets/kaas.png" alt="kaas" style="height: 20px;"> want dan is het game over!</li>
-        <li>Pak zeldzame <img src="assets/zonnebril.png" alt="zonnebril" style="height: 20px;"> om MrDeluxe op te roepen voor 10 seconden!</li>
+        <li>Pak <img src="assets/appel.webp" alt="appel" style="height: 20px;"> voor punten.</li>
+        <li>Ontwijk <img src="assets/kaas.webp" alt="kaas" style="height: 20px;"> want dan is het game over!</li>
+        <li>Pak zeldzame <img src="assets/zonnebril.webp" alt="zonnebril" style="height: 20px;"> om MrDeluxe op te roepen voor 10 seconden!</li>
         <li>Als MrDeluxe is opgeroepen beschermt hij appelkaas tegen de kaasjes.</li>
       </ul>
       <p style="margin-top: 1.5rem;">
         Ben je af? Deel je highscore in de 
         <a href="https://discord.gg/J95ApheDKV" target="_blank" style="color: #5865F2; font-weight: bold;">
-          <img src="assets/discord-icon.png" alt="Discord" style="height: 16px; vertical-align: text-bottom;"> Discord
+          <img src="assets/discord-icon.webp" alt="Discord" style="height: 16px; vertical-align: text-bottom;"> Discord
         </a>!
       </p>
     </div>
@@ -123,8 +123,8 @@
   const playerIdleImg = new Image();
   function setSkin(skin) {
     currentSkin = skin;
-    playerRunImg.src = `assets/${skin}_run.png`;
-    playerIdleImg.src = `assets/${skin}_idle.png`;
+    playerRunImg.src = `assets/${skin}_run.webp`;
+    playerIdleImg.src = `assets/${skin}_idle.webp`;
     localStorage.setItem("appelrun_skin", skin);
 
     document.querySelectorAll(".skin-option").forEach(option => {
@@ -143,10 +143,10 @@
     });
   });
 
-  const appelImg = new Image(); appelImg.src = "assets/appel.png";
-  const kaasImg = new Image(); kaasImg.src = "assets/kaas.png";
-  const zonnebrilImg = new Image(); zonnebrilImg.src = "assets/zonnebril.png";
-  const deluxeImg = new Image(); deluxeImg.src = "assets/mrdeluxe_fly.png";
+  const appelImg = new Image(); appelImg.src = "assets/appel.webp";
+  const kaasImg = new Image(); kaasImg.src = "assets/kaas.webp";
+  const zonnebrilImg = new Image(); zonnebrilImg.src = "assets/zonnebril.webp";
+  const deluxeImg = new Image(); deluxeImg.src = "assets/mrdeluxe_fly.webp";
 
   const gameOverSound = new Audio("assets/gameover.mp3");
   const powerupSound = new Audio("assets/powerup.mp3");
