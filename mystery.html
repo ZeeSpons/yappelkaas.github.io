@@ -81,13 +81,6 @@
       max-width: 100%;
     }
 
-    .mystery-video {
-      width: 100%;
-      max-width: 450px;
-      border-radius: 15px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-      margin-bottom: 1.5rem;
-    }
     
     .mystery-gif {
       width: 100%;
@@ -139,10 +132,20 @@
     <h1>🔮 Mystery Knop 🔮</h1>
   </header>
 
+  
   <main class="mystery-content">
-    <video> <source src="assets/spinky.mp4" alt="Mystery video" class="mystery-video" ></video>
+    
+<div class="video-embed" id="videoContainer">
+    <video
+      width="560" 
+      height="420">
+  <source src="assets/spinky.mp4" type="video/mp4">
+Your browser does not support the video tag.
+    </video>
+</div>
+    
     <p class="mystery-text">SPINKY</p>
-
+    
     
     <img src="assets/tekening.webp" alt="Mystery afbeelding" class="mystery-gif" />
     <p class="mystery-text">Het mooie kunstwerk van appelkaas</p>
