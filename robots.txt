@@ -1,6 +1,4 @@
 User-agent: *
-Allow: /assets/og.png
-Allow: /assets/favicon.png
 Disallow: /assets/
 
 Sitemap: https://www.yappelkaas.nl/sitemap.xml
