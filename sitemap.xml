@@ -1,69 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!--  created with Free Online Sitemap Generator www.xml-sitemaps.com  -->
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
 <url>
-<loc>https://www.yappelkaas.nl/</loc>
-<lastmod>2026-01-14T00:40:03+00:00</lastmod>
-<priority>1.00</priority>
+  <loc>https://www.yappelkaas.nl/</loc>
+  <lastmod>2026-01-15T10:13:05+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>1.00</priority>
+</url>
+  <url>
+  <loc>https://www.yappelkaas.nl/appelkaas-event</loc>
+  <lastmod>2026-01-15T10:13:05+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.90</priority>
 </url>
 <url>
-<loc>https://www.yappelkaas.nl/mrdeluxe-event</loc>
-<lastmod>2026-01-14T00:40:03+00:00</lastmod>
-<priority>0.80</priority>
+  <loc>https://www.yappelkaas.nl/mrdeluxe-event</loc>
+  <lastmod>2026-01-15T10:13:05+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.90</priority>
 </url>
 <url>
-<loc>https://www.yappelkaas.nl/appelkaas-event</loc>
-<lastmod>2026-01-14T00:40:03+00:00</lastmod>
-<priority>0.80</priority>
+  <loc>https://www.yappelkaas.nl/live</loc>
+  <lastmod>2026-01-15T10:13:05+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.70</priority>
 </url>
 <url>
-<loc>https://www.yappelkaas.nl/live</loc>
-<lastmod>2026-01-14T00:40:03+00:00</lastmod>
-<priority>0.80</priority>
+  <loc>https://www.yappelkaas.nl/kaasklikker</loc>
+  <lastmod>2026-01-15T10:13:05+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.70</priority>
 </url>
 <url>
-<loc>https://www.yappelkaas.nl/kaasklikker</loc>
-<lastmod>2026-01-14T00:40:03+00:00</lastmod>
-<priority>0.80</priority>
+  <loc>https://www.yappelkaas.nl/random-clip</loc>
+  <lastmod>2026-01-15T10:13:05+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.70</priority>
 </url>
 <url>
-<loc>https://www.yappelkaas.nl/random-clip</loc>
-<lastmod>2026-01-14T00:40:03+00:00</lastmod>
-<priority>0.80</priority>
+  <loc>https://www.yappelkaas.nl/evenementen</loc>
+  <lastmod>2026-01-15T10:13:05+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.90</priority>
 </url>
 <url>
-<loc>https://www.yappelkaas.nl/evenementen</loc>
-<lastmod>2026-01-14T00:40:03+00:00</lastmod>
-<priority>0.80</priority>
+  <loc>https://www.yappelkaas.nl/appelrun</loc>
+  <lastmod>2026-01-15T10:13:05+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.70</priority>
 </url>
 <url>
-<loc>https://www.yappelkaas.nl/appelrun</loc>
-<lastmod>2026-01-14T00:40:03+00:00</lastmod>
-<priority>0.80</priority>
+  <loc>https://www.yappelkaas.nl/mystery</loc>
+  <lastmod>2026-01-15T10:13:05+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.50</priority>
 </url>
 <url>
-<loc>https://www.yappelkaas.nl/mystery</loc>
-<lastmod>2026-01-14T00:40:03+00:00</lastmod>
-<priority>0.80</priority>
+  <loc>https://www.yappelkaas.nl/clip</loc>
+  <lastmod>2026-01-15T10:13:05+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.70</priority>
 </url>
 <url>
-<loc>https://www.yappelkaas.nl/clip</loc>
-<lastmod>2026-01-14T00:40:03+00:00</lastmod>
-<priority>0.80</priority>
+  <loc>https://www.yappelkaas.nl/links</loc>
+  <lastmod>2026-01-15T10:13:05+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.80</priority>
 </url>
 <url>
-<loc>https://www.yappelkaas.nl/terms-of-service.html</loc>
-<lastmod>2026-01-14T00:40:03+00:00</lastmod>
-<priority>0.80</priority>
+  <loc>https://www.yappelkaas.nl/terms-of-service.html</loc>
+  <lastmod>2026-01-15T10:13:05+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.50</priority>
 </url>
 <url>
-<loc>https://www.yappelkaas.nl/privacy-policy.html</loc>
-<lastmod>2026-01-14T00:40:03+00:00</lastmod>
-<priority>0.80</priority>
+  <loc>https://www.yappelkaas.nl/privacy-policy.html</loc>
+  <lastmod>2026-01-15T10:13:05+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.50</priority>
 </url>
 <url>
-<loc>https://www.yappelkaas.nl/index</loc>
-<lastmod>2026-01-14T00:40:03+00:00</lastmod>
-<priority>0.64</priority>
+  <loc>https://www.yappelkaas.nl/index</loc>
+  <lastmod>2026-01-15T10:13:05+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.60</priority>
 </url>
+
+
 </urlset>
