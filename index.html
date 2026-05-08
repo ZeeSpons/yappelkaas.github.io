@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html lang="nl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="nl"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Welkom bij Yappelkaas.nl</title>
-  <link rel="icon" href="media/favicon.png" type="image/png" />
-  <link rel="stylesheet" href="style.css" />
-  <script src="script.js" defer></script>
+  <link rel="icon" href="media/favicon.png" type="image/png">
+  <script src="script.js" defer=""></script>
  
   <!-- Open Graph / Social Media Meta Tags -->
 <meta property="og:title" content="Yappelkaas – Klik. Ren. Lach.">
@@ -27,22 +25,37 @@
 <link rel="canonical" href="https://yappelkaas.nl/">
 
   <style>
+  
+   body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0rem;
+  background-color: #f0f6ff;      /* lichte blauwe achtergrond */
+  text-align: center;
+	}
+    
+  .hero {
+  padding: 2.5rem;
+  background-color: #161ead;     /* donkerblauw */
+  color: white;     /* textkleur */
+ 
+	}
     main.menu {
       gap: 1.5rem;
-      padding: 3rem 2rem;
+      padding: 2rem 2rem;
     }
+    
     .menu-btn {
       font-size: 1.5rem;
       padding: 1.1rem 2rem;
-      border-radius: 2px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.15);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       display: inline-flex;
       align-items: center;
       gap: 0.6rem;
       text-decoration: none;
-      color: inherit;
+      color: #161ead;
       cursor: pointer;
+      background-color: white;
     }
     .menu-btn:hover {
       transform: scale(1.05);
@@ -59,10 +72,9 @@
 }
 
 .event-button {
-  background-color: #ffd43b;
-  color: #1e2b3a;
+  background-color: white;
+  color: #161ead;     /* donkerblauw text*/
   padding: 1rem 2rem;
-  border-radius: 2px;
   font-weight: bold;
   text-decoration: none;
   font-size: 1.2rem;
@@ -82,7 +94,6 @@
   background-color: #ff4d4d;
   color: white;
   padding: 1.5rem 3rem;
-  border-radius: 2px;
   font-weight: bold;
   text-decoration: none;
   font-size: 1.5rem;
@@ -113,27 +124,29 @@
     section.feature-img img {
       max-width: 450px;
       margin: 2.5rem auto;
-      border-radius: 2px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.2);
       display: block;
     }
     footer {
       margin-top: 3rem;
       padding: 1.5rem;
-      background-color: #dbeeff;
-      border-top: 2px solid #66b3ff;
-      font-size: 0.9rem;
+      background-color:#161ead;
+      font-size: 1rem;
       text-align: center;
-      color: #1e2b3a;
-      border-radius: 2px;
+      color: white;
     }
+    
+    footer a {
+    color: #a8abd3;
+    }
+    
     p.copyright {
       text-align: center;
-      font-size: 0.8rem;
-      color: #888;
+      font-size: 0.9rem;
+      color: #a8abd3;
       margin-top: 1rem;
       margin-bottom: 3rem;
-      user-select: none;
+    
     }
     header.hero {
       position: relative;
@@ -150,7 +163,7 @@
     #twitch-auth-status span {
       text-decoration: underline;
       cursor: pointer;
-      color: #3366cc;
+      color: #a8abd3;
     }
 
     /* ===== MOBIEL/SMALLER SCREEN ===== */
@@ -168,10 +181,12 @@
         padding: 1.3rem 0;
         box-shadow: 0 2px 6px rgba(0,0,0,0.15);
       }
+      
       a.menu-btn.appelrun {
         font-size: 1.8rem;
         padding: 1.5rem 0;
       }
+      
       .event-buttons {
   position: static;
   flex-direction: column;
@@ -223,6 +238,17 @@
       }
     }
     
+    #akaipfp {
+  position: fixed;
+  bottom: 60px;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  z-index: 9999;
+  cursor: pointer;
+}
+
   </style>
 </head>
 
@@ -245,7 +271,7 @@
     <a href="random-clip" class="menu-btn">🎲 Random Clip</a>
     <a href="evenementen" class="menu-btn">📅 Evenementen</a>
     <a href="appelrun" class="menu-btn appelrun">
-      <img src="assets/appelkaas_run.webp" alt="Appelkaas Run" />
+      <img src="assets/appelkaas_run.webp" alt="Appelkaas Run">
       AppelRun
     </a>
     <a href="mystery" class="menu-btn">🔮 Mystery Knop</a>
@@ -257,10 +283,10 @@
   </main>
 
   <section class="feature-img">
-    <img src="assets/appelkaas_welkom.webp" alt="Appelkaas begroet je" />
+    <img src="assets/appelkaas_welkom.webp" alt="Appelkaas begroet je">
   </section>
 
-  <img src="assets/akaipfp.webp" alt="Akaipfp" id="akaipfp" />
+  <img src="assets/akaipfp.webp" alt="Akaipfp" id="akaipfp">
 
   <audio id="akaiaudio1" src="assets/welkombijmijnparadijs.mp4"></audio>
   <audio id="akaiaudio2" src="assets/furry.mp3"></audio>
@@ -350,5 +376,4 @@
   </footer>
 
   <p class="copyright">Gemaakt door: Zeespons.</p>
-</body>
 </html>
