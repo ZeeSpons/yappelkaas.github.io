@@ -1,43 +1,48 @@
-     body {
+body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0rem;
   background-color: #f0f6ff;      /* lichte blauwe achtergrond */
   text-align: center;
-	}
+  /* STICKY FOOTER FIX */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
- header.hero {
+header.hero {
   position: relative;
   text-align: center;
-  padding-top: 5rem; /* Verhoogd van 2rem naar 5rem voor de knoppen */
+  padding-top: 5rem; /* Ruimte voor de absolute knoppen */
   padding-bottom: 2.5rem;
   background-color: #161ead;
   color: white;
 }
-	
-    main.menu {
-      gap: 1.5rem;
-      padding: 2rem 2rem;
-    }
-    
-    .menu-btn {
-      font-size: 1.5rem;
-      padding: 1.1rem 2rem;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      text-decoration: none;
-      color: #161ead;
-      cursor: pointer;
-      background-color: white;
-    }
-    .menu-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
-	}
 
-    .event-buttons {
+/* Zorg dat de content tussen de header en footer alle ruimte opvult */
+main.menu, .stream-container, section.feature-img {
+  flex: 1;
+}
+
+.menu-btn {
+  font-size: 1.5rem;
+  padding: 1.1rem 2rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: #161ead;
+  cursor: pointer;
+  background-color: white;
+}
+
+.menu-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+}
+
+.event-buttons {
   position: absolute;
   top: 1rem;
   left: 1rem;
@@ -49,7 +54,7 @@
 
 .event-button {
   background-color: white;
-  color: #161ead;     /* donkerblauw text*/
+  color: #161ead;
   padding: 1rem 2rem;
   font-weight: bold;
   text-decoration: none;
@@ -62,6 +67,7 @@
   transform: scale(1.05);
   box-shadow: 0 6px 14px rgba(0,0,0,0.3);
 }
+
 .event-button img {
   height: 24px;
   width: auto;
@@ -83,143 +89,103 @@
   gap: 0.4rem;
 }
 
-/* Alleen animatie toevoegen als de knop echt live is */
 .live-button.live-active {
   animation: pulse 1.6s infinite ease-in-out;
   box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
 }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.08); }
-    }
-    a.menu-btn.appelrun {
-      font-size: 2.2rem;
-      padding: 2rem 4rem;
-    }
-    a.menu-btn.appelrun img {
-      height: 38px;
-      width: auto;
-      vertical-align: middle;
-      object-fit: contain;
-    }
-    section.feature-img img {
-      max-width: 450px;
-      margin: 2.5rem auto;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      display: block;
-    }
-    footer {
-      margin-top: 3rem;
-      padding: 1.5rem;
-      background-color:#161ead;
-      font-size: 1rem;
-      text-align: center;
-      color: white;
-    }
-    
-    footer a {
-    color: #a8abd3;
-    }
-    
-    p.copyright {
-      text-align: center;
-      font-size: 0.9rem;
-      color: #a8abd3;
-      margin-top: 1rem;
-      margin-bottom: 3rem;
-    
-    }
-    header.hero {
-      position: relative;
-      text-align: center;
-      padding-top: 2rem;
-    }
-    #twitch-auth-status {
-      position: absolute;
-      top: 6.2rem;
-      right: 1rem;
-      font-size: 1rem;
-      color: #333;
-    }
-    #twitch-auth-status span {
-      text-decoration: underline;
-      cursor: pointer;
-      color: #a8abd3;
-    }
 
-    /* ===== MOBIEL/SMALLER SCREEN ===== */
-    @media (max-width: 767px) {
-      main.menu {
-        display: flex;
-        flex-direction: column;
-        gap: 1.2rem;
-        padding: 2rem 1rem;
-      }
-      .menu-btn {
-        width: 100%;
-        justify-content: center;
-        font-size: 1.7rem;
-        padding: 1.3rem 0;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      }
-      
-      a.menu-btn.appelrun {
-        font-size: 1.8rem;
-        padding: 1.5rem 0;
-      }
-      
-      .event-buttons {
-  position: static;
-  flex-direction: column;
-  align-items: center;
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
 }
 
-.event-button {
-  width: 90%;
-  max-width: 300px;
-  text-align: center;
+a.menu-btn.appelrun {
+  font-size: 2.2rem;
+  padding: 2rem 4rem;
 }
-      .live-button {
-  position: static;
-  margin: 1rem auto;
+
+a.menu-btn.appelrun img {
+  height: 38px;
+  width: auto;
+  vertical-align: middle;
+  object-fit: contain;
+}
+
+section.feature-img img {
+  max-width: 450px;
+  margin: 2.5rem auto;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
   display: block;
-  width: 90%;
-  max-width: 300px;
+}
+
+footer {
+  margin-top: auto; /* Duwt de footer naar beneden */
+  padding: 1.5rem;
+  background-color: #161ead;
+  font-size: 1rem;
   text-align: center;
-  box-sizing: border-box;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  color: white;
 }
 
-/* Alleen als live actief is, mag hij animeren op mobiel */
-.live-button.live-active {
-  animation: pulse 1.6s infinite ease-in-out;
-  box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+footer a {
+  color: #a8abd3;
 }
-      #twitch-auth-status {
-        position: static;
-        margin: 0.5rem auto 1.5rem;
-        text-align: center;
-      }
-      header.hero {
-        padding-top: 1rem;
-      }
-      section.feature-img img {
-        max-width: 90vw;
-        margin: 2rem auto;
-      }
-      /* Zorg dat de header h1 en p ook wat meer ruimte krijgen */
-      header.hero h1 {
-        font-size: 2rem;
-        margin-bottom: 0.3rem;
-      }
-      header.hero p {
-        font-size: 1.1rem;
-        margin-top: 0;
-      }
-    }
 
-    #akaipfp {
+#twitch-auth-status {
+  position: absolute;
+  top: 6.2rem;
+  right: 1rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+#twitch-auth-status span {
+  text-decoration: underline;
+  cursor: pointer;
+  color: #a8abd3;
+}
+
+/* ===== MOBIEL/SMALLER SCREEN ===== */
+@media (max-width: 767px) {
+  header.hero {
+    padding-top: 1rem; /* Minder padding op mobiel omdat buttons stacken */
+  }
+  
+  main.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 2rem 1rem;
+  }
+  
+  .menu-btn {
+    width: 100%;
+    justify-content: center;
+    font-size: 1.7rem;
+    padding: 1.3rem 0;
+  }
+  
+  .event-buttons {
+    position: static;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .event-button, .live-button {
+    width: 90%;
+    max-width: 300px;
+    text-align: center;
+    position: static;
+    margin: 0.5rem auto;
+  }
+  
+  section.feature-img img {
+    max-width: 90vw;
+  }
+}
+
+#akaipfp {
   position: fixed;
   bottom: 60px;
   right: 0;
@@ -229,19 +195,3 @@
   z-index: 9999;
   cursor: pointer;
 }
-
-.feature-img img {
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-  margin: 2rem auto;
-  border-radius: 2px;
-  box-shadow: 0 0 20px rgba(0, 102, 204, 0.2);
-}
-
-.uitleg {
-  margin-top: 1rem;
-  font-size: 1rem;
-  color: #1e2b3a;
-}
-
