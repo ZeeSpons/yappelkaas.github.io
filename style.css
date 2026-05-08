@@ -9,8 +9,8 @@ body {
 .hero {
   padding: 2rem;
   background-color: #d6eaff;     /* zachte lichtblauw */
-  border-bottom: 4px solid #3399ff; /* fellere blauwe rand */
-  border-radius: 15px;
+  border-bottom: 2px solid #3399ff; /* fellere blauwe rand */
+  border-radius: 2px;
   color: #1e2b3a;
 }
 
@@ -26,7 +26,7 @@ body {
   padding: 1rem 2rem;
   background-color: #e0f0ff;    /* lichte blauwe knop */
   border: 2px solid #66b3ff;    /* blauwe rand */
-  border-radius: 12px;
+  border-radius: 2px;
   text-decoration: none;
   font-size: 1.2rem;
   color: #1e2b3a;
@@ -44,7 +44,7 @@ body {
   max-width: 400px;
   height: auto;
   margin: 2rem auto;
-  border-radius: 15px;
+  border-radius: 2px;
   box-shadow: 0 0 20px rgba(0, 102, 204, 0.2);
 }
 
@@ -54,7 +54,7 @@ footer {
   background-color: #dbeeff;   /* zachte blauwe footer */
   border-top: 2px solid #66b3ff;
   color: #1e2b3a;
-  border-radius: 10px;
+  border-radius: 2px;
 }
 
 /* Live banner styling */
