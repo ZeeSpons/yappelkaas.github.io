@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="nl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="nl"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Live Stream - Appelkaas</title>
-  <link rel="icon" href="media/favicon.png" type="image/png" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="media/favicon.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
   <meta property="og:title" content="Yappelkaas Live 📡">
 <meta property="og:description" content="Volg live avonturen, streams en melige momenten rechtstreeks vanuit het kaasuniversum.">
 <meta property="og:image" content="https://yappelkaas.nl/media/og.png">
@@ -17,113 +16,43 @@
 <link rel="canonical" href="https://yappelkaas.nl/live">
 
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f4f8ff;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-
-    header {
-      background-color: #dbeeff;
-      padding: 1.5rem;
-      border-bottom: 2px solid #66b3ff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-    }
-
-    header img {
-      height: 32px;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
-      color: #1e2b3a;
-    }
-
-    .button-bar {
-      margin: 2rem 0;
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      background-color: #6441a5;
-      color: white;
-      padding: 1rem 2rem;
-      font-size: 1.2rem;
-      text-decoration: none;
-      border-radius: 10px;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      transition: background-color 0.2s ease;
-    }
-
-    .btn:hover {
-      background-color: #7e5bd3;
-    }
-
-    .btn img {
-      height: 24px;
-    }
-
+  
     .stream-container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 1rem;
-      margin-bottom: 3rem;
+      gap: 5rem;
+      margin-bottom: 5rem;
+      margin-top: 5rem;
     }
 
     iframe {
-      border-radius: 12px;
+      border-radius: 5px;
     }
 
-    footer {
-      padding: 2rem;
-      background-color: #dbeeff;
-      color: #1e2b3a;
-      border-top: 2px solid #66b3ff;
-      font-size: 0.9rem;
-    }
+   
   </style>
 </head>
 <body>
-  <header>
-    <img src="assets/logos/twitch.webp" alt="Twitch">
-    <h1>Live stream van Appelkaas</h1>
-  </header>
-
-  <div class="button-bar">
-    <a href="index" class="btn">🏠 Terug naar Home</a>
-    <a href="https://www.twitch.tv/appelkaas" target="_blank" class="btn">
+  <header class="hero">
+  <div class="event-buttons">
+    <a href="index" class="event-button">🏠 Home</a>
+    <a href="https://www.twitch.tv/appelkaas" target="_blank" class="event-button">
       <img src="assets/logos/twitch.webp" alt="Twitch"> Open op Twitch
     </a>
   </div>
+  <h1>Appelkaas Livestream</h1>
+</header>
+
+
+  
 
   <div class="stream-container">
-    <iframe 
-  src="https://player.twitch.tv/?channel=appelkaas&parent=www.yappelkaas.nl" 
-  frameborder="0" 
-  allowfullscreen="true" 
-  scrolling="no" 
-  height="506" 
-  width="900">
+    <iframe src="https://player.twitch.tv/?channel=appelkaas&amp;parent=www.yappelkaas.nl" frameborder="0" allowfullscreen="true" scrolling="no" height="506" width="900">
   </iframe>
 
     
-    <iframe
-  id="chat_embed"
-  src="https://www.twitch.tv/embed/appelkaas/chat?parent=www.yappelkaas.nl"
-  height="506"
-  width="400">
+    <iframe id="chat_embed" src="https://www.twitch.tv/embed/appelkaas/chat?parent=www.yappelkaas.nl" height="506" width="400">
 </iframe>
   </div>
 
@@ -133,5 +62,5 @@
     <a href="terms-of-service.html">Algemene Voorwaarden</a> |
   <a href="privacy-policy.html">Privacyverklaring</a>
   </footer>
-</body>
+
 </html>
