@@ -4,13 +4,16 @@
   background-color: #f0f6ff;      /* lichte blauwe achtergrond */
   text-align: center;
 	}
-    
-    .hero {
-  padding: 2.5rem;
-  background-color: #161ead;     /* donkerblauw */
-  color: white;     /* textkleur */
- 
-	}
+
+ header.hero {
+  position: relative;
+  text-align: center;
+  padding-top: 5rem; /* Verhoogd van 2rem naar 5rem voor de knoppen */
+  padding-bottom: 2.5rem;
+  background-color: #161ead;
+  color: white;
+}
+	
     main.menu {
       gap: 1.5rem;
       padding: 2rem 2rem;
@@ -32,15 +35,16 @@
     .menu-btn:hover {
       transform: scale(1.05);
       box-shadow: 0 6px 12px rgba(0,0,0,0.25);
-    }
-    
-.event-buttons {
+	}
+
+    .event-buttons {
   position: absolute;
   top: 1rem;
   left: 1rem;
   display: flex;
   gap: 0.8rem;
   z-index: 10;
+  flex-wrap: wrap;
 }
 
 .event-button {
@@ -57,6 +61,11 @@
 .event-button:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+}
+.event-button img {
+  height: 24px;
+  width: auto;
+  vertical-align: middle;
 }
 
 .live-button {
