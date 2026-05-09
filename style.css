@@ -1,17 +1,27 @@
-/* 1. BASIS & LAYOUT */
+/* ============================================================
+   1. BASIS LAYOUT & STICKY FOOTER
+   ============================================================ */
+:root {
+  --primary-purple: #6c5ce7;
+  --light-purple: #a29bfe;
+  --bg-color: #f4f7ff;
+  --text-dark: #2d3436;
+  --danger-red: #ff7675;
+}
+
 body {
   font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   margin: 0;
-  background-color: #f4f7ff;
+  background-color: var(--bg-color);
   text-align: center;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  color: #2d3436;
+  color: var(--text-dark);
 }
 
-/* De content vult de ruimte tussen header en footer */
-main.menu, .stream-container, section.feature-img {
+/* Zorgt dat content de ruimte vult en footer onderaan blijft */
+main, .main-content, .kaasklikker-container, .mystery-content, .link-grid, .clip-main, .stream-container {
   flex: 1 0 auto;
   padding: 2rem 1rem;
 }
@@ -20,7 +30,7 @@ header.hero {
   position: relative;
   text-align: center;
   padding: 6rem 1rem 3rem;
-  background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+  background: linear-gradient(135deg, var(--light-purple) 0%, var(--primary-purple) 100%);
   color: white;
   box-shadow: 0 4px 15px rgba(108, 92, 231, 0.2);
 }
@@ -31,17 +41,41 @@ header.hero h1 {
   text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
 }
 
-/* 2. KNOPPEN & INTERACTIE */
-.menu-btn, .event-button, .live-button {
+footer {
+  margin-top: auto;
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, var(--light-purple) 0%, var(--primary-purple) 100%);
+  color: white;
+}
+
+footer a {
+  color: var(--light-purple);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.copyright {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  margin-top: 1rem;
+}
+
+/* ============================================================
+   2. KNOPPEN & INTERACTIE
+   ============================================================ */
+.menu-btn, .event-button, .live-button, .submit-btn {
   transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
   text-decoration: none;
   font-weight: bold;
   border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   backface-visibility: hidden;
   transform: translateZ(0);
 }
 
-.menu-btn:hover, .event-button:hover {
+.menu-btn:hover, .event-button:hover, .submit-btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 15px rgba(108, 92, 231, 0.2);
 }
@@ -50,38 +84,11 @@ header.hero h1 {
   font-size: 1.3rem;
   padding: 1.1rem 2rem;
   background-color: white;
-  color: #6c5ce7;
-  border: 2px solid #a29bfe;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.8rem;
+  color: var(--primary-purple);
+  border: 2px solid var(--light-purple);
   margin: 0.5rem;
 }
 
-/* FIX: Voorkomt dat iconen in knoppen te groot worden */
-.menu-btn img {
-  width: auto !important;
-  max-width: 25px;
-  height: auto;
-  margin-right: 5px;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-  border: none !important;
-}
-
-/* Specifiek voor de grotere AppelRun knop */
-a.menu-btn.appelrun {
-  border: 2px solid #a29bfe;
-  color: #6c5ce7;
-  font-size: 1.8rem;
-}
-
-a.menu-btn.appelrun img {
-  max-width: 40px;
-  height: 32px;
-}
-
-/* 3. EVENT & LIVE BUTTONS */
 .event-buttons {
   position: absolute;
   top: 1rem;
@@ -92,52 +99,45 @@ a.menu-btn.appelrun img {
 }
 
 .event-button {
-  background-color: white; /* Wit net als de menu-knoppen */
-  color: #6c5ce7;          /* Paarse tekst */
-  padding: 1rem 1.8rem;    /* Lekker dikke knop */
-  font-size: 1.1rem;
+  background-color: white;
+  color: var(--primary-purple);
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
   border: 2px solid #e0e0e0;
-  display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
-  width: auto !important;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.event-button:hover {
-  background-color: #f8f8f8;
-  color: #4834d4;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 15px rgba(108, 92, 231, 0.2);
-}
-
-/* Fix voor het Twitch logo of de Home emoji in de knop */
-.event-button img {
-  width: 24px !important;
-  height: auto !important;
-  margin-right: 10px !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-  display: inline-block !important;
 }
 
 .live-button {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background-color: #ff7675;
+  background-color: var(--danger-red);
   color: white;
   padding: 1rem 2rem;
   font-size: 1.3rem;
-  display: inline-flex;
-  align-items: center;
   gap: 0.5rem;
   box-shadow: 0 4px 12px rgba(255, 118, 117, 0.3);
-  width: auto !important;
 }
 
+#twitch-auth-status {
+  position: absolute;
+  top: 4.5rem;
+  right: 1rem;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+}
 
-/* 4. AFBEELDINGEN (Grote plaatjes op de pagina) */
+/* Knoppen op mobiel */
+@media (max-width: 767px) {
+  header.hero { padding-top: 4rem; }
+  .event-buttons { position: static; justify-content: center; margin-bottom: 1rem; }
+  .event-button, .live-button { position: static; width: auto; margin: 0.3rem; }
+  .menu-btn { width: 100%; box-sizing: border-box; }
+  #twitch-auth-status { position: static; margin-bottom: 1rem; }
+}
+
+/* ============================================================
+   3. AFBEELDINGEN & FIXES
+   ============================================================ */
 section.feature-img img, .feature-img img {
   width: 100%;
   max-width: 380px;
@@ -150,50 +150,155 @@ section.feature-img img, .feature-img img {
   display: block;
 }
 
-/* FIX: Zwevende Akai rechtsonder klein houden */
-#akaipfp {
+/* Knoppen iconen fix */
+.menu-btn img, .event-button img {
+  width: auto !important;
+  max-width: 25px !important;
+  height: auto !important;
+  margin-right: 8px !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Zwevende Akai rechtsonder */
+img#akaipfp {
   position: fixed;
   bottom: 20px;
   right: 20px;
   width: 45px !important;
   height: 45px !important;
-  border-radius: 50%;
-  object-fit: cover;
+  border-radius: 50% !important;
   z-index: 9999;
-  cursor: pointer;
   border: 2px solid white;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2) !important;
 }
 
-#twitch-auth-status {
-  position: absolute;
-  top: 4.5rem;
-  right: 1rem;
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.8);
+/* ============================================================
+   4. PAGINA SPECIFIEKE STIJLEN
+   ============================================================ */
+
+/* KAASKLIKKER */
+.score-board {
+  background: white;
+  padding: 1.5rem 3rem;
+  border-radius: 20px;
+  border: 3px solid var(--primary-purple);
+  margin-bottom: 2rem;
+  display: inline-block;
 }
 
-/* 5. FOOTER */
-footer {
-  margin-top: auto;
-  padding: 2rem 1rem;
-  background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
-  color: white;
+img#cheese {
+  width: 250px !important;
+  max-width: 250px !important;
+  flex: none !important;
+  cursor: pointer;
+  transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
+  display: block;
+  margin: 2rem auto !important;
 }
 
-footer a {
-  color: #a29bfe;
-  text-decoration: none;
-  font-weight: bold;
+img#cheese:active { transform: scale(0.92) !important; }
+
+/* APPELRUN */
+canvas#gameCanvas {
+  border: 4px solid var(--primary-purple);
+  border-radius: 20px;
+  background: white;
+  max-width: 95%;
 }
 
-.copyright {
-  font-size: 0.8rem;
-  opacity: 0.8;
-  margin-top: 1rem;
+.skin-option {
+  background: white;
+  padding: 1rem;
+  border-radius: 15px;
+  border: 2px solid #e0e0e0;
+  min-width: 100px;
 }
 
-/* 6. ANIMATIES */
+.skin-option img {
+  height: 80px !important;
+  width: auto !important;
+  box-shadow: none !important;
+}
+
+/* LINKS */
+.link-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.link-card {
+  background: white;
+  border-radius: 15px;
+  border: 1px solid #e0e0e0;
+}
+
+.link-item img.wide-logo {
+  width: 70px !important;
+  max-width: 70px !important;
+}
+
+/* MYSTERY & VIDEO */
+.video-container-mystery {
+  width: 100%;
+  max-width: 640px;
+  aspect-ratio: 16 / 9;
+  border: 4px solid var(--primary-purple);
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 2rem auto;
+}
+
+.mystery-shout, .mystery-text {
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 800;
+  color: var(--primary-purple);
+  margin: 1.5rem 0;
+}
+
+img.mystery-gif {
+  max-width: 450px !important;
+  border: 4px solid white;
+}
+
+/* CLIP INZENDEN */
+.clip-inzend-blok {
+  max-width: 550px;
+  margin: 3rem auto;
+  padding: 2.5rem;
+  background-color: white;
+  border: 3px solid var(--primary-purple);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(108, 92, 231, 0.15);
+}
+
+.clip-form input[type="url"] {
+  width: 100%;
+  padding: 1.1rem;
+  border: 2px solid #f0f0f0;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  box-sizing: border-box;
+}
+
+/* JURIDISCH */
+.legal-box {
+  background: white;
+  padding: 3rem;
+  border-radius: 20px;
+  text-align: left;
+  max-width: 800px;
+  margin: 0 auto;
+  border: 1px solid #e0e0e0;
+}
+
+/* ============================================================
+   5. ANIMATIES
+   ============================================================ */
 .live-button.live-active {
   animation: pulse 2s infinite ease-in-out;
 }
@@ -203,591 +308,3 @@ footer a {
   70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 118, 117, 0); }
   100% { transform: scale(1); }
 }
-
-/* 7. MOBIEL */
-@media (max-width: 767px) {
-  header.hero { padding: 4rem 1rem 2.5rem; }
-  
-  .event-buttons {
-    position: static;
-    justify-content: center;
-    margin-bottom: 1rem;
-  }
-
-  .event-button, .live-button {
-    position: static;
-    width: auto;
-    margin: 0.3rem;
-  }
-
-  #twitch-auth-status { position: static; margin-bottom: 1rem; }
-
-  .menu-btn { 
-    width: 100%; 
-    justify-content: center; 
-    box-sizing: border-box;
-    font-size: 1.2rem;
-  }
-  
-  section.feature-img img { max-width: 85vw; }
-}
-/* Fix voor tekst en icoon in header-buttons */
-.event-button {
-  display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
-  gap: 8px; /* Ruimte tussen emoji/logo en tekst */
-  white-space: nowrap; /* Zorgt dat tekst op één regel blijft */
-}
-
-.event-button img {
-  width: 20px !important;
-  height: auto !important;
-  margin: 0 !important;
-  flex-shrink: 0;
-}
-
-/* Fix voor de stream layout */
-.stream-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem !important; /* Kleiner gemaakt zodat het naast elkaar past */
-  margin: 2rem auto;
-  max-width: 1400px;
-}
-
-/* Zorg dat de iframes niet buiten het scherm vallen op mobiel */
-@media (max-width: 1350px) {
-  iframe {
-    width: 95vw;
-    height: auto;
-    aspect-ratio: 16 / 9;
-  }
-  #chat_embed {
-    height: 500px;
-  }
-}
-
-
-
-
-/* --- JURIDISCHE PAGINA'S (PP & TOS) --- */
-.legal-container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 3rem 1rem;
-  text-align: left; /* Juridische tekst leest fijner van links naar rechts */
-}
-
-.legal-box {
-  background-color: white;
-  padding: 3rem;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(108, 92, 231, 0.1);
-  border: 1px solid #e0e0e0;
-}
-
-.legal-box h2 {
-  color: #6c5ce7;
-  border-bottom: 2px solid #f4f7ff;
-  padding-bottom: 0.5rem;
-  margin-top: 2rem;
-}
-
-.legal-box p, .legal-box li {
-  color: #444;
-  line-height: 1.7;
-}
-
-.last-updated {
-  font-style: italic;
-  color: #a29bfe;
-  margin-bottom: 2rem;
-}
-
-.legal-footer {
-  margin-top: 3rem;
-  font-weight: bold;
-  text-align: center;
-  color: #6c5ce7;
-}
-
-/* Mobiel fix */
-@media (max-width: 767px) {
-  .legal-box {
-    padding: 1.5rem;
-  }
-}
-
-/* --- RANDOM CLIP SPECIFIEK --- */
-.clip-main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  padding: 2rem 1rem;
-}
-
-#clip-container {
-  width: 90vw;
-  max-width: 900px; /* Iets compacter voor betere kwaliteit */
-  aspect-ratio: 16 / 9;
-  background-color: black;
-  /* Gebruikt al de styles van .video-container-mystery */
-}
-
-#error-msg {
-  color: #ff7675;
-  font-weight: bold;
-}
-
-#newClipBtn {
-  cursor: pointer;
-  background-color: #6c5ce7;
-  color: white;
-  border: none;
-  font-size: 1.2rem;
-  padding: 1rem 2.5rem;
-}
-
-#newClipBtn:hover {
-  background-color: #4834d4;
-}
-
-/* --- MYSTERY PAGINA SPECIFIEK --- */
-.mystery-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3rem;
-  padding: 3rem 1rem;
-}
-
-.video-container-mystery {
-  width: 100%;
-  max-width: 640px;
-  aspect-ratio: 16 / 9;
-  background: white;
-  border: 4px solid #6c5ce7; /* Paarse border */
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 15px 35px rgba(108, 92, 231, 0.2);
-}
-
-.video-container-mystery video, 
-.video-container-mystery iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
-.mystery-image-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
-.mystery-gif {
-  width: 100% !important;
-  max-width: 450px !important; /* Dwingt de tekening op de juiste maat */
-  height: auto !important;
-  border-radius: 20px;
-  border: 4px solid white;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-
-.mystery-shout, .mystery-text {
-  font-size: clamp(1.5rem, 4vw, 2.2rem);
-  font-weight: 800;
-  color: #6c5ce7;
-  margin: 0;
-}
-
-/* --- EVENT PAGINA SPECIFIEKE STIJLEN --- */
-
-/* Kaarten layout */
-.event-card {
-  display: flex;
-  background-color: white;
-  border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(108, 92, 231, 0.1);
-  margin-bottom: 2rem;
-  overflow: hidden;
-  align-items: center;
-  gap: 2rem;
-  padding: 1.5rem;
-  transition: transform 0.3s ease;
-  border: 1px solid #e0e0e0;
-}
-
-.event-card:hover {
-  transform: translateY(-5px);
-  border-color: #a29bfe;
-}
-
-.event-image {
-  flex: 0 0 220px;
-  height: 220px;
-  border-radius: 15px;
-  object-fit: cover;
-  box-shadow: 0 5px 15px rgba(108, 92, 231, 0.2);
-}
-
-.event-text {
-  flex: 1;
-  text-align: left;
-}
-
-.event-text h2 {
-  margin-top: 0;
-  color: #6c5ce7;
-  font-size: 1.5rem;
-}
-
-.status-tag {
-  background-color: #ff7675;
-  color: white;
-  font-size: 0.8rem;
-  padding: 0.2rem 0.6rem;
-  border-radius: 8px;
-  vertical-align: middle;
-  margin-left: 10px;
-  text-transform: uppercase;
-}
-
-.event-text p {
-  margin: 0;
-  line-height: 1.6;
-  color: #444;
-}
-
-/* Mobiel fix voor de kaarten */
-@media (max-width: 767px) {
-  .event-card {
-    flex-direction: column;
-    text-align: center;
-    padding: 1rem;
-  }
-
-  .event-image {
-    flex: 0 0 auto;
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-  }
-
-  .event-text {
-    text-align: center;
-  }
-}
-/* --- LINKS PAGINA STIJLEN --- */
-.link-grid {
-  max-width: 800px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem;
-  padding: 2rem 1rem;
-}
-
-.link-card {
-  background-color: white;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(108, 92, 231, 0.1);
-  transition: transform 0.2s ease, border-color 0.2s ease;
-  border: 1px solid #e0e0e0;
-}
-
-.link-card:hover {
-  transform: translateY(-3px);
-  border-color: #a29bfe;
-  box-shadow: 0 8px 20px rgba(108, 92, 231, 0.15);
-}
-
-.link-item {
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-  text-decoration: none;
-  color: #2d3436;
-  font-weight: 600;
-  gap: 1.5rem;
-}
-
-.link-item img {
-  width: 40px !important;
-  height: 40px !important;
-  object-fit: contain;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-  margin: 0 !important;
-}
-
-/* Voor bredere logos zoals Appelcraft */
-.link-item img.wide-logo {
-  width: 70px !important;
-}
-
-@media (max-width: 600px) {
-  .link-grid {
-    grid-template-columns: 1fr;
-  }
-}
-/* --- APPELRUN SPECIFIEK --- */
-
-canvas#gameCanvas {
-  display: block;
-  margin: 2rem auto;
-  background-color: #ffffff;
-  border: 4px solid #6c5ce7;
-  border-radius: 20px;
-  box-shadow: 0 15px 35px rgba(108, 92, 231, 0.2);
-  max-width: 95%;
-  height: auto;
-}
-
-.skin-container {
-  margin: 3rem auto;
-  max-width: 900px;
-}
-
-.skin-option:hover {
-  transform: translateY(-5px);
-  border-color: #a29bfe;
-}
-
-
-/* Uitleg Box */
-.uitleg-box {
-  max-width: 800px;
-  margin: 3rem auto;
-  text-align: left;
-  background: white;
-  padding: 2rem;
-  border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-}
-
-.game-instructions {
-  list-style: none;
-  padding: 0;
-}
-
-.game-instructions li {
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.game-instructions img {
-  height: 24px;
-  vertical-align: middle;
-}
-
-.discord-promo a {
-  color: #5865F2;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.discord-promo img {
-  height: 18px;
-  vertical-align: middle;
-}
-
-/* Mobiel fix */
-@media (max-width: 767px) {
-  .uitleg-box {
-    margin: 1rem;
-    padding: 1.5rem;
-  }
-}
-/* --- FIX VOOR APPELRUN SKINS --- */
-.skin-option {
-  position: relative;
-  cursor: pointer;
-  background: white;
-  padding: 1rem;
-  border-radius: 15px;
-  border: 2px solid #e0e0e0;
-  transition: all 0.2s ease;
-  min-width: 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Forceer de skin afbeeldingen klein */
-.skin-option img {
-  width: auto !important; /* Negeert de 100% breedte regel */
-  height: 80px !important; /* Forceert de originele hoogte */
-  max-width: 80px !important;
-  margin-bottom: 0.5rem;
-  box-shadow: none !important; /* Geen schaduw op de kleine mannetjes */
-  border: none !important;
-  border-radius: 0 !important;
-}
-
-.skin-grid {
-  display: flex;
-  gap: 1.5rem;
-  justify-content: center;
-  overflow-x: auto;
-  padding: 1.5rem;
-  flex-wrap: nowrap; /* Zorgt dat ze op een rij blijven staan */
-}
-
-/* Zorg dat de checkmark ook klein blijft */
-.skin-option .checkmark {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  font-size: 1.2rem;
-  z-index: 5;
-}
-/* --- CLIP FORMULIER STIJLEN --- */
-.form-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 3rem 1rem;
-}
-
-.clip-form {
-  max-width: 500px;
-  width: 100%;
-  padding: 2.5rem;
-  background-color: white;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(108, 92, 231, 0.1);
-  border: 1px solid #e0e0e0;
-}
-
-.clip-form h2 {
-  margin-top: 0;
-  color: #6c5ce7;
-}
-
-.form-subtext {
-  font-size: 0.9rem;
-  color: #636e72;
-  margin-bottom: 1rem;
-}
-
-.clip-form input[type="url"] {
-  width: 100%;
-  padding: 1.1rem;
-  font-size: 1rem;
-  border: 2px solid #f0f0f0;
-  border-radius: 12px;
-  margin-bottom: 1.5rem;
-  box-sizing: border-box;
-  transition: border-color 0.2s;
-}
-
-.clip-form input[type="url"]:focus {
-  outline: none;
-  border-color: #a29bfe;
-}
-
-.submit-btn {
-  width: 100%;
-  padding: 1.1rem;
-  font-size: 1.1rem;
-  font-weight: bold;
-  background-color: #6c5ce7;
-  color: white;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: transform 0.2s, background-color 0.2s;
-}
-
-.submit-btn:hover {
-  background-color: #4834d4;
-  transform: translateY(-2px);
-}
-
-.clip-form .message {
-  margin-top: 1.5rem;
-  font-weight: bold;
-  min-height: 1.2rem;
-}
-
-/* --- KAASKLIKKER SPECIFIEK --- */
-
-/* Zorg dat de container de ruimte vult en de footer naar beneden duwt */
-.kaasklikker-container {
-  flex: 1 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 1rem;
-}
-
-/* Het scorebordje */
-.score-board {
-  background: white;
-  padding: 1.5rem 3rem;
-  border-radius: 20px;
-  border: 3px solid #6c5ce7;
-  box-shadow: 0 10px 25px rgba(108, 92, 231, 0.1);
-  margin-bottom: 2rem;
-  width: auto;
-  display: inline-block;
-}
-
-.score-board h2 {
-  margin: 0;
-  color: #6c5ce7;
-  font-size: 2.2rem;
-}
-
-.score-board h3 {
-  margin: 0.5rem 0 0;
-  font-size: 1.1rem;
-  color: #636e72;
-}
-
-/* DE KAAS FIX (Extra sterke selector) */
-img#cheese {
-  width: 250px !important;    
-  height: auto !important;
-  max-width: 250px !important; 
-  flex: none !important; /* Voorkomt dat flexbox de afbeelding uitrekt */
-  cursor: pointer;
-  transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-  display: block;
-  margin: 2rem auto !important;
-  border-radius: 0 !important; 
-  box-shadow: none !important;
-  border: none !important;
-}
-
-/* Klik animatie */
-img#cheese:active {
-  transform: scale(0.92) !important;
-}
-
-/* Mobiele aanpassingen voor het scorebord */
-@media (max-width: 767px) {
-  .score-board {
-    padding: 1rem 2rem;
-    min-width: 200px;
-  }
-  
-  img#cheese {
-    width: 200px !important; /* Iets kleiner op mobiel voor de ruimte */
-    max-width: 60vw !important;
-  }
-}
-
