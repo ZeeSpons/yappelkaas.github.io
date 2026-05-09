@@ -1,4 +1,4 @@
-/* 1. BASIS & LAYOUT (Sticky Footer Fix) */
+/* 1. BASIS & LAYOUT */
 body {
   font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   margin: 0;
@@ -10,9 +10,9 @@ body {
   color: #2d3436;
 }
 
-/* Zorgt dat content tussen header en footer de ruimte vult zonder door te slaan */
+/* De content vult de ruimte tussen header en footer */
 main.menu, .stream-container, section.feature-img {
-  flex: 1 0 auto; /* Stabielere flex-instelling */
+  flex: 1 0 auto;
   padding: 2rem 1rem;
 }
 
@@ -31,7 +31,7 @@ header.hero h1 {
   text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
 }
 
-/* 2. KNOPPEN & INTERACTIE (Geen trip-effecten) */
+/* 2. KNOPPEN & INTERACTIE */
 .menu-btn, .event-button, .live-button {
   transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
   text-decoration: none;
@@ -58,6 +58,30 @@ header.hero h1 {
   margin: 0.5rem;
 }
 
+/* FIX: Voorkomt dat iconen in knoppen te groot worden */
+.menu-btn img {
+  width: auto !important;
+  max-width: 25px;
+  height: auto;
+  margin-right: 5px;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+/* Specifiek voor de grotere AppelRun knop */
+a.menu-btn.appelrun {
+  border: 2px solid #ff7675;
+  color: #d63031;
+  font-size: 1.8rem;
+}
+
+a.menu-btn.appelrun img {
+  max-width: 40px;
+  height: 32px;
+}
+
+/* 3. EVENT & LIVE BUTTONS */
 .event-buttons {
   position: absolute;
   top: 1rem;
@@ -91,12 +115,12 @@ header.hero h1 {
   box-shadow: 0 4px 12px rgba(255, 118, 117, 0.3);
 }
 
-/* 3. AFBEELDINGEN (Begrensd zodat ze niet de hele pagina vullen) */
+/* 4. AFBEELDINGEN (Grote plaatjes op de pagina) */
 section.feature-img img, .feature-img img {
   width: 100%;
   max-width: 380px;
   height: auto;
-  max-height: 45vh; /* Voorkomt overname van halve pagina */
+  max-height: 45vh;
   object-fit: contain;
   margin: 1.5rem auto;
   border-radius: 20px;
@@ -104,30 +128,19 @@ section.feature-img img, .feature-img img {
   display: block;
 }
 
-/* 4. SPECIFIEKE ELEMENTEN */
-a.menu-btn.appelrun {
-  border: 2px solid #ff7675;
-  color: #d63031;
-  font-size: 1.8rem;
-}
-
-a.menu-btn.appelrun img {
-  height: 32px;
-  object-fit: contain;
-}
-
+/* FIX: Zwevende Akai rechtsonder klein houden */
 #akaipfp {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 45px;
-  height: 45px;
+  width: 45px !important;
+  height: 45px !important;
   border-radius: 50%;
   object-fit: cover;
   z-index: 9999;
   cursor: pointer;
   border: 2px solid white;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2) !important;
 }
 
 #twitch-auth-status {
@@ -150,6 +163,12 @@ footer a {
   color: #a29bfe;
   text-decoration: none;
   font-weight: bold;
+}
+
+.copyright {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  margin-top: 1rem;
 }
 
 /* 6. ANIMATIES */
