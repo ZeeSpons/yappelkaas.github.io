@@ -611,19 +611,25 @@ canvas#gameCanvas {
   color: #636e72;
 }
 
+/* --- FIX VOOR DE KAAS --- */
 #cheese {
-  width: 250px;
-  max-width: 80vw;
+  width: 250px !important;    /* Forceert de kaas op 250px breedte */
+  height: auto !important;
+  max-width: 80vw !important; /* Zorgt dat hij op mobiel niet buiten beeld valt */
   cursor: pointer;
   transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+  display: block;
+  margin: 2rem auto;
+  border-radius: 0 !important; /* Kaas hoeft geen afgeronde hoeken van de andere imgs */
+  box-shadow: none !important; /* Verwijdert de standaard blauwe gloed */
 }
 
-/* Animatie als je op de kaas klikt */
+/* De animatie bij klikken blijft hetzelfde */
 #cheese:active {
-  transform: scale(0.9);
+  transform: scale(0.9) !important;
 }
 
 @media (max-width: 767px) {
