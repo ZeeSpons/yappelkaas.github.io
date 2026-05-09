@@ -1,8 +1,8 @@
-/* 1. BASIS & LAYOUT */
+/* 1. BASIS & LAYOUT (Sticky Footer Fix) */
 body {
   font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   margin: 0;
-  background-color: #f4f7ff; /* Zeer licht blauw/grijs voor rust */
+  background-color: #f4f7ff;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -10,115 +10,139 @@ body {
   color: #2d3436;
 }
 
+/* Zorgt dat content tussen header en footer de ruimte vult zonder door te slaan */
 main.menu, .stream-container, section.feature-img {
-  flex: 1;
+  flex: 1 0 auto; /* Stabielere flex-instelling */
   padding: 2rem 1rem;
 }
 
 header.hero {
   position: relative;
   text-align: center;
-  padding: 6rem 2rem 4rem; /* Iets meer ademruimte */
-  background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%); /* Mooi helder paars verloop */
+  padding: 6rem 1rem 3rem;
+  background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
   color: white;
   box-shadow: 0 4px 15px rgba(108, 92, 231, 0.2);
 }
 
 header.hero h1 {
-  font-size: 2.5rem;
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
   margin: 0;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
 }
 
-/* 2. KNOPPEN & INTERACTIE */
+/* 2. KNOPPEN & INTERACTIE (Geen trip-effecten) */
 .menu-btn, .event-button, .live-button {
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
   text-decoration: none;
   font-weight: bold;
-  border-radius: 12px; /* Iets ronder is moderner */
+  border-radius: 12px;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.menu-btn:hover, .event-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(108, 92, 231, 0.2);
 }
 
 .menu-btn {
   font-size: 1.3rem;
-  padding: 1.2rem 2rem;
+  padding: 1.1rem 2rem;
   background-color: white;
-  color: #6c5ce7; /* Paarse tekst */
+  color: #6c5ce7;
   border: 2px solid #e0e0e0;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
   display: inline-flex;
   align-items: center;
   gap: 0.8rem;
-}
-
-.menu-btn:hover {
-  transform: translateY(-5px) scale(1.02);
-  border-color: #a29bfe;
-  box-shadow: 0 10px 20px rgba(108, 92, 231, 0.15);
-  color: #4834d4;
+  margin: 0.5rem;
 }
 
 .event-buttons {
   position: absolute;
-  top: 1.5rem;
-  left: 1.5rem;
+  top: 1rem;
+  left: 1rem;
   display: flex;
-  gap: 1rem;
-  z-index: 10;
+  gap: 0.6rem;
+  z-index: 100;
+  flex-wrap: wrap;
 }
 
 .event-button {
-  background-color: rgba(255, 255, 255, 0.2); /* Semi-transparant wit */
-  backdrop-filter: blur(5px); /* Trendy glass-effect */
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
   color: white;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
   border: 1px solid rgba(255, 255, 255, 0.4);
-}
-
-.event-button:hover {
-  background-color: white;
-  color: #6c5ce7;
-  transform: translateY(-2px);
 }
 
 .live-button {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  background-color: #ff7675; /* Frisser rood/roze */
+  top: 1rem;
+  right: 1rem;
+  background-color: #ff7675;
   color: white;
-  padding: 1rem 2rem;
+  padding: 0.8rem 1.8rem;
   font-size: 1.2rem;
-  box-shadow: 0 4px 15px rgba(255, 118, 117, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: 0 4px 12px rgba(255, 118, 117, 0.3);
 }
 
-/* 3. SPECIFIEKE ELEMENTEN */
+/* 3. AFBEELDINGEN (Begrensd zodat ze niet de hele pagina vullen) */
+section.feature-img img, .feature-img img {
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+  max-height: 45vh; /* Voorkomt overname van halve pagina */
+  object-fit: contain;
+  margin: 1.5rem auto;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(108, 92, 231, 0.15);
+  display: block;
+}
+
+/* 4. SPECIFIEKE ELEMENTEN */
 a.menu-btn.appelrun {
-  background: linear-gradient(to right, #ffffff, #fff9f9);
   border: 2px solid #ff7675;
   color: #d63031;
+  font-size: 1.8rem;
 }
 
-section.feature-img img {
-  max-width: 400px;
-  border-radius: 20px;
-  box-shadow: 0 15px 35px rgba(108, 92, 231, 0.2);
-  border: 5px solid white;
+a.menu-btn.appelrun img {
+  height: 32px;
+  object-fit: contain;
+}
+
+#akaipfp {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  z-index: 9999;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
 #twitch-auth-status {
   position: absolute;
-  top: 7rem;
-  right: 2rem;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.9);
+  top: 4.5rem;
+  right: 1rem;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
 }
 
-/* 4. FOOTER */
+/* 5. FOOTER */
 footer {
   margin-top: auto;
-  padding: 2.5rem 1rem;
-  background-color: #6c5ce7; /* Matched de header */
+  padding: 2rem 1rem;
+  background-color: #6c5ce7;
   color: white;
 }
 
@@ -128,39 +152,41 @@ footer a {
   font-weight: bold;
 }
 
-footer a:hover {
-  text-decoration: underline;
-}
-
-/* 5. ANIMATIES */
+/* 6. ANIMATIES */
 .live-button.live-active {
   animation: pulse 2s infinite ease-in-out;
 }
 
 @keyframes pulse {
   0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 118, 117, 0.7); }
-  70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255, 118, 117, 0); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 118, 117, 0); }
   100% { transform: scale(1); }
 }
 
-/* 6. MOBIEL */
+/* 7. MOBIEL */
 @media (max-width: 767px) {
-  header.hero { padding: 4rem 1rem 3rem; }
-  header.hero h1 { font-size: 1.8rem; }
+  header.hero { padding: 4rem 1rem 2.5rem; }
   
   .event-buttons {
     position: static;
-    flex-direction: row;
     justify-content: center;
     margin-bottom: 1rem;
   }
 
   .event-button, .live-button {
-    width: auto;
     position: static;
-    margin: 0.5rem;
-    font-size: 0.9rem;
+    width: auto;
+    margin: 0.3rem;
+  }
+
+  #twitch-auth-status { position: static; margin-bottom: 1rem; }
+
+  .menu-btn { 
+    width: 100%; 
+    justify-content: center; 
+    box-sizing: border-box;
+    font-size: 1.2rem;
   }
   
-  .menu-btn { width: 100%; box-sizing: border-box; }
+  section.feature-img img { max-width: 85vw; }
 }
