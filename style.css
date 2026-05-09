@@ -311,17 +311,21 @@ img.mystery-gif {
 
 /* --- 404 PAGINA SPECIFIEK --- */
 .wobble-cheese {
-  font-size: 120px;
-  animation: wobble 2s infinite ease-in-out;
+  font-size: 150px !important; /* Lekker groot */
+  line-height: 1;
+  margin: 2rem 0;
   display: inline-block;
+  animation: wobble-anim 2s infinite ease-in-out !important;
   user-select: none;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
 }
 
-@keyframes wobble {
-  0%, 100% { transform: rotate(-5deg) scale(1); }
-  50% { transform: rotate(5deg) scale(1.1); }
+@keyframes wobble-anim {
+  0%, 100% { transform: rotate(-8deg) scale(1); }
+  50% { transform: rotate(8deg) scale(1.15); }
 }
 
 .error-page .legal-box h2 {
   border-bottom: none;
+  color: var(--primary-purple);
 }
