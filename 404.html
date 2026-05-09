@@ -2,56 +2,36 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <title>404 – Oeps, verdwaald!</title>
+  <title>404 – Oeps, verdwaald! | Yappelkaas</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      background-color: #fff7e6;
-      color: #333;
-      text-align: center;
-      padding: 50px;
-    }
-    h1 {
-      font-size: 72px;
-      margin-bottom: 0;
-    }
-    p {
-      font-size: 24px;
-    }
-    .cheese {
-      font-size: 100px;
-      animation: wobble 2s infinite;
-    }
-    a.button {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 15px 30px;
-      background-color: #f4b400;
-      color: #000;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 12px;
-      transition: background-color 0.3s;
-    }
-    a.button:hover {
-      background-color: #ffd54f;
-    }
-    @keyframes wobble {
-      0%, 100% { transform: rotate(0deg); }
-      25% { transform: rotate(5deg); }
-      75% { transform: rotate(-5deg); }
-    }
-  </style>
+  <link rel="icon" href="media/favicon.png" type="image/png" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="error-page">
 
-  <div class="cheese">🧀</div>
-  <h1>404</h1>
-  <p>Oei! Deze pagina is gesmolten of nooit gebakken.</p>
-  <p>Misschien ben je verdwaald in een kaasdoolhof?</p>
+  <div class="event-buttons">
+    <a href="index" class="event-button">🏠 Home</a>
+  </div>
 
-  <a href="index.html" class="button">↩️ Terug naar de homepage</a>
+  <header class="hero">
+    <h1>404 - Pagina Gesmolten</h1>
+    <p>Oei! Deze pagina is nooit gebakken of per ongeluk opgegeten.</p>
+  </header>
+
+  <main class="kaasklikker-container">
+    <div class="wobble-cheese">🧀</div>
+    
+    <div class="legal-box" style="text-align: center; margin-top: 2rem;">
+      <h2>Verdwaald in de kaas?</h2>
+      <p>Het lijkt erop dat je op een link hebt geklikt die niet (meer) bestaat.</p>
+      <a href="index" class="menu-btn" style="margin-top: 2rem;">↩️ Terug naar de veiligheid</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>🍏🧀 Yappelkaas 2025 – Zelfs onze fouten zijn kazig.</p>
+    <p class="copyright">Gemaakt door: Zeespons.</p>
+  </footer>
 
 </body>
 </html>
