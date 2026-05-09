@@ -8,165 +8,49 @@
   <link rel="icon" href="media/favicon.png" type="image/png" />
  
   <!-- Open Graph / Social Media Meta Tags -->
-<meta property="og:title" content="Mystery.">
-<meta property="og:description" content="Wat zou hier staan?.">
-<meta property="og:image" content="https://yappelkaas.nl/media/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:url" content="https://yappelkaas.nl/mystery">
-<meta property="og:type" content="website">
+  <meta property="og:title" content="Mystery.">
+  <meta property="og:description" content="Wat zou hier staan?.">
+  <meta property="og:image" content="https://yappelkaas.nl/media/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://yappelkaas.nl/mystery">
+  <meta property="og:type" content="website">
 
-<!-- Twitter Card Meta Tags -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Mystery.">
-<meta name="twitter:description" content="Wat zou hier staan?.">
-<meta name="twitter:image" content="https://yappelkaas.nl/media/og.png">
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mystery.">
+  <meta name="twitter:description" content="Wat zou hier staan?.">
+  <meta name="twitter:image" content="https://yappelkaas.nl/media/og.png">
 
-<!-- Canonical URL (zorg dat zoekmachines de juiste pagina kiezen) -->
-<link rel="canonical" href="https://yappelkaas.nl/mystery">
-
-
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      background-color: #f0f6ff;
-      color: #1e2b3a;
-      text-align: center;
-      padding: 2rem;
-    }
-
-    .home-btn {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background-color: #e0f0ff;
-      border: 2px solid #66b3ff;
-      color: #1e2b3a;
-      padding: 1rem 2rem;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1.3rem;
-      box-shadow: 2px 2px 8px rgba(0, 0, 50, 0.1);
-      transition: 0.2s ease-in-out;
-      user-select: none;
-      z-index: 1000;
-      display: inline-block;
-    }
-    .home-btn:hover {
-      background-color: #cce6ff;
-      transform: translateY(-2px);
-    }
-
-    header.hero {
-      padding: 2rem;
-      background-color: #d6eaff;
-      border-bottom: 4px solid #3399ff;
-      margin-bottom: 2rem;
-      border-radius: 15px;
-    }
-    header.hero h1 {
-      margin: 0 0 0.5rem;
-      font-size: 2.8rem;
-      color: #1e2b3a;
-      user-select: none;
-    }
-
-    .mystery-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      max-width: 100%;
-    }
-
-    
-    .mystery-gif {
-      width: 100%;
-      max-width: 450px;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      margin-bottom: 1.5rem;
-      display: block;
-    }
-
-    .mystery-text {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #1e2b3a;
-      user-select: none;
-      margin: 0;
-      text-align: center;
-    }
-    
-    .video-plswerk {
-      margin-top: 4rem;
-      width: 100%;
-      max-width: 640px;
-      aspect-ratio: 16 / 9;
-      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
-      border-radius: 9px;
-      overflow: hidden;
-    }
-
-    .video-embed {
-      margin-top: 2rem;
-      width: 100%;
-      max-width: 560px;
-      aspect-ratio: 16 / 9;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    .video-embed iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    .mystery-shout {
-      margin-top: 1rem;
-      font-size: 2rem;
-      font-weight: 700;
-      color: #1e2b3a;
-      user-select: none;
-    }
-  </style>
+  <!-- Canonical URL (zorg dat zoekmachines de juiste pagina kiezen) -->
+  <link rel="canonical" href="https://yappelkaas.nl/mystery">
 </head>
-<body>
-  <a href="index" class="home-btn">🏠 Home</a>
+<body class="mystery-page">
+
+  <div class="event-buttons">
+    <a href="index" class="event-button">🏠 Home</a>
+  </div>
 
   <header class="hero">
     <h1>🔮 Mystery Knop 🔮</h1>
   </header>
   
-  
   <main class="mystery-content">
 
-    <hr>
-
-<div class="video-plswerk" id="spinky">
-    <video
-      width="640" 
-      height="360"
-      controls>
-  <source src="assets/spinky.mp4" type="video/mp4">
-Your browser does not support the video tag.
-    </video>
-</div>
-    
+    <div class="video-container-mystery" id="spinky">
+        <video width="640" height="360" controls>
+          <source src="assets/spinky.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+    </div>
     <p class="mystery-shout">SPINKY!</p>
     
-    <hr>
+    <div class="mystery-image-wrap">
+      <img src="assets/tekening.webp" alt="Mystery afbeelding" class="mystery-gif" />
+      <p class="mystery-text">Het mooie kunstwerk van appelkaas</p>
+    </div>
     
-    <img src="assets/tekening.webp" alt="Mystery afbeelding" class="mystery-gif" />
-    <p class="mystery-text">Het mooie kunstwerk van appelkaas</p>
-    
-<hr>
-    
-    <div class="video-embed" id="klinktalsweekend">
+    <div class="video-container-mystery" id="klinktalsweekend">
       <iframe
         id="ytframe"
         src="https://www.youtube.com/embed/uSOJbMCJBTE?autoplay=1&loop=1&playlist=uSOJbMCJBTE&si=9OLrytRPp80HLBiY"
@@ -176,9 +60,16 @@ Your browser does not support the video tag.
         allowfullscreen>
       </iframe>
     </div>
-
     <p class="mystery-shout">KLINKT ALS WEEKEND 🗣️🗣️🗣️</p>
+
   </main>
+
+  <footer>
+    <p>🍏🧀 Yappelkaas 2025 – Altijd een verrassing.</p>
+    <a href="terms-of-service.html">Algemene Voorwaarden</a> |
+    <a href="privacy-policy.html">Privacyverklaring</a>
+    <p class="copyright">Gemaakt door: Zeespons.</p>
+  </footer>
 
   <script>
     function isMobile() {
@@ -186,7 +77,7 @@ Your browser does not support the video tag.
     }
 
     if (isMobile()) {
-      const videoContainer = document.getElementById('videoContainer');
+      const videoContainer = document.getElementById('klinktalsweekend');
       const src = "https://www.youtube.com/embed/uSOJbMCJBTE?autoplay=1&loop=1&playlist=uSOJbMCJBTE&si=9OLrytRPp80HLBiY";
 
       function replaceIframe() {
@@ -207,11 +98,5 @@ Your browser does not support the video tag.
       document.body.addEventListener("touchstart", replaceIframe, { once: true });
     }
   </script>
-  
-  <footer style="text-align: center; margin-top: 40px; font-size: 0.9em; color: #666;">
-  <a href="terms-of-service.html">Algemene Voorwaarden</a> |
-  <a href="privacy-policy.html">Privacyverklaring</a>
-</footer>
-
 </body>
 </html>
