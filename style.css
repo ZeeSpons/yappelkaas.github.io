@@ -195,3 +195,22 @@ footer a {
   z-index: 9999;
   cursor: pointer;
 }
+
+.feature-img img {
+  width: 100%;
+  max-width: 400px; /* In je HTML stond 400px, in CSS 450px. Ik zou 400px aanhouden */
+  height: auto;
+  margin: 2.5rem auto;
+  border-radius: 12px; /* Ik heb deze wat ronder gemaakt, past beter bij de rest */
+  box-shadow: 0 0 20px rgba(0, 102, 204, 0.2);
+  display: block;
+}
+
+#twitch-auth-status {
+  position: absolute;
+  top: 6.2rem;
+  right: 1rem;
+  font-size: 1rem;
+  color: white; /* Veranderd van #333 naar white voor leesbaarheid */
+}
+
