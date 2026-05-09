@@ -24,105 +24,83 @@
 
 <!-- Canonical URL (zorg dat zoekmachines de juiste pagina kiezen) -->
 <link rel="canonical" href="https://yappelkaas.nl/appelrun">
-  
-  <style>
-    /* Alleen mobiel/tablet styles */
-    @media (max-width: 900px) {
-      canvas#gameCanvas {
-        width: 90vw !important;
-        height: auto !important;
-        max-height: 50vh;
-        display: block;
-        margin: 2rem auto 0 auto !important;
-        border-radius: 20px;
-        border: 2px solid #3399ff !important;
-        background-color: #ffffff !important;
-      }
-      header.hero {
-        padding: 1rem 1.5rem;
-      }
-      main.kaasklikker {
-        padding: 0 1rem 2rem 1rem;
-      }
-      a.menu-btn {
-        position: static !important;
-        margin-bottom: 1rem !important;
-      }
-    }
-  </style>
-</head>
-<body>
+  <body class="game-page">
+
+  <div class="event-buttons">
+    <a href="index" class="event-button">🏠 Home</a>
+  </div>
+
   <header class="hero">
-    <a href="index" class="menu-btn" style="position: absolute; top: 1rem; left: 1rem;">🏠 Home</a>
     <h1>AppelRun</h1>
     <p>Ontwijk de kaas, verzamel de appels!</p>
   </header>
 
-  <main class="kaasklikker">
-    <canvas id="gameCanvas" width="1000" height="400" style="border: 2px solid #3399ff; background-color: #ffffff; display: block; margin: 2rem auto 0 auto; border-radius: 20px;"></canvas>
+  <main>
+    <!-- De Game -->
+    <canvas id="gameCanvas" width="1000" height="400"></canvas>
 
-    <!-- ✅ Skin selector toegevoegd -->
-    <div id="skinSelector" style="margin: 2rem auto; text-align: center;">
+    <!-- Skin selector -->
+    <section class="skin-container">
       <h3>Kies je skin:</h3>
-      <div style="display: flex; gap: 1.5rem; justify-content: center; overflow-x: auto; padding: 1rem;">
-        <div class="skin-option" data-skin="appelkaas" style="position: relative; cursor: pointer;">
-          <img src="assets/appelkaas_idle.webp" alt="Appelkaas" style="height: 80px;">
-          <div class="checkmark" style="position: absolute; top: 5px; right: 5px; display: none;">✅</div>
-          <p style="margin: 0.5rem 0 0;">Appelkaas</p>
+      <div class="skin-grid">
+        <div class="skin-option" data-skin="appelkaas">
+          <img src="assets/appelkaas_idle.webp" alt="Appelkaas">
+          <div class="checkmark">✅</div>
+          <p>Appelkaas</p>
         </div>
-        <div class="skin-option" data-skin="gio" style="position: relative; cursor: pointer;">
-          <img src="assets/gio_idle.webp" alt="Gio" style="height: 80px;">
-          <div class="checkmark" style="position: absolute; top: 5px; right: 5px; display: none;">✅</div>
-          <p style="margin: 0.5rem 0 0;">Gio</p>
+        <div class="skin-option" data-skin="gio">
+          <img src="assets/gio_idle.webp" alt="Gio">
+          <div class="checkmark">✅</div>
+          <p>Gio</p>
         </div>
-        <div class="skin-option" data-skin="cavia" style="position: relative; cursor: pointer;">
-  <img src="assets/cavia_idle.webp" alt="Cavia" style="height: 80px;">
-  <div class="checkmark" style="position: absolute; top: 5px; right: 5px; display: none;">✅</div>
-  <p style="margin: 0.5rem 0 0;">Cavia</p>
-</div>
-<div class="skin-option" data-skin="kliko" style="position: relative; cursor: pointer;">
-          <img src="assets/kliko_idle.webp" alt="Kliko" style="height: 80px;">
-          <div class="checkmark" style="position: absolute; top: 5px; right: 5px; display: none;">✅</div>
-          <p style="margin: 0.5rem 0 0;">Kliko</p>
+        <div class="skin-option" data-skin="cavia">
+          <img src="assets/cavia_idle.webp" alt="Cavia">
+          <div class="checkmark">✅</div>
+          <p>Cavia</p>
         </div>
-        <div class="skin-option" data-skin="benja" style="position: relative; cursor: pointer;">
-          <img src="assets/benja_idle.webp" alt="Benja" style="height: 80px;">
-          <div class="checkmark" style="position: absolute; top: 5px; right: 5px; display: none;">✅</div>
-          <p style="margin: 0.5rem 0 0;">Benja</p>
+        <div class="skin-option" data-skin="kliko">
+          <img src="assets/kliko_idle.webp" alt="Kliko">
+          <div class="checkmark">✅</div>
+          <p>Kliko</p>
         </div>
-        <div class="skin-option" data-skin="furry" style="position: relative; cursor: pointer;">
-          <img src="assets/furry_idle.webp" alt="Furry" style="height: 80px;">
-          <div class="checkmark" style="position: absolute; top: 5px; right: 5px; display: none;">✅</div>
-          <p style="margin: 0.5rem 0 0;">Furry</p>
+        <div class="skin-option" data-skin="benja">
+          <img src="assets/benja_idle.webp" alt="Benja">
+          <div class="checkmark">✅</div>
+          <p>Benja</p>
+        </div>
+        <div class="skin-option" data-skin="furry">
+          <img src="assets/furry_idle.webp" alt="Furry">
+          <div class="checkmark">✅</div>
+          <p>Furry</p>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div style="max-width: 900px; margin: 2rem auto; text-align: left;">
+    <!-- Uitleg -->
+    <section class="uitleg-box">
       <h2>Hoe werkt het?</h2>
-      <ul>
+      <ul class="game-instructions">
         <li>Druk op <strong>spatie</strong> of tik op het scherm om te springen.</li>
-        <li>Pak <img src="assets/appel.webp" alt="appel" style="height: 20px;"> voor punten.</li>
-        <li>Ontwijk <img src="assets/kaas.webp" alt="kaas" style="height: 20px;"> want dan is het game over!</li>
-        <li>Pak zeldzame <img src="assets/zonnebril.webp" alt="zonnebril" style="height: 20px;"> om MrDeluxe op te roepen voor 10 seconden!</li>
-        <li>Als MrDeluxe is opgeroepen beschermt hij appelkaas tegen de kaasjes.</li>
+        <li>Pak <img src="assets/appel.webp" alt="appel"> voor punten.</li>
+        <li>Ontwijk <img src="assets/kaas.webp" alt="kaas"> want dan is het game over!</li>
+        <li>Pak zeldzame <img src="assets/zonnebril.webp" alt="zonnebril"> om MrDeluxe op te roepen!</li>
+        <li>MrDeluxe beschermt je 10 seconden lang tegen de kaasjes.</li>
       </ul>
-      <p style="margin-top: 1.5rem;">
+      <p class="discord-promo">
         Ben je af? Deel je highscore in de 
-        <a href="https://discord.gg/J95ApheDKV" target="_blank" style="color: #5865F2; font-weight: bold;">
-          <img src="assets/logos/discord.webp" alt="Discord" style="height: 16px; vertical-align: text-bottom;"> Discord
+        <a href="https://discord.gg/J95ApheDKV" target="_blank">
+          <img src="assets/logos/discord.webp" alt="Discord"> Discord
         </a>!
       </p>
-    </div>
+    </section>
   </main>
 
   <footer>
     <p>🍏🧀 Yappelkaas 2025 – Rennen voor je leven.</p>
-  <a href="terms-of-service.html">Algemene Voorwaarden</a> |
-  <a href="privacy-policy.html">Privacyverklaring</a>
-  <p class="copyright">Gemaakt door: Zeespons.</p>
-</footer>
-</body>
+    <a href="terms-of-service.html">Algemene Voorwaarden</a> |
+    <a href="privacy-policy.html">Privacyverklaring</a>
+    <p class="copyright">Gemaakt door: Zeespons.</p>
+  </footer>
   
   <script>
   const canvas = document.getElementById("gameCanvas");
