@@ -9,140 +9,53 @@
   <script src="script.js" defer></script>
  
   <!-- Open Graph / Social Media Meta Tags -->
-<meta property="og:title" content="KAASKLIKKER">
-<meta property="og:description" content="Speel hier Kaasklikker.">
-<meta property="og:image" content="https://yappelkaas.nl/media/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:url" content="https://yappelkaas.nl/kaasklikker">
-<meta property="og:type" content="website">
+  <meta property="og:title" content="KAASKLIKKER">
+  <meta property="og:description" content="Speel hier Kaasklikker.">
+  <meta property="og:image" content="https://yappelkaas.nl/media/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://yappelkaas.nl/kaasklikker">
+  <meta property="og:type" content="website">
 
-<!-- Twitter Card Meta Tags -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="KAASKLIKKER">
-<meta name="twitter:description" content="Speel hier Kaasklikker.">
-<meta name="twitter:image" content="https://yappelkaas.nl/media/og.png">
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="KAASKLIKKER">
+  <meta name="twitter:description" content="Speel hier Kaasklikker.">
+  <meta name="twitter:image" content="https://yappelkaas.nl/media/og.png">
 
-<!-- Canonical URL (zorg dat zoekmachines de juiste pagina kiezen) -->
-<link rel="canonical" href="https://yappelkaas.nl/kaasklikker">
-
-
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      background-color: #f0f6ff;       /* dezelfde lichte blauwe achtergrond */
-      color: #1e2b3a;                  /* dezelfde tekstkleur */
-      text-align: center;
-      padding: 2rem;
-    }
-
-    /* Home knop linksboven */
-    .home-btn {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background-color: #e0f0ff;       /* lichte blauwe knop achtergrond (menu-btn kleur) */
-      border: 2px solid #66b3ff;       /* blauwe rand */
-      color: #1e2b3a;
-      padding: 1rem 2rem;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1.3rem;
-      box-shadow: 2px 2px 8px rgba(0, 0, 50, 0.1);
-      transition: 0.2s ease-in-out;
-      user-select: none;
-      z-index: 1000;
-      display: inline-block;
-    }
-    .home-btn:hover {
-      background-color: #cce6ff;
-      transform: translateY(-2px);
-    }
-
-    header.hero {
-      padding: 2rem;
-      background-color: #d6eaff;       /* zelfde als home */
-      border-bottom: 4px solid #3399ff;
-      margin-bottom: 2rem;
-      border-radius: 15px;
-    }
-    header.hero h1 {
-      margin: 0 0 0.5rem;
-      font-size: 2.8rem;
-      color: #1e2b3a;
-      user-select: none;
-    }
-    header.hero p {
-      margin: 0;
-      font-size: 1.3rem;
-      color: #1e2b3a;
-      user-select: none;
-    }
-
-    main.kaasklikker {
-      padding: 2rem;
-    }
-    main.kaasklikker h2,
-    main.kaasklikker h3 {
-      margin: 1rem 0;
-      font-weight: 600;
-      color: #1e2b3a;
-      user-select: none;
-    }
-
-    #cheese {
-      width: 250px;                     /* iets groter dan home image */
-      max-width: 90vw;
-      cursor: pointer;
-      transition: transform 0.1s ease;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0, 102, 204, 0.2);
-      margin: 2rem auto;
-      display: block;
-      user-select: none;
-    }
-    #cheese:active {
-      transform: scale(0.95);
-    }
-
-    footer {
-      margin-top: 3rem;
-      padding: 1rem;
-      background-color: #dbeeff;       /* zelfde als home footer */
-      border-top: 2px solid #66b3ff;
-      color: #1e2b3a;
-      font-size: 1rem;
-      user-select: none;
-      border-radius: 10px;
-    }
-  </style>
+  <!-- Canonical URL (zorg dat zoekmachines de juiste pagina kiezen) -->
+  <link rel="canonical" href="https://yappelkaas.nl/kaasklikker">
 </head>
-<body>
+<body class="game-page">
 
-  <a href="index" class="home-btn">🏠 Home</a>
+  <div class="event-buttons">
+    <a href="index" class="event-button">🏠 Home</a>
+  </div>
 
   <header class="hero">
     <h1>🧀 Kaasklikker</h1>
     <p>Klik op de kaas en laat het yappen beginnen!</p>
   </header>
 
-  <main class="kaasklikker">
-    <h2>Score: <span id="score">0</span></h2>
-    <h3>🏆 Highscore: <span id="highscore">0</span></h3>
+  <main class="kaasklikker-container">
+    <!-- Score bordje -->
+    <div class="score-board">
+      <h2>Score: <span id="score">0</span></h2>
+      <h3>🏆 Highscore: <span id="highscore">0</span></h3>
+    </div>
+
+    <!-- De Kaas -->
     <img src="assets/kaas.webp" alt="Klik op de kaas!" id="cheese" />
+    
     <audio id="click-sound" src="assets/click.mp3" preload="auto"></audio>
   </main>
 
-   <footer>
+  <footer>
     <p>🧀 Klik ze! Of klik weg. Jij bepaalt.</p>
-  <a href="terms-of-service.html">Algemene Voorwaarden</a> |
-  <a href="privacy-policy.html">Privacyverklaring</a>
-</footer>
-
+    <a href="terms-of-service.html">Algemene Voorwaarden</a> |
+    <a href="privacy-policy.html">Privacyverklaring</a>
+    <p class="copyright">Gemaakt door: Zeespons.</p>
   </footer>
-  <p class="copyright">Gemaakt door: Zeespons.</p>
-  
+
 </body>
 </html>
