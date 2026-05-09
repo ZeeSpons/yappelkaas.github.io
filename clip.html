@@ -7,87 +7,54 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="media/favicon.png" type="image/png" />
   <meta property="og:title" content="Yappelkaas Clipjes 🎥">
-<meta property="og:description" content="Bekijk absurde, zeldzame en soms geniale fragmenten uit het kaasuniversum.">
-<meta property="og:image" content="https://yappelkaas.nl/media/og.png">
-<meta property="og:url" content="https://yappelkaas.nl/clip.html">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
+  <meta property="og:description" content="Bekijk absurde, zeldzame en soms geniale fragmenten uit het kaasuniversum.">
+  <meta property="og:image" content="https://yappelkaas.nl/media/og.png">
+  <meta property="og:url" content="https://yappelkaas.nl/clip.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
 
-<!-- Canonical URL (zorg dat zoekmachines de juiste pagina kiezen) -->
-<link rel="canonical" href="https://yappelkaas.nl/clip">
-  
-  <style>
-    .clip-form {
-      max-width: 500px;
-      margin: 2rem auto;
-      padding: 2rem;
-      background-color: #e6f3ff;
-      border-radius: 15px;
-      box-shadow: 0 0 10px rgba(0, 102, 204, 0.1);
-    }
-    .clip-form h2 {
-      margin-bottom: 1rem;
-    }
-    .clip-form input[type="url"] {
-      width: 100%;
-      padding: 1rem;
-      font-size: 1rem;
-      border: 2px solid #66b3ff;
-      border-radius: 10px;
-      margin-bottom: 1rem;
-    }
-    .clip-form button {
-      padding: 1rem 2rem;
-      font-size: 1rem;
-      background-color: #3399ff;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-    .clip-form button:hover {
-      background-color: #1e80e0;
-    }
-    .clip-form .message {
-      margin-top: 1rem;
-      font-weight: bold;
-    }
-  </style>
+  <!-- Canonical URL (zorg dat zoekmachines de juiste pagina kiezen) -->
+  <link rel="canonical" href="https://yappelkaas.nl/clip">
 </head>
-<body>
+<body class="clip-page">
+
+  <div class="event-buttons">
+    <a href="index" class="event-button">🏠 Home</a>
+  </div>
+
   <header class="hero">
-    <a href="index" class="menu-btn" style="position: absolute; top: 1rem; left: 1rem;">🏠 Home</a>
     <h1>Clip Insturen</h1>
     <p>
       Stuur jouw favoriete clip van Appelkaas in en misschien komt hij wel op de
-      <a href="random-clip">Random clips pagina</a>!
+      <a href="random-clip" style="color: #a29bfe; font-weight: bold;">Random clips pagina</a>!
     </p>
   </header>
 
   <main>
-    <form class="clip-form" onsubmit="return handleSubmit();">
-
-      <h2>Cliplink</h2>
-      <input
-        type="url"
-        name="url"
-        id="clipUrl"
-        placeholder="https://www.twitch.tv/appelkaas/clip/..."
-        required
-      />
-      <input type="hidden" name="apiKey" value="yappelkaas2025supergeheim" />
-      <button type="submit">Insturen</button>
-      <div class="message" id="message"></div>
-    </form>
-
+    <section class="form-container">
+      <form class="clip-form" onsubmit="return handleSubmit();">
+        <h2>Cliplink</h2>
+        <p class="form-subtext">Plak hier de Twitch clip URL:</p>
+        <input
+          type="url"
+          name="url"
+          id="clipUrl"
+          placeholder="https://www.twitch.tv/appelkaas/clip/..."
+          required
+        />
+        <input type="hidden" name="apiKey" value="yappelkaas2025supergeheim" />
+        <button type="submit" class="submit-btn">Insturen 🚀</button>
+        <div class="message" id="message"></div>
+      </form>
+    </section>
   </main>
 
   <footer>
     <p>🍏🧀 Yappelkaas 2025 – Geen garantie op mentale stabiliteit.</p>
-  <a href="terms-of-service.html">Algemene Voorwaarden</a> |
-  <a href="privacy-policy.html">Privacyverklaring</a>
+    <a href="terms-of-service.html">Algemene Voorwaarden</a> |
+    <a href="privacy-policy.html">Privacyverklaring</a>
+    <p class="copyright">Gemaakt door: Zeespons.</p>
   </footer>
-  <p class="copyright">Gemaakt door: Zeespons.</p>
 
   <script>
   async function handleSubmit() {
@@ -96,12 +63,12 @@
     const url = urlInput.value.trim();
 
     if (!url.startsWith("https://www.twitch.tv/appelkaas/clip/")) {
-      messageDiv.style.color = "red";
+      messageDiv.style.color = "#ff7675";
       messageDiv.textContent = "❌ Ongeldige link. Alleen clips van Appelkaas zijn toegestaan!";
       return false;
     }
 
-    messageDiv.style.color = "black";
+    messageDiv.style.color = "#6c5ce7";
     messageDiv.textContent = "⏳ Clip wordt ingestuurd...";
 
     const formData = new FormData();
@@ -121,11 +88,11 @@
         messageDiv.textContent = text;
         urlInput.value = "";
       } else {
-        messageDiv.style.color = "red";
+        messageDiv.style.color = "#ff7675";
         messageDiv.textContent = text;
       }
     } catch (err) {
-      messageDiv.style.color = "red";
+      messageDiv.style.color = "#ff7675";
       messageDiv.textContent = "⚠️ Fout bij verzenden: " + err.message;
     }
 
