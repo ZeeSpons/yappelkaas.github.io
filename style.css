@@ -270,6 +270,45 @@ footer a {
 }
 
 
+
+
+
+/* --- RANDOM CLIP SPECIFIEK --- */
+.clip-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem 1rem;
+}
+
+#clip-container {
+  width: 90vw;
+  max-width: 900px; /* Iets compacter voor betere kwaliteit */
+  aspect-ratio: 16 / 9;
+  background-color: black;
+  /* Gebruikt al de styles van .video-container-mystery */
+}
+
+#error-msg {
+  color: #ff7675;
+  font-weight: bold;
+}
+
+#newClipBtn {
+  cursor: pointer;
+  background-color: #6c5ce7;
+  color: white;
+  border: none;
+  font-size: 1.2rem;
+  padding: 1rem 2.5rem;
+}
+
+#newClipBtn:hover {
+  background-color: #4834d4;
+}
+
 /* --- MYSTERY PAGINA SPECIFIEK --- */
 .mystery-content {
   flex: 1;
