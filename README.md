@@ -1,9 +1,8 @@
 # 🍏🧀 Yappelkaas.nl
 
 [![Site Status](https://shields.io)](https://yappelkaas.nl)
-[![License: MIT](https://shields.io)](https://opensource.org)
 
-Welkom op de officiële GitHub-repository van **Yappelkaas.nl** — de mafste, onofficiële community-site rondom **Appelkaas**. 
+Welkom op de GitHub-repository van **Yappelkaas.nl** — een onofficiële, door de community gemaakte website rondom **Appelkaas**. 
 
 Deze site is een mix van pure chaos, nostalgische web-vibes en interactieve memes. Gebouwd door fans, voor fans.
 
@@ -16,54 +15,40 @@ Deze site is een mix van pure chaos, nostalgische web-vibes en interactieve meme
 
 De website is een statische krachtpatser gehost op **GitHub Pages**:
 
-* 🧀 **Kaasklikker** – De ultieme test voor je muis en je mentale gezondheid.
-* 🍎 **AppelRun** – Een high-speed runner game met custom skins (Gio, Benja, Furry, en meer!).
-* 📡 **Live Hub** – Check direct de Twitch-stream en chat zonder de site te verlaten.
-* 📅 **Event Tracker** – Mis nooit meer een concert van MR.DELUXE of een 24-uurs stream.
-* 🎲 **Chaos Engine** – Random clips en een Mystery Knop voor je dagelijkse dosis verwarring.
+* 🧀 **Kaasklikker** – Het klikspel zonder consequenties.
+* 🍎 **AppelRun** – Ren en ontwijk de kaas met custom skins.
+* 📡 **Live Hub** – De Twitch-stream en chat direct op de site.
+* 📅 **Event Tracker** – Overzicht van echte community & stream events.
+* 🎲 **Chaos Engine** – Random clips en de Mystery Knop.
 
 ---
 
 ## 🛠️ Tech Stack
 
-Lichtgewicht, razendsnel en (bijna) onverwoestbaar:
+Lichtgewicht en razendsnel:
 
-- **Frontend:** HTML5, Modern CSS3 (met Flexbox/Grid)
-- **Logica:** Vanilla JavaScript (geen zware frameworks)
+- **Frontend:** HTML5, CSS3 (Flexbox/Grid)
+- **Logica:** Vanilla JavaScript
 - **Hosting:** GitHub Pages
-- **Integratie:** Twitch API (OAuth voor live-status check)
-- **Opslag:** `localStorage` (voor highscores en skins – we slaan niks op in een database!)
+- **Integratie:** Twitch Embeds & OAuth (client-side)
 
 ---
 
 ## 🔐 Privacy & Gegevens
 
-Wij houden niet van stiekem gedoe. Onze filosofie: **Wat we niet weten, kunnen we ook niet kwijtraken.**
+Wij verzamelen niks persoonlijks.
 
-- **Geen databases:** Je scores blijven op jouw apparaat.
-- **Geen cookies:** Geen irritante tracking of advertenties.
-- **Transparant:** Alles draait client-side. Check de code maar!
+- **Geen databases:** Scores worden nergens centraal opgeslagen.
+- **Geen tracking:** Geen cookies van ons, geen analytics.
+- **Transparant:** Alles draait in je eigen browser.
 
-Zie [Privacyverklaring](https://yappelkaas.nl) voor de details.
-
----
-
-## 🤝 Bijdragen (Contributing)
-
-Wil je de site nóg maffer maken? Dat kan!
-
-1. **Fork** deze repository.
-2. Maak een nieuwe **branch** aan (`git checkout -b feature/nieuwe-meme`).
-3. Doe je aanpassingen (voeg bijv. een nieuwe skin toe aan AppelRun).
-4. Maak een **Pull Request** aan.
-
-*Let op: Houd het gezellig. Bijdrages die de boel slopen of vervelend zijn worden direct geband (zie Discord regels hieronder).*
+Zie [privacy-policy.html](privacy-policy.html) en [terms-of-service.html](terms-of-service.html) voor de details.
 
 ---
 
 ## 🧑‍⚖️ De Gouden Regels
 
-Wij hanteren het **Appelskeer-protocol**:
+Wij hanteren het protocol van de server:
 1. Ben je vervelend? Dan word je geband.
 2. Vraagt een mod je om te stoppen? Stop dan ook. 🙏
 3. **P.S. NIET JE LEEFTIJD ZEGGEN!!!!**
@@ -72,11 +57,12 @@ Wij hanteren het **Appelskeer-protocol**:
 
 ## 📬 Contact & Security
 
-Heb je een kwetsbaarheid gevonden of wil je een legendarisch idee insturen?
+Heb je een kwetsbaarheid gevonden of een vraag?
 
-- 📧 Security meldingen: **[report@yappelkaas.nl](mailto:report@yappelkaas.nl)**
-- 💬 Algemene chaos: Join de **[Appelskeer Discord](https://discord.gg)**.
+- 📧 Security: **[report@yappelkaas.nl](mailto:report@yappelkaas.nl)**
+- 🔗 Alle links: [yappelkaas.nl/links](https://yappelkaas.nl/links)
+- 💬 Discord: Join de **[Appelskeer Discord](https://discord.com/invite/appelkaas)**.
 
 ---
 
-**Gemaakt met 🍏, 🧀 en een gezonde dosis schizofrenie door [Zeespons](https://github.com).**
+**Gemaakt met 🍏, 🧀 en een beetje chaos door Zeespons.**
