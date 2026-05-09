@@ -581,8 +581,10 @@ canvas#gameCanvas {
 }
 
 /* --- KAASKLIKKER SPECIFIEK --- */
+
+/* Zorg dat de container de ruimte vult en de footer naar beneden duwt */
 .kaasklikker-container {
-  flex: 1;
+  flex: 1 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -590,6 +592,7 @@ canvas#gameCanvas {
   padding: 2rem 1rem;
 }
 
+/* Het scorebordje */
 .score-board {
   background: white;
   padding: 1.5rem 3rem;
@@ -597,12 +600,14 @@ canvas#gameCanvas {
   border: 3px solid #6c5ce7;
   box-shadow: 0 10px 25px rgba(108, 92, 231, 0.1);
   margin-bottom: 2rem;
+  width: auto;
+  display: inline-block;
 }
 
 .score-board h2 {
   margin: 0;
   color: #6c5ce7;
-  font-size: 2rem;
+  font-size: 2.2rem;
 }
 
 .score-board h3 {
@@ -611,30 +616,39 @@ canvas#gameCanvas {
   color: #636e72;
 }
 
-/* --- FIX VOOR DE KAAS --- */
-#cheese {
-  width: 250px !important;    /* Forceert de kaas op 250px breedte */
+/* DE KAAS FIX (Extra sterke selector) */
+img#cheese {
+  width: 250px !important;    
   height: auto !important;
-  max-width: 80vw !important; /* Zorgt dat hij op mobiel niet buiten beeld valt */
+  max-width: 250px !important; 
+  flex: none !important; /* Voorkomt dat flexbox de afbeelding uitrekt */
   cursor: pointer;
   transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   display: block;
-  margin: 2rem auto;
-  border-radius: 0 !important; /* Kaas hoeft geen afgeronde hoeken van de andere imgs */
-  box-shadow: none !important; /* Verwijdert de standaard blauwe gloed */
+  margin: 2rem auto !important;
+  border-radius: 0 !important; 
+  box-shadow: none !important;
+  border: none !important;
 }
 
-/* De animatie bij klikken blijft hetzelfde */
-#cheese:active {
-  transform: scale(0.9) !important;
+/* Klik animatie */
+img#cheese:active {
+  transform: scale(0.92) !important;
 }
 
+/* Mobiele aanpassingen voor het scorebord */
 @media (max-width: 767px) {
   .score-board {
     padding: 1rem 2rem;
-    width: 80%;
+    min-width: 200px;
+  }
+  
+  img#cheese {
+    width: 200px !important; /* Iets kleiner op mobiel voor de ruimte */
+    max-width: 60vw !important;
   }
 }
+
