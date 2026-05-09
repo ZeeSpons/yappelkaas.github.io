@@ -511,3 +511,71 @@ canvas#gameCanvas {
   font-size: 1.2rem;
   z-index: 5;
 }
+/* --- CLIP FORMULIER STIJLEN --- */
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1rem;
+}
+
+.clip-form {
+  max-width: 500px;
+  width: 100%;
+  padding: 2.5rem;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(108, 92, 231, 0.1);
+  border: 1px solid #e0e0e0;
+}
+
+.clip-form h2 {
+  margin-top: 0;
+  color: #6c5ce7;
+}
+
+.form-subtext {
+  font-size: 0.9rem;
+  color: #636e72;
+  margin-bottom: 1rem;
+}
+
+.clip-form input[type="url"] {
+  width: 100%;
+  padding: 1.1rem;
+  font-size: 1rem;
+  border: 2px solid #f0f0f0;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.clip-form input[type="url"]:focus {
+  outline: none;
+  border-color: #a29bfe;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 1.1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background-color: #6c5ce7;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.submit-btn:hover {
+  background-color: #4834d4;
+  transform: translateY(-2px);
+}
+
+.clip-form .message {
+  margin-top: 1.5rem;
+  font-weight: bold;
+  min-height: 1.2rem;
+}
