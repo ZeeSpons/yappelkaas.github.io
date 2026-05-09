@@ -416,46 +416,11 @@ canvas#gameCanvas {
   max-width: 900px;
 }
 
-.skin-grid {
-  display: flex;
-  gap: 1.5rem;
-  justify-content: center;
-  overflow-x: auto;
-  padding: 1.5rem;
-  -webkit-overflow-scrolling: touch;
-}
-
-.skin-option {
-  position: relative;
-  cursor: pointer;
-  background: white;
-  padding: 1rem;
-  border-radius: 15px;
-  border: 2px solid #e0e0e0;
-  transition: all 0.2s ease;
-  min-width: 100px;
-}
-
 .skin-option:hover {
   transform: translateY(-5px);
   border-color: #a29bfe;
 }
 
-.skin-option img {
-  height: 80px;
-  width: auto;
-  margin-bottom: 0.5rem;
-}
-
-.skin-option .checkmark {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  background: white;
-  border-radius: 50%;
-  padding: 2px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
 
 /* Uitleg Box */
 .uitleg-box {
@@ -502,4 +467,47 @@ canvas#gameCanvas {
     margin: 1rem;
     padding: 1.5rem;
   }
+}
+/* --- FIX VOOR APPELRUN SKINS --- */
+.skin-option {
+  position: relative;
+  cursor: pointer;
+  background: white;
+  padding: 1rem;
+  border-radius: 15px;
+  border: 2px solid #e0e0e0;
+  transition: all 0.2s ease;
+  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Forceer de skin afbeeldingen klein */
+.skin-option img {
+  width: auto !important; /* Negeert de 100% breedte regel */
+  height: 80px !important; /* Forceert de originele hoogte */
+  max-width: 80px !important;
+  margin-bottom: 0.5rem;
+  box-shadow: none !important; /* Geen schaduw op de kleine mannetjes */
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+.skin-grid {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  overflow-x: auto;
+  padding: 1.5rem;
+  flex-wrap: nowrap; /* Zorgt dat ze op een rij blijven staan */
+}
+
+/* Zorg dat de checkmark ook klein blijft */
+.skin-option .checkmark {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 1.2rem;
+  z-index: 5;
 }
