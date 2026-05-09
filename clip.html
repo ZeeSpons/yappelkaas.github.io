@@ -7,16 +7,15 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="media/favicon.png" type="image/png" />
   <meta property="og:title" content="Yappelkaas Clipjes 🎥">
-  <meta property="og:description" content="Bekijk absurde, zeldzame en soms geniale fragmenten uit het kaasuniversum.">
-  <meta property="og:image" content="https://yappelkaas.nl/media/og.png">
-  <meta property="og:url" content="https://yappelkaas.nl/clip.html">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
+<meta property="og:description" content="Bekijk absurde, zeldzame en soms geniale fragmenten uit het kaasuniversum.">
+<meta property="og:image" content="https://yappelkaas.nl/media/og.png">
+<meta property="og:url" content="https://yappelkaas.nl/clip.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 
-  <!-- Canonical URL (zorg dat zoekmachines de juiste pagina kiezen) -->
-  <link rel="canonical" href="https://yappelkaas.nl/clip">
+<!-- Canonical URL (zorg dat zoekmachines de juiste pagina kiezen) -->
+<link rel="canonical" href="https://yappelkaas.nl/clip">
 </head>
-  
 <body class="clip-page">
 
   <div class="event-buttons">
@@ -64,12 +63,12 @@
     const url = urlInput.value.trim();
 
     if (!url.startsWith("https://www.twitch.tv/appelkaas/clip/")) {
-      messageDiv.style.color = "#ff7675";
+      messageDiv.style.color = "red";
       messageDiv.textContent = "❌ Ongeldige link. Alleen clips van Appelkaas zijn toegestaan!";
       return false;
     }
 
-    messageDiv.style.color = "#6c5ce7";
+    messageDiv.style.color = "black";
     messageDiv.textContent = "⏳ Clip wordt ingestuurd...";
 
     const formData = new FormData();
@@ -89,11 +88,11 @@
         messageDiv.textContent = text;
         urlInput.value = "";
       } else {
-        messageDiv.style.color = "#ff7675";
+        messageDiv.style.color = "red";
         messageDiv.textContent = text;
       }
     } catch (err) {
-      messageDiv.style.color = "#ff7675";
+      messageDiv.style.color = "red";
       messageDiv.textContent = "⚠️ Fout bij verzenden: " + err.message;
     }
 
