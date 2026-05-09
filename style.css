@@ -1,46 +1,50 @@
+/* 1. BASIS & LAYOUT */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0rem;
-  background-color: #f0f6ff;      /* lichte blauwe achtergrond */
+  margin: 0;
+  background-color: #f0f6ff;
   text-align: center;
-  /* STICKY FOOTER FIX */
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
+/* Zorgt dat content tussen header en footer de ruimte vult */
+main.menu, .stream-container, section.feature-img {
+  flex: 1;
+}
+
 header.hero {
   position: relative;
   text-align: center;
-  padding-top: 5rem; /* Ruimte voor de absolute knoppen */
+  padding-top: 5rem;
   padding-bottom: 2.5rem;
   background-color: #161ead;
   color: white;
 }
 
-/* Zorg dat de content tussen de header en footer alle ruimte opvult */
-main.menu, .stream-container, section.feature-img {
-  flex: 1;
+/* 2. KNOPPEN & INTERACTIE */
+.menu-btn, .event-button, .live-button {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.menu-btn:hover, .event-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
 }
 
 .menu-btn {
   font-size: 1.5rem;
   padding: 1.1rem 2rem;
   box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  text-decoration: none;
   color: #161ead;
-  cursor: pointer;
   background-color: white;
-  border-radius: 5px;
-}
-
-.menu-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.25);
 }
 
 .event-buttons {
@@ -57,17 +61,8 @@ main.menu, .stream-container, section.feature-img {
   background-color: white;
   color: #161ead;
   padding: 1rem 2rem;
-  font-weight: bold;
-  text-decoration: none;
   font-size: 1.2rem;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border-radius: 5px;
-}
-
-.event-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.3);
 }
 
 .event-button img {
@@ -83,25 +78,13 @@ main.menu, .stream-container, section.feature-img {
   background-color: #ff4d4d;
   color: white;
   padding: 1.5rem 3rem;
-  font-weight: bold;
-  text-decoration: none;
   font-size: 1.5rem;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  border-radius: 5px;
 }
 
-.live-button.live-active {
-  animation: pulse 1.6s infinite ease-in-out;
-  box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.08); }
-}
-
+/* 3. SPECIFIEKE ELEMENTEN */
 a.menu-btn.appelrun {
   font-size: 2.2rem;
   padding: 2rem 4rem;
@@ -109,85 +92,17 @@ a.menu-btn.appelrun {
 
 a.menu-btn.appelrun img {
   height: 38px;
-  width: auto;
-  vertical-align: middle;
   object-fit: contain;
 }
 
 section.feature-img img {
-  max-width: 450px;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
   margin: 2.5rem auto;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 102, 204, 0.2);
   display: block;
-}
-
-footer {
-  margin-top: auto; /* Duwt de footer naar beneden */
-  padding: 1.5rem;
-  background-color: #161ead;
-  font-size: 1rem;
-  text-align: center;
-  color: white;
-}
-
-footer a {
-  color: #a8abd3;
-}
-
-#twitch-auth-status {
-  position: absolute;
-  top: 6.2rem;
-  right: 1rem;
-  font-size: 1rem;
-  color: #333;
-}
-
-#twitch-auth-status span {
-  text-decoration: underline;
-  cursor: pointer;
-  color: #a8abd3;
-}
-
-/* ===== MOBIEL/SMALLER SCREEN ===== */
-@media (max-width: 767px) {
-  header.hero {
-    padding-top: 1rem; /* Minder padding op mobiel omdat buttons stacken */
-  }
-  
-  main.menu {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-    padding: 2rem 1rem;
-  }
-  
-  .menu-btn {
-    width: 100%;
-    justify-content: center;
-    font-size: 1.7rem;
-    padding: 1.3rem 0;
-    border-radius: 5px;
-  }
-  
-  .event-buttons {
-    position: static;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 1rem;
-  }
-
-  .event-button, .live-button {
-    width: 90%;
-    max-width: 300px;
-    text-align: center;
-    position: static;
-    margin: 0.5rem auto;
-    border-radius: 5px;
-  }
-  
-  section.feature-img img {
-    max-width: 90vw;
-  }
 }
 
 #akaipfp {
@@ -201,21 +116,69 @@ footer a {
   cursor: pointer;
 }
 
-.feature-img img {
-  width: 100%;
-  max-width: 400px; /* In je HTML stond 400px, in CSS 450px. Ik zou 400px aanhouden */
-  height: auto;
-  margin: 2.5rem auto;
-  border-radius: 12px; /* Ik heb deze wat ronder gemaakt, past beter bij de rest */
-  box-shadow: 0 0 20px rgba(0, 102, 204, 0.2);
-  display: block;
-}
-
 #twitch-auth-status {
   position: absolute;
   top: 6.2rem;
   right: 1rem;
   font-size: 1rem;
-  color: white; /* Veranderd van #333 naar white voor leesbaarheid */
+  color: white;
 }
 
+#twitch-auth-status span {
+  text-decoration: underline;
+  cursor: pointer;
+  color: #a8abd3;
+}
+
+/* 4. FOOTER */
+footer {
+  margin-top: auto;
+  padding: 1.5rem;
+  background-color: #161ead;
+  color: white;
+}
+
+footer a {
+  color: #a8abd3;
+}
+
+/* 5. ANIMATIES */
+.live-button.live-active {
+  animation: pulse 1.6s infinite ease-in-out;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+/* 6. MOBIEL */
+@media (max-width: 767px) {
+  header.hero { padding-top: 1rem; }
+  
+  main.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 2rem 1rem;
+  }
+  
+  .menu-btn { width: 100%; justify-content: center; font-size: 1.7rem; }
+  
+  .event-buttons {
+    position: static;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .event-button, .live-button {
+    width: 90%;
+    max-width: 300px;
+    position: static;
+    margin: 0.5rem auto;
+  }
+  
+  section.feature-img img { max-width: 90vw; }
+}
