@@ -272,6 +272,53 @@ footer a {
 
 
 
+/* --- JURIDISCHE PAGINA'S (PP & TOS) --- */
+.legal-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+  text-align: left; /* Juridische tekst leest fijner van links naar rechts */
+}
+
+.legal-box {
+  background-color: white;
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(108, 92, 231, 0.1);
+  border: 1px solid #e0e0e0;
+}
+
+.legal-box h2 {
+  color: #6c5ce7;
+  border-bottom: 2px solid #f4f7ff;
+  padding-bottom: 0.5rem;
+  margin-top: 2rem;
+}
+
+.legal-box p, .legal-box li {
+  color: #444;
+  line-height: 1.7;
+}
+
+.last-updated {
+  font-style: italic;
+  color: #a29bfe;
+  margin-bottom: 2rem;
+}
+
+.legal-footer {
+  margin-top: 3rem;
+  font-weight: bold;
+  text-align: center;
+  color: #6c5ce7;
+}
+
+/* Mobiel fix */
+@media (max-width: 767px) {
+  .legal-box {
+    padding: 1.5rem;
+  }
+}
 
 /* --- RANDOM CLIP SPECIFIEK --- */
 .clip-main {
