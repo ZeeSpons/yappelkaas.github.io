@@ -4,137 +4,75 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Random Appelkaas Clip</title>
+  <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="media/favicon.png" type="image/png" />
   
   <!-- Open Graph / Social Media Meta Tags -->
-<meta property="og:title" content="RANDOM CLIP">
-<meta property="og:description" content="Bekijk hier appelkaas clipjes.">
-<meta property="og:image" content="https://yappelkaas.nl/media/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:url" content="https://yappelkaas.nl/random-clip">
-<meta property="og:type" content="website">
+  <meta property="og:title" content="RANDOM CLIP">
+  <meta property="og:description" content="Bekijk hier appelkaas clipjes.">
+  <meta property="og:image" content="https://yappelkaas.nl/media/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://yappelkaas.nl/random-clip">
+  <meta property="og:type" content="website">
 
-<!-- Twitter Card Meta Tags -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="RANDOM CLIP">
-<meta name="twitter:description" content="Bekijk hier appelkaas clipjes.">
-<meta name="twitter:image" content="https://yappelkaas.nl/media/og.png">
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="RANDOM CLIP">
+  <meta name="twitter:description" content="Bekijk hier appelkaas clipjes.">
+  <meta name="twitter:image" content="https://yappelkaas.nl/media/og.png">
 
-<!-- Canonical URL (zorg dat zoekmachines de juiste pagina kiezen) -->
-<link rel="canonical" href="https://yappelkaas.nl/random-clip">
-
-
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f5f5f5;
-      margin: 0; padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
-    }
-    h1 {
-      color: #6441a5;
-      margin-bottom: 1rem;
-    }
-  #clip-container {
-    margin-top: 1rem;
-    width: 90vw;         /* breder scherm */
-    max-width: 1200px;   /* maximaal lekker groot */
-    aspect-ratio: 16 / 9;
-    border: 2px solid #6441a5;
-    border-radius: 12px;
-    overflow: hidden;
-    background-color: black;
-  }
-  iframe {
-    width: 100%;
-    height: 100%;
-    border: 0;
-  }
-
-    button {
-      margin-top: 1rem;
-      padding: 0.5rem 1rem;
-      font-size: 1.1rem;
-      border: none;
-      border-radius: 6px;
-      background-color: #6441a5;
-      color: white;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    button:hover {
-      background-color: #7f5dcf;
-    }
-    .home-button {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      text-decoration: none;
-      color: white;
-      background-color: #6441a5;
-      padding: 0.4rem 0.8rem;
-      border-radius: 6px;
-      font-weight: bold;
-    }
-    .home-button:hover {
-      background-color: #7f5dcf;
-    }
-    #error-msg {
-      margin-top: 1rem;
-      color: red;
-      font-weight: bold;
-    }
-  </style>
+  <!-- Canonical URL (zorg dat zoekmachines de juiste pagina kiezen) -->
+  <link rel="canonical" href="https://yappelkaas.nl/random-clip">
 </head>
-<body>
-  <a href="index" class="home-button">🏠 Home</a>
+<body class="clip-page">
 
-  <h1>Random Appelkaas Clip</h1>
-  
-  <div id="clip-container">
-    <!-- Twitch clip iframe komt hier -->
+  <div class="event-buttons">
+    <a href="index" class="event-button">🏠 Home</a>
   </div>
 
-  <button id="newClipBtn">Nieuw clipje</button>
-  <div id="error-msg"></div>
-
-<h1>Stuur Jou Clip <a href="clip">Hier</a> In</h1>
+  <header class="hero">
+    <h1>Random Appelkaas Clip</h1>
+    <p>Geniet van de chaos uit de stream!</p>
+  </header>
   
-  <script>
-    // Jouw CSV url van de gepubliceerde sheet met output=csv
-    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRrugVtjs-wxRUtGm96uiwByYhZIndY5pRbShTy0Towzva-sqQDTpKLo-UHcIr5qTk_Rks-e4_GtuPt/pub?output=csv';
+  <main class="clip-main">
+    <div id="clip-container" class="video-container-mystery">
+      <!-- Twitch clip iframe komt hier via JS -->
+    </div>
 
+    <button id="newClipBtn" class="menu-btn">🎲 Nieuw clipje</button>
+    <div id="error-msg"></div>
+
+    <section class="uitleg-box" style="text-align: center; margin-top: 2rem;">
+      <p>Heb jij zelf een legendarisch moment gevangen?</p>
+      <a href="clip" class="submit-btn" style="text-decoration: none; display: inline-block; width: auto; padding: 0.8rem 2rem;">Stuur jouw clip hier in! 🎬</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>🍏🧀 Yappelkaas 2025 – Schizofreen als een peen.</p>
+    <a href="terms-of-service.html">Algemene Voorwaarden</a> |
+    <a href="privacy-policy.html">Privacyverklaring</a>
+    <p class="copyright">Gemaakt door: Zeespons.</p>
+  </footer>
+
+  <script>
+    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRrugVtjs-wxRUtGm96uiwByYhZIndY5pRbShTy0Towzva-sqQDTpKLo-UHcIr5qTk_Rks-e4_GtuPt/pub?output=csv';
     const clipContainer = document.getElementById("clip-container");
     const newClipBtn = document.getElementById("newClipBtn");
     const errorMsg = document.getElementById("error-msg");
-
     let clipIDs = [];
 
-    // Functie om CSV te fetchen en clipIDs te laden
     async function loadClipsFromCSV() {
       try {
         const response = await fetch(csvUrl);
         if (!response.ok) throw new Error('CSV laden mislukt');
-
         const text = await response.text();
-        // CSV is simpel: elke regel is een clip ID
-        clipIDs = text
-          .split('\n')
-          .map(line => line.trim())
-          .filter(line => line.length > 0);
-
-        if (clipIDs.length === 0) {
-          throw new Error('Geen clips gevonden in CSV');
-        }
-
+        clipIDs = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+        if (clipIDs.length === 0) throw new Error('Geen clips gevonden');
         errorMsg.textContent = '';
         loadRandomClip();
-
       } catch (err) {
         errorMsg.textContent = '⚠️ Kan clips niet laden: ' + err.message;
         clipContainer.innerHTML = '<p>Geen clips beschikbaar.</p>';
@@ -142,38 +80,15 @@
       }
     }
 
-    // Toon een random clip uit clipIDs
     function loadRandomClip() {
-      if (clipIDs.length === 0) {
-        clipContainer.innerHTML = "<p>Geen clips beschikbaar.</p>";
-        return;
-      }
+      if (clipIDs.length === 0) return;
       const randomIndex = Math.floor(Math.random() * clipIDs.length);
       const clipID = clipIDs[randomIndex];
-
-      const iframeHTML = `
-        <iframe 
-          src="https://clips.twitch.tv/embed?clip=${clipID}&parent=${window.location.hostname}" 
-          allowfullscreen="true" 
-          scrolling="no" 
-          frameborder="0">
-        </iframe>`;
-
-      clipContainer.innerHTML = iframeHTML;
+      clipContainer.innerHTML = `<iframe src="https://clips.twitch.tv/embed?clip=${clipID}&parent=${window.location.hostname}" allowfullscreen="true" scrolling="no" frameborder="0"></iframe>`;
     }
 
     newClipBtn.addEventListener("click", loadRandomClip);
-
-    // Laad clips direct bij het openen
     loadClipsFromCSV();
   </script>
-  <footer>
-    <p>🍏🧀 Yappelkaas 2025 – Schizofreen als een peen.</p>
-  <a href="terms-of-service.html">Algemene Voorwaarden</a> |
-  <a href="privacy-policy.html">Privacyverklaring</a>
-</footer>
-
-  </footer>
-  <p class="copyright">Gemaakt door: Zeespons.</p>
 </body>
 </html>
