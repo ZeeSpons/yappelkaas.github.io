@@ -51,7 +51,7 @@ header.hero h1 {
   padding: 1.1rem 2rem;
   background-color: white;
   color: #6c5ce7;
-  border: 2px solid #e0e0e0;
+  border: 2px solid #a29bfe;
   display: inline-flex;
   align-items: center;
   gap: 0.8rem;
@@ -71,8 +71,8 @@ header.hero h1 {
 
 /* Specifiek voor de grotere AppelRun knop */
 a.menu-btn.appelrun {
-  border: 2px solid #ff7675;
-  color: #d63031;
+  border: 2px solid #a29bfe;
+  color: #6c5ce7;
   font-size: 1.8rem;
 }
 
@@ -177,7 +177,7 @@ section.feature-img img, .feature-img img {
 footer {
   margin-top: auto;
   padding: 2rem 1rem;
-  background-color: #6c5ce7;
+  background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
   color: white;
 }
 
