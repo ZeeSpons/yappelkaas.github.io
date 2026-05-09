@@ -99,6 +99,20 @@ a.menu-btn.appelrun img {
   padding: 0.6rem 1.2rem;
   font-size: 0.9rem;
   border: 1px solid rgba(255, 255, 255, 0.4);
+  display: inline-flex !important; /* Dwingt ze klein te blijven */
+  align-items: center;
+  width: auto !important; /* Voorkomt uitrekken naar 100% */
+  height: auto !important;
+}
+
+/* Specifieke fix voor de afbeelding binnen de event-button */
+.event-button img {
+  width: 20px !important; /* Forceert het Twitch logo klein */
+  height: 20px !important;
+  margin: 0 8px 0 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+  display: inline-block !important;
 }
 
 .live-button {
@@ -113,6 +127,7 @@ a.menu-btn.appelrun img {
   align-items: center;
   gap: 0.4rem;
   box-shadow: 0 4px 12px rgba(255, 118, 117, 0.3);
+  width: auto !important;
 }
 
 /* 4. AFBEELDINGEN (Grote plaatjes op de pagina) */
