@@ -102,7 +102,7 @@
     <p class="copyright">Gemaakt door: Zeespons.</p>
   </footer>
   
-  <script>
+<script>
   const canvas = document.getElementById("gameCanvas");
   const ctx = canvas.getContext("2d");
 
@@ -110,6 +110,7 @@
   let currentSkin = localStorage.getItem("appelrun_skin") || "appelkaas";
   const playerRunImg = new Image();
   const playerIdleImg = new Image();
+
   function setSkin(skin) {
     currentSkin = skin;
     playerRunImg.src = `assets/${skin}_run.webp`;
@@ -125,6 +126,15 @@
       }
     });
   }
+
+  // ✅ Blokkeer scrollen bij spatiebalk (en pijltjes)
+  window.addEventListener("keydown", function(e) {
+    if([32, 38, 40].indexOf(e.keyCode) > -1) {
+      e.preventDefault();
+    }
+  }, false);
+
+  // Initialiseer skins
   setSkin(currentSkin);
   document.querySelectorAll(".skin-option").forEach(option => {
     option.addEventListener("click", () => {
@@ -387,5 +397,5 @@
   canvas.addEventListener("touchstart", e => { e.preventDefault(); handleJump(); });
 
   gameLoop();
-  </script>
+</script>
 </html>
