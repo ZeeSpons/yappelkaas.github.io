@@ -1,140 +1,82 @@
 # 🍏🧀 Yappelkaas.nl
 
-Welkom op **Yappelkaas.nl** — een onofficiële, door de community gemaakte website rondom **Appelkaas**.
+[![Site Status](https://shields.io)](https://yappelkaas.nl)
+[![License: MIT](https://shields.io)](https://opensource.org)
 
-Deze site is half-serieus, half-chaos, en vooral bedoeld voor lol. Denk aan simpele games, Twitch-integratie en een plek waar events en memes samenkomen.
+Welkom op de officiële GitHub-repository van **Yappelkaas.nl** — de mafste, onofficiële community-site rondom **Appelkaas**. 
 
-> ⚠️ Dit is **geen officiële website** van Appelkaas. Alles hier is gemaakt door fans / de community.
+Deze site is een mix van pure chaos, nostalgische web-vibes en interactieve memes. Gebouwd door fans, voor fans.
 
----
-
-## 🌐 Wat is Yappelkaas.nl?
-
-Yappelkaas.nl is een statische website gehost via **GitHub Pages**. De site bevat:
-
-* 🧀 **Kaasklikker** – klikspel met nul consequenties
-* 🍎 **AppelRun** – ren, spring, chaos
-* 🔴 **Live-pagina** met een embedded Twitch-stream + chat
-* 📅 **Evenementenpagina** met echte (community / stream) events
-* 🎲 Random clips & mystery-knoppen
-
-Alles is gemaakt om lichtgewicht, snel en vooral leuk te zijn.
+> [!IMPORTANT]
+> Dit is **geen officiële website** van de streamer Appelkaas. Alles hier is fan-made.
 
 ---
 
-## 🔴 Live & Twitch
+## 🚀 Features
 
-* De **LIVE-knop** stuurt je naar `live.html`
-* Daar staat:
+De website is een statische krachtpatser gehost op **GitHub Pages**:
 
-  * een embedded Twitch-stream
-  * een embedded Twitch-chat
-
-### Twitch login
-
-* Inloggen met Twitch is **optioneel**
-* Het wordt **alleen gebruikt** om te checken of Appelkaas live is
-* Er worden **geen accounts**, profielen of scores opgeslagen
+* 🧀 **Kaasklikker** – De ultieme test voor je muis en je mentale gezondheid.
+* 🍎 **AppelRun** – Een high-speed runner game met custom skins (Gio, Benja, Furry, en meer!).
+* 📡 **Live Hub** – Check direct de Twitch-stream en chat zonder de site te verlaten.
+* 📅 **Event Tracker** – Mis nooit meer een concert van MR.DELUXE of een 24-uurs stream.
+* 🎲 **Chaos Engine** – Random clips en een Mystery Knop voor je dagelijkse dosis verwarring.
 
 ---
 
-## 🎮 Games & Scores
+## 🛠️ Tech Stack
 
-Belangrijk:
+Lichtgewicht, razendsnel en (bijna) onverwoestbaar:
 
-* ❌ Scores worden **niet opgeslagen**
-* ❌ Geen accounts
-* ❌ Geen databases
-
-Alles draait lokaal in je browser. Sluit je tab? Weg score. Dat is geen bug, dat is een feature.
-
----
-
-## 📅 Events
-
-De evenementen die op de site staan:
-
-* zijn **echte events**
-* worden handmatig op een rij gezet
-* kunnen IRL, stream- of community-gerelateerd zijn
-
-De site fungeert alleen als overzicht, niet als ticketsysteem.
+- **Frontend:** HTML5, Modern CSS3 (met Flexbox/Grid)
+- **Logica:** Vanilla JavaScript (geen zware frameworks)
+- **Hosting:** GitHub Pages
+- **Integratie:** Twitch API (OAuth voor live-status check)
+- **Opslag:** `localStorage` (voor highscores en skins – we slaan niks op in een database!)
 
 ---
 
-## 🧑‍🤝‍🧑 Community & Regels
+## 🔐 Privacy & Gegevens
 
-Deze site volgt exact dezelfde regels als de Discord-server:
+Wij houden niet van stiekem gedoe. Onze filosofie: **Wat we niet weten, kunnen we ook niet kwijtraken.**
 
-```
-@everyone
+- **Geen databases:** Je scores blijven op jouw apparaat.
+- **Geen cookies:** Geen irritante tracking of advertenties.
+- **Transparant:** Alles draait client-side. Check de code maar!
 
-ik ban je als je vervelend bent, grts appelkaas
-
-als een mod je vraagt te stoppen met vervelend doen, stop dat ook 🙏
-
-P.S NIET JE LEEFTIJD ZEGGEN !!!!
-```
-
-Zo simpel is het.
+Zie [Privacyverklaring](https://yappelkaas.nl) voor de details.
 
 ---
 
-## 🔐 Privacy & Security
+## 🤝 Bijdragen (Contributing)
 
-* Geen persoonlijke data-opslag
-* Geen tracking
-* Geen analytics
-* Geen scores in databases
+Wil je de site nóg maffer maken? Dat kan!
 
-Zie ook:
+1. **Fork** deze repository.
+2. Maak een nieuwe **branch** aan (`git checkout -b feature/nieuwe-meme`).
+3. Doe je aanpassingen (voeg bijv. een nieuwe skin toe aan AppelRun).
+4. Maak een **Pull Request** aan.
 
-* `privacy-policy.html`
-* `terms-of-service.html`
-* `SECURITY.md` voor vulnerability reporting
+*Let op: Houd het gezellig. Bijdrages die de boel slopen of vervelend zijn worden direct geband (zie Discord regels hieronder).*
 
 ---
 
-## 🛠️ Techniek (kort & krachtig)
+## 🧑‍⚖️ De Gouden Regels
 
-* **Hosting:** GitHub Pages
-* **Stack:** HTML / CSS / JavaScript
-* **Backend:** geen
-* **Assets:** `/assets`
-* **Login:** Twitch OAuth (client-side, minimaal gebruik)
-
-Alles is bewust simpel gehouden.
-
----
-
-## 🚨 Misbruik
-
-Zolang de site niet wordt misbruikt: prima.
-
-Bij misbruik gelden:
-
-* de Terms of Service
-* gezond verstand
-* en eventueel een snelle fix of blokkade
+Wij hanteren het **Appelskeer-protocol**:
+1. Ben je vervelend? Dan word je geband.
+2. Vraagt een mod je om te stoppen? Stop dan ook. 🙏
+3. **P.S. NIET JE LEEFTIJD ZEGGEN!!!!**
 
 ---
 
 ## 📬 Contact & Security
 
-Security issues of kwetsbaarheden kun je mailen naar:
+Heb je een kwetsbaarheid gevonden of wil je een legendarisch idee insturen?
 
-📧 **[report@yappelkaas.nl](mailto:report@yappelkaas.nl)**
-
-Zie `SECURITY.md` voor details.
-
----
-
-## ✨ Disclaimer
-
-* Dit project is gemaakt **voor de lol**
-* Geen commerciële bedoelingen
-* Geen officiële affiliatie met Twitch of Appelkaas
+- 📧 Security meldingen: **[report@yappelkaas.nl](mailto:report@yappelkaas.nl)**
+- 💬 Algemene chaos: Join de **[Appelskeer Discord](https://discord.gg)**.
 
 ---
 
-Gemaakt met 🍏🧀 en een beetje chaos door **Zeespons**.
+**Gemaakt met 🍏, 🧀 en een gezonde dosis schizofrenie door [Zeespons](https://github.com).**
