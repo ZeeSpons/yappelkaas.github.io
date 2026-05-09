@@ -345,3 +345,56 @@ footer a {
     text-align: center;
   }
 }
+/* --- LINKS PAGINA STIJLEN --- */
+.link-grid {
+  max-width: 800px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  padding: 2rem 1rem;
+}
+
+.link-card {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(108, 92, 231, 0.1);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  border: 1px solid #e0e0e0;
+}
+
+.link-card:hover {
+  transform: translateY(-3px);
+  border-color: #a29bfe;
+  box-shadow: 0 8px 20px rgba(108, 92, 231, 0.15);
+}
+
+.link-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  text-decoration: none;
+  color: #2d3436;
+  font-weight: 600;
+  gap: 1.5rem;
+}
+
+.link-item img {
+  width: 40px !important;
+  height: 40px !important;
+  object-fit: contain;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+}
+
+/* Voor bredere logos zoals Appelcraft */
+.link-item img.wide-logo {
+  width: 70px !important;
+}
+
+@media (max-width: 600px) {
+  .link-grid {
+    grid-template-columns: 1fr;
+  }
+}
