@@ -1,4 +1,3 @@
-<pre>
 (Als streamer) Iemand toevoegen als editor op 7TV:
 
 1. Ga naar https://7tv.app en log in met twitch.
@@ -20,4 +19,3 @@ Nu ben je aan jou kant klaar!
 4. Klik op de veld "Editing For" of "Bewerken voor" en klik op "Accept" of "Accepteren" bij het kanaal waar je de edit rol wil.
 
 Nu ben je klaar en kun je emotes toevoegen aan het kanaal dat je edit!
-</pre>
