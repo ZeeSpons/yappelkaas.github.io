@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AppelRun - Yappelkaas</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="media/favicon.png" type="image/png" />
+  
+  <!-- Open Graph / Social Media Meta Tags -->
+<meta property="og:title" content="APPELRUN.">
+<meta property="og:description" content="SPEEL HIER DE APPELRUN GAME.">
+<meta property="og:image" content="https://yappelkaas.nl/media/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://yappelkaas.nl/appelrun">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="APPELRUN.">
+<meta name="twitter:description" content="SPEEL HIER DE APPELRUN GAME.">
+<meta name="twitter:image" content="https://yappelkaas.nl/media/og.png">
+
+<!-- Canonical URL (zorg dat zoekmachines de juiste pagina kiezen) -->
+<link rel="canonical" href="https://yappelkaas.nl/appelrun">
+  <body class="game-page">
+
+  <div class="event-buttons">
+    <a href="index" class="event-button">🏠 Home</a>
+  </div>
+
+  <header class="hero">
+    <h1>AppelRun</h1>
+    <p>Ontwijk de kaas, verzamel de appels!</p>
+  </header>
+
+  <main>
+    <!-- De Game -->
+    <canvas id="gameCanvas" width="1000" height="400"></canvas>
+
+    <!-- Skin selector -->
+    <section class="skin-container">
+      <h3>Kies je skin:</h3>
+      <div class="skin-grid">
+        <div class="skin-option" data-skin="appelkaas">
+          <img src="assets/appelkaas_idle.webp" alt="Appelkaas">
+          <div class="checkmark">✅</div>
+          <p>Appelkaas</p>
+        </div>
+        <div class="skin-option" data-skin="gio">
+          <img src="assets/gio_idle.webp" alt="Gio">
+          <div class="checkmark">✅</div>
+          <p>Gio</p>
+        </div>
+        <div class="skin-option" data-skin="cavia">
+          <img src="assets/cavia_idle.webp" alt="Cavia">
+          <div class="checkmark">✅</div>
+          <p>Cavia</p>
+        </div>
+        <div class="skin-option" data-skin="kliko">
+          <img src="assets/kliko_idle.webp" alt="Kliko">
+          <div class="checkmark">✅</div>
+          <p>Kliko</p>
+        </div>
+        <div class="skin-option" data-skin="benja">
+          <img src="assets/benja_idle.webp" alt="Benja">
+          <div class="checkmark">✅</div>
+          <p>Benja</p>
+        </div>
+        <div class="skin-option" data-skin="furry">
+          <img src="assets/furry_idle.webp" alt="Furry">
+          <div class="checkmark">✅</div>
+          <p>Furry</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Uitleg -->
+    <section class="uitleg-box">
+      <h2>Hoe werkt het?</h2>
+      <ul class="game-instructions">
+        <li>Druk op <strong>spatie</strong> of tik op het scherm om te springen.</li>
+        <li>Pak <img src="assets/appel.webp" alt="appel"> voor punten.</li>
+        <li>Ontwijk <img src="assets/kaas.webp" alt="kaas"> want dan is het game over!</li>
+        <li>Pak zeldzame <img src="assets/zonnebril.webp" alt="zonnebril"> om MrDeluxe op te roepen!</li>
+        <li>MrDeluxe beschermt je 10 seconden lang tegen de kaasjes.</li>
+      </ul>
+      <p class="discord-promo">
+        Ben je af? Deel je highscore in de 
+        <a href="https://discord.gg/J95ApheDKV" target="_blank">
+          <img src="assets/logos/discord.webp" alt="Discord"> Discord
+        </a>!
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>🍏🧀 Yappelkaas 2025 – Rennen voor je leven.</p>
+    <a href="terms-of-service.html">Algemene Voorwaarden</a> |
+    <a href="privacy-policy.html">Privacyverklaring</a>
+    <p class="copyright">Gemaakt door: Zeespons.</p>
+  </footer>
+  
+<script>
+  const canvas = document.getElementById("gameCanvas");
+  const ctx = canvas.getContext("2d");
+
+  // ✅ Skin setup
+  let currentSkin = localStorage.getItem("appelrun_skin") || "appelkaas";
+  const playerRunImg = new Image();
+  const playerIdleImg = new Image();
+
+  function setSkin(skin) {
+    currentSkin = skin;
+    playerRunImg.src = `assets/${skin}_run.webp`;
+    playerIdleImg.src = `assets/${skin}_idle.webp`;
+    localStorage.setItem("appelrun_skin", skin);
+
+    document.querySelectorAll(".skin-option").forEach(option => {
+      const check = option.querySelector(".checkmark");
+      if (option.dataset.skin === skin) {
+        check.style.display = "block";
+      } else {
+        check.style.display = "none";
+      }
+    });
+  }
+
+  // ✅ Blokkeer scrollen bij spatiebalk (en pijltjes)
+  window.addEventListener("keydown", function(e) {
+    if([32, 38, 40].indexOf(e.keyCode) > -1) {
+      e.preventDefault();
+    }
+  }, false);
+
+  // Initialiseer skins
+  setSkin(currentSkin);
+  document.querySelectorAll(".skin-option").forEach(option => {
+    option.addEventListener("click", () => {
+      setSkin(option.dataset.skin);
+    });
+  });
+
+  const appelImg = new Image(); appelImg.src = "assets/appel.webp";
+  const kaasImg = new Image(); kaasImg.src = "assets/kaas.webp";
+  const zonnebrilImg = new Image(); zonnebrilImg.src = "assets/zonnebril.webp";
+  const deluxeImg = new Image(); deluxeImg.src = "assets/mrdeluxe_fly.webp";
+
+  const gameOverSound = new Audio("assets/gameover.mp3");
+  const powerupSound = new Audio("assets/powerup.mp3");
+  const popSound = new Audio("assets/pop.mp3");
+  const tshoeSound = new Audio("assets/Tshoe.mp3");
+
+  const player = { x: 50, y: canvas.height - 140, width: 100, height: 100, velocityY: 0, grounded: true };
+  let gravity = 0.3;
+  let jumpPower = -10;
+  let speed = 3;
+  let score = 0;
+  let highscore = parseInt(localStorage.getItem("appelrun_highscore")) || 0;
+  let gameStarted = false;
+  let gameOver = false;
+  let gameOverTime = null;
+  let framesSinceLastObstacle = 0;
+  let obstacleCooldown = 100;
+  let obstacles = [];
+  let activePowerup = null;
+  let deluxe = null;
+  const deluxeSize = { width: 100, height: 56 };
+
+  function resizeCanvas() {
+    if(window.innerWidth <= 900) {
+      const newWidth = window.innerWidth * 0.9;
+      const newHeight = newWidth / 2.5;
+      canvas.style.width = newWidth + "px";
+      canvas.style.height = newHeight + "px";
+      canvas.width = 1000;
+      canvas.height = 400;
+      player.y = canvas.height - player.height;
+    } else {
+      canvas.style.width = "1000px";
+      canvas.style.height = "400px";
+      canvas.width = 1000;
+      canvas.height = 400;
+      player.y = canvas.height - player.height;
+    }
+  }
+
+  window.addEventListener("resize", resizeCanvas);
+  window.addEventListener("orientationchange", resizeCanvas);
+  resizeCanvas();
+
+  function drawPlayer() {
+    const img = (!gameStarted || gameOver) ? playerIdleImg : playerRunImg;
+    const aspect = img === playerIdleImg ? 1221 / 2171 : 1410 / 1881;
+    const w = player.height * aspect;
+    const offsetX = (player.width - w) / 2;
+    ctx.drawImage(img, player.x + offsetX, player.y, w, player.height);
+  }
+
+  function drawObstacle(ob) {
+    let img;
+    let scaleW, scaleH;
+
+    if (ob.type === "appel" || ob.type === "kaas") {
+      img = ob.type === "appel" ? appelImg : kaasImg;
+      scaleW = 60;
+      scaleH = 60;
+    } else if (ob.type === "zonnebril") {
+      img = zonnebrilImg;
+      scaleW = 75;
+      scaleH = 42;
+    }
+
+    ctx.drawImage(img, ob.x, ob.y, scaleW, scaleH);
+  }
+
+  function drawDeluxe() {
+    if (!deluxe) return;
+    const remaining = activePowerup ? activePowerup.duration - (Date.now() - activePowerup.startTime) : 0;
+    const shouldBlink = remaining <= 3000;
+    const visible = !shouldBlink || Math.floor(Date.now() / 200) % 2 === 0;
+    if (visible) {
+      ctx.drawImage(deluxeImg, deluxe.x, deluxe.y, deluxeSize.width, deluxeSize.height);
+    }
+  }
+
+  function resetGame() {
+    if (score > highscore) {
+      highscore = score;
+      localStorage.setItem("appelrun_highscore", highscore);
+    }
+    Object.assign(player, { y: canvas.height - player.height, velocityY: 0, grounded: true });
+    obstacles = [];
+    score = 0;
+    speed = 3;
+    gameOver = false;
+    gameOverTime = null;
+    activePowerup = null;
+    deluxe = null;
+  }
+
+  function update() {
+    if (!gameStarted || gameOver) return;
+    player.velocityY += gravity;
+    player.y += player.velocityY;
+    if (player.y >= canvas.height - player.height) {
+      player.y = canvas.height - player.height;
+      player.velocityY = 0;
+      player.grounded = true;
+    } else {
+      player.grounded = false;
+    }
+
+    if (activePowerup && Date.now() - activePowerup.startTime > activePowerup.duration) {
+      activePowerup = null;
+      deluxe = null;
+    }
+
+    for (let i = obstacles.length - 1; i >= 0; i--) {
+      let ob = obstacles[i];
+      ob.x -= speed;
+      if (ob.x + ob.width < 0) {
+        obstacles.splice(i, 1);
+        continue;
+      }
+
+      const p = { x: player.x + 12, y: player.y + 12, w: player.width - 24, h: player.height - 24 };
+      const o = { x: ob.x + 12, y: ob.y + 12, w: ob.width - 24, h: ob.height - 24 };
+
+      if (p.x < o.x + o.w && p.x + p.w > o.x && p.y < o.y + o.h && p.y + p.h > o.y) {
+        if (ob.type === "kaas") {
+          if (!activePowerup) {
+            gameOverSound.play();
+            gameOver = true;
+            gameOverTime = Date.now();
+            return;
+          }
+          obstacles.splice(i, 1);
+        } else if (ob.type === "appel") {
+          score++;
+          obstacles.splice(i, 1);
+          popSound.currentTime = 0;
+          popSound.play();
+          if (score % 5 === 0 && speed < 10) speed += 0.3;
+        } else if (ob.type === "zonnebril") {
+          activePowerup = { startTime: Date.now(), duration: 10000 };
+          powerupSound.currentTime = 0;
+          powerupSound.play();
+          deluxe = {
+            x: player.x - 140,
+            y: player.y + 20,
+            width: deluxeSize.width,
+            height: deluxeSize.height,
+            flyingIn: true
+          };
+          obstacles.splice(i, 1);
+        }
+      }
+
+      if (activePowerup && ob.type === "kaas" && deluxe) {
+        const d = { x: deluxe.x, y: deluxe.y, w: deluxeSize.width, h: deluxeSize.height };
+        if (d.x < o.x + o.w && d.x + d.w > o.x && d.y < o.y + o.h && d.y + d.h > o.y) {
+          tshoeSound.currentTime = 0;
+          tshoeSound.play();
+          obstacles.splice(i, 1);
+        }
+      }
+    }
+
+    if (++framesSinceLastObstacle >= obstacleCooldown) {
+      let type;
+      const rand = Math.random();
+      if (!activePowerup && rand < 0.01) {
+        type = "zonnebril";
+      } else if (rand < 0.6) {
+        type = "appel";
+      } else {
+        type = "kaas";
+      }
+
+      let width = 60;
+      let height = 60;
+      if (type === "zonnebril") {
+        width = 75;
+        height = 42;
+      }
+
+      obstacles.push({ x: canvas.width, y: canvas.height - height, width, height, type });
+      framesSinceLastObstacle = 0;
+    }
+
+    if (deluxe) {
+      if (deluxe.flyingIn && deluxe.x < player.x + 120) {
+        deluxe.x += 6;
+      } else {
+        deluxe.flyingIn = false;
+        deluxe.y = player.y + 20;
+        deluxe.x = player.x + 120;
+      }
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawPlayer();
+    drawDeluxe();
+    obstacles.forEach(drawObstacle);
+
+    ctx.fillStyle = "#1e2b3a";
+    ctx.font = "20px Segoe UI";
+    ctx.fillText("Score: " + score, 10, 30);
+    ctx.fillText("Highscore: " + highscore, 10, 55);
+
+    if (activePowerup) {
+      const remaining = Math.max(0, activePowerup.duration - (Date.now() - activePowerup.startTime));
+      const seconds = Math.ceil(remaining / 1000);
+      ctx.fillStyle = "#ffb347";
+      ctx.font = "20px Segoe UI";
+      ctx.textAlign = "right";
+      ctx.fillText("🕒 " + seconds + "s", canvas.width - 15, 30);
+      ctx.textAlign = "left";
+    }
+
+    if (!gameStarted) {
+      ctx.font = "26px Segoe UI";
+      ctx.fillText("Druk op spatie of tik op het scherm!", 300, 200);
+    }
+    if (gameOver) {
+      ctx.fillStyle = "#ff4d4d";
+      ctx.font = "28px Segoe UI";
+      ctx.fillText("Game Over!", 400, 180);
+      ctx.fillStyle = "#1e2b3a";
+      ctx.font = "20px Segoe UI";
+      ctx.fillText("Druk op spatie of tik om opnieuw te spelen.", 280, 220);
+    }
+  }
+
+  function gameLoop() {
+    update();
+    draw();
+    requestAnimationFrame(gameLoop);
+  }
+
+  function handleJump() {
+    if (!gameStarted || gameOver) {
+      if (gameOver && gameOverTime && Date.now() - gameOverTime < 250) return;
+      resetGame();
+      gameStarted = true;
+    } else if (player.grounded) {
+      player.velocityY = jumpPower;
+    }
+  }
+
+  document.addEventListener("keydown", e => e.code === "Space" && handleJump());
+  canvas.addEventListener("click", handleJump);
+  canvas.addEventListener("touchstart", e => { e.preventDefault(); handleJump(); });
+
+  gameLoop();
+</script>
+</html>
